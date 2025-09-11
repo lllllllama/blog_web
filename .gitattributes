@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+# 常见二进制
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+

@@ -1,0 +1,41 @@
+// 头部/页脚/内容布局
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.brand { font-weight: 700; font-size: 18px; }
+.site-nav a { margin-left: 12px; color: var(--fg); }
+
+.site-footer { margin-top: 48px; border-top: 1px solid var(--border); background: var(--bg); }
+.footer-inner { padding: 20px 0; font-size: 14px; color: var(--fg-dim); }
+.powered { color: var(--fg-dim); }
+
+main.container { padding: 24px 0 32px; }
+
+.intro { margin: 12px 0 24px; }
+.subtitle { margin: 8px 0; color: var(--fg); font-weight: 600; }
+.desc { margin: 0; }
+
+.post-list { display: grid; gap: 16px; }
+.post-card { padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); }
+.post-card.pinned { border-color: var(--link); box-shadow: 0 0 0 2px color-mix(in srgb, var(--link) 20%, transparent); }
+.post-card .meta { margin: 6px 0 10px; color: var(--fg-dim); font-size: 14px; }
+.post-card .tags span { margin-right: 8px; color: var(--fg-dim); font-size: 13px; }
+
+.pagination { display: flex; gap: 12px; align-items: center; margin-top: 8px; }
+.pagination a { border: 1px solid var(--border); border-radius: 8px; padding: 4px 8px; }
+
+.post-title { margin-bottom: 8px; }
+.post-content { margin-top: 16px; }
+
+.archive-list { list-style: none; padding-left: 0; }
+.archive-list li { display: flex; gap: 8px; align-items: baseline; padding: 4px 0; }
+.archive-list .date { color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 640px) {
+  .header-inner { height: 52px; }
+  .site-nav a { margin-left: 8px; }
+}
+

@@ -1,0 +1,53 @@
+---
+layout: default
+title: 首页
+---
+
+<section class="intro">
+  <h1>{{ site.title }}</h1>
+  {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
+  {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
+</section>
+
+<section class="post-list">
+  <h2>最新文章</h2>
+  {% if paginator %}
+    {% assign page_posts = paginator.posts %}
+  {% else %}
+    {% assign page_posts = site.posts %}
+  {% endif %}
+
+  {% assign pinned = page_posts | where_exp: 'p','p.pin == true' %}
+  {% assign others = page_posts | where_exp: 'p','p.pin != true' %}
+
+  {% for post in pinned %}
+    <article class="post-card pinned">
+      <h3><a href="{{ post.url | relative_url }}">📌 {{ post.title }}</a></h3>
+      <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: "/" }}</p>
+      <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+      {% if post.tags %}<p class="tags">标签：{% for t in post.tags %}<span>#{{ t }}</span>{% endfor %}</p>{% endif %}
+    </article>
+  {% endfor %}
+
+  {% for post in others %}
+    <article class="post-card">
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: "/" }}</p>
+      <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+      {% if post.tags %}<p class="tags">标签：{% for t in post.tags %}<span>#{{ t }}</span>{% endfor %}</p>{% endif %}
+    </article>
+  {% endfor %}
+
+  {% if paginator and paginator.total_pages > 1 %}
+  <nav class="pagination">
+    {% if paginator.previous_page %}
+      <a class="prev" href="{{ paginator.previous_page_path | relative_url }}">« 上一页</a>
+    {% endif %}
+    <span>第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+    {% if paginator.next_page %}
+      <a class="next" href="{{ paginator.next_page_path | relative_url }}">下一页 »</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+</section>
+

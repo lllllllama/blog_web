@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    {% include head.html %}
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到主要内容</a>
+    {% include header.html %}
+    <main id="content" class="container">
+      {{ content }}
+    </main>
+    {% include footer.html %}
+    <script src="{{ '/assets/js/darkmode.js' | relative_url }}" defer></script>
+  </body>
+  </html>
+

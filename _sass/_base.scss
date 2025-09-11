@@ -1,0 +1,73 @@
+// 色板与变量
+$c-fg: #0f172a; // slate-900
+$c-fg-dim: #334155; // slate-600
+$c-bg: #ffffff;
+$c-bg-muted: #f8fafc; // slate-50
+$c-link: #0ea5e9; // sky-500
+$c-border: #e2e8f0; // slate-200
+
+// 暗色
+$c-fg-dark: #e2e8f0; // slate-200
+$c-fg-dark-dim: #94a3b8; // slate-400
+$c-bg-dark: #0b1220;
+$c-bg-dark-muted: #0f172a;
+$c-link-dark: #38bdf8;
+$c-border-dark: #1f2937;
+
+:root {
+  --fg: #{$c-fg};
+  --fg-dim: #{$c-fg-dim};
+  --bg: #{$c-bg};
+  --bg-muted: #{$c-bg-muted};
+  --link: #{$c-link};
+  --border: #{$c-border};
+}
+
+html[data-theme='dark'] {
+  --fg: #{$c-fg-dark};
+  --fg-dim: #{$c-fg-dark-dim};
+  --bg: #{$c-bg-dark};
+  --bg-muted: #{$c-bg-dark-muted};
+  --link: #{$c-link-dark};
+  --border: #{$c-border-dark};
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--fg);
+  background: var(--bg);
+  line-height: 1.7;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { width: 100%; max-width: 920px; margin: 0 auto; padding: 0 16px; }
+.skip-link { position: absolute; left: -999px; }
+
+h1, h2, h3, h4, h5 { color: var(--fg); margin: 0 0 0.5em; line-height: 1.25; }
+p { color: var(--fg-dim); }
+
+pre, code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+pre { background: var(--bg-muted); padding: 12px; border-radius: 8px; overflow: auto; }
+code { background: var(--bg-muted); padding: 2px 6px; border-radius: 4px; }
+
+img { max-width: 100%; height: auto; }
+
+// 按钮
+.darkmode-toggle {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+// 表格
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid var(--border); padding: 8px; }
+

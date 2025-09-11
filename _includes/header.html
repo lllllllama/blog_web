@@ -1,0 +1,14 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <nav class="site-nav">
+      {% for item in site.nav %}
+        <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+    {% if site.appearance.enable_darkmode_toggle %}
+      {% include darkmode-toggle.html %}
+    {% endif %}
+  </div>
+</header>
+

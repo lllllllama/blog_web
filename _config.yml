@@ -1,0 +1,74 @@
+title: 我的博客
+subtitle: 记录、分享与创造
+description: 一个使用 Jekyll 和 GitHub Pages 构建的中文博客示例。
+# 生产地址：用户页使用 https://<username>.github.io，项目页使用 https://<username>.github.io/<repo>
+url: "https://lllllllama.github.io" # 部署后请改为你的域名或用户页地址
+baseurl: "/blog_web" # 用户页留空；项目页填写 "/<repo>"
+
+author:
+  name: lllllllama
+  email: you@example.com
+  url: https://github.com/yourname
+
+lang: zh-CN
+timezone: Asia/Shanghai # 可改为你的时区
+
+# 永久链接样式
+permalink: /:categories/:year/:month/:day/:title/
+
+# 分页（使用 jekyll-paginate 插件）
+paginate: 5
+paginate_path: "/page:num/"
+
+# 主题/布局：本项目自带 layouts/_includes/_sass，不依赖远程主题
+
+# 插件：以下均为 GitHub Pages 官方支持（A 模式可用）
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# Markdown & 高亮
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# 导航菜单（可在此修改）
+nav:
+  - title: 首页
+    url: /
+  - title: 关于
+    url: /pages/about/
+  - title: 归档
+    url: /pages/archives/
+  - title: RSS
+    url: /feed.xml
+
+# 社交链接（在页脚显示）
+social:
+  github: lllllllama
+  twitter: yourhandle
+  weibo: yourweibo
+  rss: /feed.xml
+
+# 外观
+appearance:
+  enable_darkmode_toggle: true
+
+# 自定义域名（如使用，请将 CNAME 文件内容设置为你的域名）
+# CNAME: example.com
+
+# 如果使用 TEMPLATE_REPO_URL 拉取模板：
+# - 本地脚本会将模板仓库中的文件拷贝到当前目录（不覆盖现有同名文件）。
+# - 你仍可在此文件中覆盖模板的配置。
+
+exclude:
+  - vendor
+  - node_modules
+  - scripts
+  - README_local.md
+  - Gemfile.lock
+  - .github
