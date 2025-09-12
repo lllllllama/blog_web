@@ -1,3 +1,6 @@
+.post-grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width: 960px){ .post-grid{grid-template-columns:minmax(0,1fr) 280px} }
+
 .toc{position:sticky;top:80px;max-height:70vh;overflow:auto;border:1px solid var(--border);border-radius:$radius-md;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.08));box-shadow:var(--shadow);margin:12px 0}
 .toc-title{font-weight:700;margin:0 0 8px}
 .toc ul{list-style:none;margin:0;padding:0}
@@ -5,3 +8,7 @@
 .toc li.h3{padding-left:10px}
 .toc a{color:var(--text-dim)}
 .toc a.active{color:var(--accent);text-shadow:0 0 8px var(--accent)}
+
+@media (max-width: 959px){
+  .toc{position:relative;top:auto;max-height:none}
+}
