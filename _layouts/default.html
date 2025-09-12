@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
   <head>
     {% include head.html %}
   </head>
@@ -10,7 +10,7 @@
       {{ content }}
     </main>
     {% include footer.html %}
-    <script src="{{ '/assets/js/darkmode.js' | relative_url }}" defer></script>
+    {% include search.html %}
+    <script type="module" src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
   </body>
   </html>
-

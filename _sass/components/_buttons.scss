@@ -1,0 +1,6 @@
+.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid color-mix(in srgb, var(--accent) 30%, var(--border));border-radius:$radius-sm;color:var(--text);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.08));box-shadow:0 2px 0 rgba(0,0,0,.2);transition:transform $t-fast $ease-inout, box-shadow $t-fast $ease-inout, border-color $t-fast $ease-inout}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,0,0,.35), var(--accent-glow);border-color:var(--accent)}
+.btn:active{transform:translateY(0)}
+.icon-btn{padding:6px 8px;border-radius:10px}
+.chip{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;margin-left:8px;border-radius:50%;border-color:color-mix(in srgb, var(--accent) 45%, var(--border));}
+.chip[aria-pressed="true"], .chip:hover{background:color-mix(in srgb, var(--accent) 20%, transparent);box-shadow:var(--accent-glow)}

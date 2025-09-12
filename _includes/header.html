@@ -1,14 +1,19 @@
-<header class="site-header">
+<header class="site-header" role="banner">
   <div class="container header-inner">
-    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    <nav class="site-nav">
+    <a class="brand neon" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+      <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="logo" width="28" height="28" loading="eager" decoding="sync"/>
+      {{ site.title }}
+    </a>
+    <nav class="site-nav" aria-label="主导航">
       {% for item in site.nav %}
         <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
       {% endfor %}
     </nav>
-    {% if site.appearance.enable_darkmode_toggle %}
-      {% include darkmode-toggle.html %}
+    {% if site.appearance.enable_theme_switcher %}
+      {% include theme-toggle.html %}
+    {% endif %}
+    {% if site.features.search %}
+      <button class="btn icon-btn" data-action="open-search" aria-label="打开搜索" title="搜索 (/)" type="button">🔎</button>
     {% endif %}
   </div>
 </header>
-

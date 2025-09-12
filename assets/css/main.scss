@@ -1,6 +1,14 @@
 ---
 ---
-// 主样式，通过 Sass 组合局部样式
-@import "base";
-@import "layout";
-
+// 赛博朋克主题主样式（按模块组织，可演进）
+@import "tokens";
+@import "base/reset";
+@import "base/typography";
+@import "components/buttons";
+@import "components/header";
+@import "components/hero";
+@import "components/card";
+@import "components/layout";
+@import "components/search";
+@import "components/code";
+@import "components/toc";

@@ -1,6 +1,6 @@
-# Jekyll + GitHub Pages 博客骨架（Windows 友好）
+# 赛博朋克风 Jekyll + GitHub Pages（Windows 友好）
 
-本仓库是一套在 Windows 环境下可直接运行的 Jekyll + GitHub Pages 博客脚手架，包含：项目结构、中文示例内容、简洁响应式主题（含深浅色模式）、PowerShell 一键脚本，以及支持 A/B 两种构建模式的 GitHub Actions 工作流。
+一套生产级、可演进的赛博朋克主题博客脚手架：默认深色（#0b0e14），霓虹点缀（青/洋红/酸橙/紫），轻量动效与 HUD 元素。无打包器，仅用 Jekyll + Sass + 原生 ES Modules；兼容 GitHub Pages 官方构建（A 模式）。
 
 适用环境：Windows 10/11，PowerShell 5+；已安装 Ruby（含 DevKit/MSYS2）。
 
@@ -39,9 +39,9 @@ scripts\serve.ps1
 .
 ├─ _config.yml              # 站点配置（中文/上海时区/分页/SEO 等）
 ├─ _layouts/                # 页面布局（default/post/page）
-├─ _includes/               # 片段（head/header/footer/darkmode 按钮等）
-├─ _sass/                   # Sass 局部样式
-├─ assets/                  # 编译样式、JS、图片、favicon
+├─ _includes/               # 片段（head/header/footer/meta/search/toc/theme-toggle/comments）
+├─ _sass/                   # 设计令牌 + 基础 + 组件（可演进）
+├─ assets/                  # 样式、ESM 组件与动效、图片、favicon/logo
 ├─ _posts/                  # 示例文章（2 篇，含置顶/标签/分类）
 ├─ pages/                   # about、archives 页面
 ├─ .github/workflows/       # pages.yml（A/B 构建模式）
@@ -51,7 +51,7 @@ scripts\serve.ps1
 ├─ .gitignore
 ├─ .gitattributes
 ├─ LICENSE (MIT)
-└─ index.html               # 首页：文章列表 + 网站介绍
+└─ index.html               # 首页：英雄区 + 文章流 + 侧栏
 ```
 
 ---
@@ -119,7 +119,7 @@ Pages 部署源：本项目使用 GitHub Actions 进行部署（pages.yml 已包
 
 ---
 
-## 写作指南
+## 写作指南（Front‑matter）
 
 - 新建文章：
 
@@ -127,12 +127,14 @@ Pages 部署源：本项目使用 GitHub Actions 进行部署（pages.yml 已包
   scripts\new-post.ps1 -Title "中文标题" -Slug "可选自定义-slug"
   ```
 
-  生成文件：`_posts/YYYY-MM-DD-slug.md`，默认 front-matter：
+  生成文件：`_posts/YYYY-MM-DD-slug.md`，默认字段：
   - `layout: post`
   - `title`、`date`（自动）
-  - `categories: [随笔]`、`tags: [未分类]`
-  - `pin: false`（置顶：设为 `true`）
-  - `excerpt`（摘要，可留空使用自动截断）
+  - `categories`、`tags`（参数 `-Cats`/`-Tags` 支持逗号分隔）
+  - `pin: true|false`（置顶）
+  - `cover`（封面路径，默认 `/assets/img/cover.svg`）
+  - `summary`（摘要）
+  - `toc: true|false`（文章目录）
 
 - Front-matter 常见字段：
   - `layout: post|page`
@@ -143,13 +145,20 @@ Pages 部署源：本项目使用 GitHub Actions 进行部署（pages.yml 已包
   - `pin: true|false`（首页置顶）
   - `excerpt: 自定义摘要`
 
-- 代码高亮：已启用 Rouge；三引号代码块会高亮。
+- 代码高亮：已启用 Rouge，内置霓虹暗黑配色，含复制按钮。
 - 图片路径：建议使用相对路径，如 `![alt](/assets/img/cover.svg)`；项目页注意 `baseurl` 影响。
 - 草稿：可在 `_drafts/` 写草稿（需自建目录），本地 `jekyll serve --drafts` 预览。
 
 ---
 
-## 主题/样式自定义
+## 主题/样式/动效（Design Tokens）
+
+- 主题切换：右上角彩色芯片（C/M/L/V），`data-theme="cyber-*"`；记忆在 localStorage。
+- 设计令牌：`_sass/_tokens.scss` 集中定义颜色、阴影、圆角、动效时间与 easing（`cubic-bezier(0.22, 1, 0.36, 1)`）。
+- 动效准则：
+  - Hover/Focus：120–180ms；入场：240–360ms；大块区域：~520ms。
+  - `prefers-reduced-motion: reduce` 下自动弱化/禁用动效与视差。
+- 组件：按钮、卡片、搜索面板、TOC、代码块等对应 `_sass/components/` 与 `assets/js/components/`。
 
 - 修改导航/社交：`_config.yml` 的 `nav` / `social`。
 - 深浅色模式：右上角切换；JS 在 `assets/js/darkmode.js`，样式变量在 `_sass/_base.scss`。
@@ -184,7 +193,29 @@ Pages 部署源：本项目使用 GitHub Actions 进行部署（pages.yml 已包
 
 ---
 
-## 许可证
+## 性能与质量
+
+- 预算：主页总传输 ≤ 250KB gz；首屏 CSS ≤ 40KB gz；JS ≤ 60KB gz。
+- 优化策略：
+  - 关键 CSS（上折叠）内联于 `<head>` 少量，其余延迟。
+  - 图片懒加载、`decoding="async"`、必要的 `width/height`；优先 `webp/avif`。
+  - JS 模块按需懒加载（搜索、TOC、动效）。
+  - 资源指纹：可用查询串版本（例如 `main.css?v=YYYYMMDD`），并设置长缓存；按需在 Actions 中自动替换（后续 Roadmap）。
+- 质量门禁（可选）：`.github/workflows/lint.yml` 运行 htmlproofer、markdownlint、stylelint，continue-on-error 仅报警。
+
+## Lighthouse 建议
+
+- 使用 Chrome DevTools Lighthouse 跑 Performance、A11y、SEO。
+- 常见扣分：图片尺寸/格式、CLS（图片需 width/height）、无效链接、低对比度。
+
+## Roadmap（可演进）
+
+- [ ] 3D 背景（WebGL/Three.js，默认关闭）。
+- [ ] Mermaid/轻量图表（纯前端，A 模式可用）。
+- [ ] 多主题包（四种霓虹主题可热切换，记忆在 localStorage）。
+- [ ] 多语言 i18n。
+- [ ] PWA（离线缓存静态页，默认关闭）。
+- [ ] 站点地图可视化/标签关系图谱（默认关闭）。
 
 默认使用 MIT 许可证（见 `LICENSE`），可按需修改。
 
@@ -200,5 +231,4 @@ Pages 部署源：本项目使用 GitHub Actions 进行部署（pages.yml 已包
 - `.github/workflows/pages.yml`：
   - A 模式：`actions/jekyll-build-pages` + `github-pages` 集合。
   - B 模式：`ruby/setup-ruby` + `bundle exec jekyll build`。
-
-# blog_web
+```

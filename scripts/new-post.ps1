@@ -1,6 +1,12 @@
 Param(
   [Parameter(Mandatory=$true)][string]$Title,
-  [Parameter(Mandatory=$false)][string]$Slug
+  [Parameter(Mandatory=$false)][string]$Slug,
+  [Parameter(Mandatory=$false)][string]$Tags = "",
+  [Parameter(Mandatory=$false)][string]$Cats = "",
+  [Parameter(Mandatory=$false)][string]$Cover = "/assets/img/cover.svg",
+  [Parameter(Mandatory=$false)][bool]$Pinned = $false,
+  [Parameter(Mandatory=$false)][bool]$Toc = $true,
+  [Parameter(Mandatory=$false)][string]$Summary = ""
 )
 
 $ErrorActionPreference = 'Stop'
@@ -25,15 +31,26 @@ try {
 
   if (Test-Path $file) { throw "文件已存在：$file" }
 
+  $tagsArr = @()
+  if ($Tags -and $Tags.Trim() -ne '') { $tagsArr = $Tags.Split(',') | ForEach-Object { $_.Trim() } }
+  $catsArr = @()
+  if ($Cats -and $Cats.Trim() -ne '') { $catsArr = $Cats.Split(',') | ForEach-Object { $_.Trim() } }
+
+  $tagsYaml = if ($tagsArr.Count -gt 0) { "[" + ($tagsArr -join ", ") + "]" } else { "[未分类]" }
+  $catsYaml = if ($catsArr.Count -gt 0) { "[" + ($catsArr -join ", ") + "]" } else { "[随笔]" }
+  $summaryYaml = if ($Summary -and $Summary.Trim() -ne '') { $Summary } else { "这里是文章摘要，可手动编辑或让 Jekyll 自动截断。" }
+
   $content = @"
 ---
 layout: post
 title: $Title
 date: $timestamp
-categories: [随笔]
-tags: [未分类]
-pin: false
-excerpt: 这里是文章摘要，可手动编辑或让 Jekyll 自动截断。
+categories: $catsYaml
+tags: $tagsYaml
+pin: $Pinned
+cover: $Cover
+summary: $summaryYaml
+toc: $Toc
 ---
 
 这里是正文内容。支持 Markdown、代码高亮、图片等。
@@ -52,4 +69,3 @@ catch {
   Write-Err $_.Exception.Message
   exit 1
 }
-

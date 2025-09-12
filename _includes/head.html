@@ -2,7 +2,36 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
-{% seo %}
 
+<script>
+  (function(){
+    try {
+      var key = 'cyber-theme';
+      var t = localStorage.getItem(key) || '{{ site.appearance.default_theme | default: "cyber-cyan" }}';
+      document.documentElement.setAttribute('data-theme', t);
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches && {{ site.appearance.reduce_motion_respect | default: true }}) {
+        document.documentElement.setAttribute('data-motion', 'reduce');
+      }
+    } catch(e) {}
+  })();
+  </script>
+
+<link rel="preload" as="image" href="{{ '/assets/img/grid.svg' | relative_url }}">
+<style>
+  /* 关键少量首屏样式（上折叠），其余在 main.css */
+  html,body{height:100%}
+  body{margin:0;background:#0b0e14;color:#d7dce2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+  .container{max-width:1100px;margin:0 auto;padding:0 16px}
+  .site-header{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.7);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid rgba(0,234,255,.2)}
+  a{color:#00eaff}
+  .skip-link{position:absolute;left:-9999px}
+  .hero{padding:56px 0 24px;background:radial-gradient(1200px 400px at 20% -50%, rgba(0,234,255,.25), transparent 70%),radial-gradient(800px 300px at 90% -20%, rgba(255,61,129,.18), transparent 60%)}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:#d7dce2;text-decoration:none}
+  .brand img{height:28px}
+  .neon{filter:drop-shadow(0 0 12px rgba(0,234,255,.6))}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+  </style>
+
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+{% seo %}

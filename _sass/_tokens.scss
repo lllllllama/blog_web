@@ -1,0 +1,45 @@
+// Design Tokens: 赛博朋克风（深色默认）
+// 主题：cyber-cyan | cyber-magenta | cyber-lime | cyber-violet
+
+// Motion & Easing
+$ease-inout: cubic-bezier(0.22, 1, 0.36, 1);
+$t-fast: 140ms;  // hover/focus 微交互
+$t-mid: 300ms;   // 入场淡入
+$t-slow: 520ms;  // 大块区域或延迟
+
+// Radius & Shadow
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 18px;
+
+:root {
+  --bg:#0b0e14;        // 背景（深色）
+  --bg-soft:#0f1420;   // 次级背景
+  --surface:#111827;   // 卡片底
+  --text:#d7dce2;      // 正文
+  --text-dim:#8a93a2;  // 次要
+  --border:rgba(255,255,255,.08);
+  --ring:rgba(0,234,255,.7);
+  --shadow:0 0 0 1px rgba(255,255,255,.05), 0 6px 30px rgba(0,0,0,.35);
+
+  /* 霓虹主题（accent） */
+  --accent:#00eaff;
+  --accent-2:#4af3ff;
+  --accent-glow:0 0 12px rgba(0,234,255,.6), 0 0 24px rgba(0,234,255,.35);
+}
+
+/* 主题变体 */
+html[data-theme='cyber-cyan'] { --accent:#00eaff; --accent-2:#4af3ff; --accent-glow:0 0 12px rgba(0,234,255,.6),0 0 24px rgba(0,234,255,.35); }
+html[data-theme='cyber-magenta'] { --accent:#ff3d81; --accent-2:#ff5c99; --accent-glow:0 0 12px rgba(255,61,129,.6),0 0 24px rgba(255,61,129,.35); }
+html[data-theme='cyber-lime'] { --accent:#b6ff00; --accent-2:#c8ff4a; --accent-glow:0 0 12px rgba(182,255,0,.6),0 0 24px rgba(182,255,0,.35); }
+html[data-theme='cyber-violet'] { --accent:#8a7dff; --accent-2:#a294ff; --accent-glow:0 0 12px rgba(138,125,255,.6),0 0 24px rgba(138,125,255,.35); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --accent-glow:none; }
+}
+
+// Utility classes
+.neon-text { color: var(--accent); text-shadow: 0 0 10px var(--accent); }
+.neon-border { box-shadow: var(--accent-glow); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.focus-ring:focus { outline: 2px solid var(--accent); outline-offset: 2px; filter: drop-shadow(0 0 12px var(--accent)); }
+

@@ -1,0 +1,8 @@
+.card{display:block;border:1px solid var(--border);border-radius:$radius-md;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.1));overflow:hidden;box-shadow:var(--shadow);transition:transform $t-mid $ease-inout, box-shadow $t-mid $ease-inout}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.45), var(--accent-glow)}
+.card .card-cover img{display:block;width:100%;height:auto}
+.card .card-body{padding:14px}
+.card .card-title{margin:6px 0 6px}
+.card .meta{color:var(--text-dim);font-size:14px}
+.card .tag{display:inline-block;margin-right:8px;color:var(--accent)}
+.card.pinned{border-color:color-mix(in srgb, var(--accent) 60%, transparent)}

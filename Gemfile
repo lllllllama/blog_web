@@ -22,9 +22,11 @@ end
 #      gem "jekyll-seo-tag"
 #      gem "jekyll-sitemap"
 #      gem "jekyll-paginate"
+#      # 如需目录生成、归档增强，可使用：
+#      # gem "jekyll-toc"    # 注意：不在 GitHub Pages 白名单，需 B 模式
+#      # gem "jekyll-archives" # 注意：不在 GitHub Pages 白名单，需 B 模式
 #      gem "rouge"
 #      group :development do
 #        gem "webrick", "~> 1.8"
 #      end
 # 3) 改用工作流 pages.yml 的 B 模式（见 README），由 Actions 编译并发布 `_site`。
-

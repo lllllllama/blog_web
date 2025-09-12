@@ -1,0 +1,17 @@
+/* Rouge 暗色霓虹配色 + 复制按钮 */
+.highlight { background:#0f1420; border:1px solid var(--border); border-radius:14px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.03); overflow:auto; }
+.highlight pre { margin:0; padding:14px; background:transparent; }
+.highlight .lineno { color:#3b4450; margin-right:12px; }
+.highlight .hll { background:rgba(0,234,255,.08) }
+.highlight .c { color:#586172 } /* Comment */
+.highlight .k { color:#8a7dff } /* Keyword */
+.highlight .s { color:#ff5c99 } /* String */
+.highlight .na,.highlight .nf { color:#00eaff } /* Name/Function */
+.highlight .nt { color:#b6ff00 } /* Tag */
+.highlight .mi,.highlight .m { color:#ffd166 } /* Number */
+.highlight .o,.highlight .p { color:#cbd5e1 }
+
+.code-block { position:relative }
+.copy-btn { position:absolute; top:8px; right:8px; padding:6px 8px; border-radius:10px; border:1px solid color-mix(in srgb, var(--accent) 40%, var(--border)); background:rgba(0,0,0,.25); color:var(--text); cursor:pointer; transition:transform $t-fast $ease-inout, box-shadow $t-fast $ease-inout; }
+.copy-btn:hover { transform:translateY(-1px); box-shadow:var(--accent-glow) }
+

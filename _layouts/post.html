@@ -12,6 +12,10 @@ layout: default
     </p>
   </header>
 
+  {% if site.features.toc and page.toc != false %}
+    {% include toc.html %}
+  {% endif %}
+
   <div class="post-content">
     {{ content }}
   </div>
@@ -21,3 +25,4 @@ layout: default
   </footer>
 </article>
 
+{% include comments.html %}

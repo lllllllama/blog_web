@@ -1,0 +1,37 @@
+name: Lint & Check (non-blocking)
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+      - name: Install htmlproofer
+        run: |
+          gem install html-proofer --no-document
+      - name: Build site
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3
+          bundle exec jekyll build
+      - name: Run htmlproofer
+        run: |
+          htmlproofer ./_site --disable-external --allow-hash-href --check-html --empty-alt-ignore
+      - name: Markdownlint
+        run: |
+          npm -g i markdownlint-cli@0.37.0
+          markdownlint "**/*.md" --ignore node_modules --ignore vendor || true
+      - name: Stylelint (SCSS)
+        run: |
+          npm -g i stylelint@16.6.1 stylelint-config-standard-scss@13.0.0
+          echo '{"extends":"stylelint-config-standard-scss"}' > .stylelintrc.json
+          stylelint "**/*.scss" || true
+

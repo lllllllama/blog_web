@@ -5,3 +5,18 @@
 <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:image" content="{{ '/assets/img/cover.svg' | absolute_url }}">
+
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {"@type":"Person","name": {{ site.author.name | default: site.title | jsonify }}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }}},
+  "image": {{ page.cover | default: '/assets/img/cover.svg' | absolute_url | jsonify }}
+}
+</script>
+{% endif %}

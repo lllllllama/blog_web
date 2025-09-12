@@ -1,0 +1,11 @@
+.layout-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:16px}
+.sidebar .widget{border:1px solid var(--border);border-radius:$radius-md;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(0,0,0,.08));box-shadow:var(--shadow)}
+.widget-title{margin:0 0 8px;font-size:16px}
+.tag-cloud .tag{display:inline-block;margin:4px 8px 0 0;color:var(--text-dim);border-bottom:1px dashed color-mix(in srgb, var(--accent) 40%, transparent)}
+.tag-cloud .tag span{font-size:12px;color:var(--text-dim);margin-left:4px}
+.section-title{margin:8px 0}
+.pagination{display:flex;gap:12px;align-items:center;margin:12px 0}
+
+@media (min-width: 960px){
+  .layout-grid{grid-template-columns: minmax(0, 1fr) 320px}
+}

@@ -1,6 +1,6 @@
-title: 我的博客
-subtitle: 记录、分享与创造
-description: 一个使用 Jekyll 和 GitHub Pages 构建的中文博客示例。
+title: 赛博日志 · Cyber Journal
+subtitle: 霓虹在夜里呼吸，文字在黑暗中发光。
+description: 一款面向 GitHub Pages 的赛博朋克风 Jekyll 博客脚手架：深色为底、霓虹点缀、轻量动效与可演进架构。
 # 生产地址：用户页使用 https://<username>.github.io，项目页使用 https://<username>.github.io/<repo>
 url: "https://lllllllama.github.io" # 部署后请改为你的域名或用户页地址
 baseurl: "/blog_web" # 用户页留空；项目页填写 "/<repo>"
@@ -44,6 +44,8 @@ nav:
     url: /pages/about/
   - title: 归档
     url: /pages/archives/
+  - title: 标签
+    url: /pages/tags/
   - title: RSS
     url: /feed.xml
 
@@ -56,7 +58,9 @@ social:
 
 # 外观
 appearance:
-  enable_darkmode_toggle: true
+  default_theme: cyber-cyan # 可选：cyber-cyan | cyber-magenta | cyber-lime | cyber-violet
+  enable_theme_switcher: true
+  reduce_motion_respect: true
 
 # 自定义域名（如使用，请将 CNAME 文件内容设置为你的域名）
 # CNAME: example.com
@@ -72,3 +76,25 @@ exclude:
   - README_local.md
   - Gemfile.lock
   - .github
+
+# 功能开关
+features:
+  search: true          # 站内搜索（基于 search.json + 前端 lunr 风格实现，无后端）
+  toc: true             # 文章目录（前端生成）
+  comments:
+    giscus:
+      enabled: false
+      repo: ""          # owner/repo
+      repo_id: ""
+      category: "General"
+      category_id: ""
+      mapping: pathname
+      reactions_enabled: 1
+      emit_metadata: 0
+      input_position: bottom
+      theme: dark
+      lang: zh-CN
+
+# 搜索索引页（无需插件，使用模板输出 JSON）
+search_index:
+  path: /search.json

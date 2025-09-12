@@ -1,0 +1,6 @@
+.site-header{border-bottom:1px solid color-mix(in srgb, var(--accent) 25%, var(--border));backdrop-filter:saturate(140%) blur(8px)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{font-weight:800}
+.site-nav a{margin-left:12px;color:#e2e8f0}
+.site-nav a:hover{color:var(--accent)}
+.theme-switcher{display:flex;align-items:center}
