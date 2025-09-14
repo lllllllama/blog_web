@@ -1,0 +1,50 @@
+backend:
+  name: github
+  repo: lllllllama/blog_web
+  branch: main
+  # 注意：在 GitHub Pages 上使用 GitHub backend 需要 OAuth 代理或 OAuth App
+  # 详见仓库 README 追加的启用步骤
+
+local_backend: true
+
+site_url: https://lllllllama.me
+logo_url: /assets/img/logo.svg
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+collections:
+  - name: posts
+    label: 文章
+    label_singular: 文章
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: frontmatter
+    fields:
+      - { label: 标题, name: title, widget: string }
+      - { label: 日期, name: date, widget: datetime, format: "YYYY-MM-DD HH:mm:ss", time_format: "HH:mm" }
+      - { label: 分类, name: categories, widget: list, default: ["blog"] }
+      - { label: 标签, name: tags, widget: list, required: false }
+      - { label: 置顶, name: pin, widget: boolean, default: false, required: false }
+      - { label: 封面, name: cover, widget: image, required: false }
+      - { label: 摘要, name: description, widget: text, required: false }
+      - { label: 正文, name: body, widget: markdown }
+
+  - name: pages
+    label: 页面
+    files:
+      - label: 关于
+        name: about
+        file: pages/about.md
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 正文, name: body, widget: markdown }
+      - label: 归档页
+        name: archives
+        file: pages/archives.md
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 正文, name: body, widget: markdown }
+
