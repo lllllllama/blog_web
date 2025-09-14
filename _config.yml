@@ -2,8 +2,8 @@ title: 赛博日志 · Cyber Journal
 subtitle: 霓虹在夜里呼吸，文字在黑暗中发光。
 description: 一款面向 GitHub Pages 的赛博朋克风 Jekyll 博客脚手架：深色为底、霓虹点缀、轻量动效与可演进架构。
 # 生产地址：用户页使用 https://<username>.github.io，项目页使用 https://<username>.github.io/<repo>
-url: "https://lllllllama.github.io" # 部署后请改为你的域名或用户页地址
-baseurl: "/blog_web" # 用户页留空；项目页填写 "/<repo>"
+url: "https://llllllama.me" # 部署后请改为你的域名或用户页地址
+baseurl: "" # 用户页留空；项目页填写 "/<repo>"
 
 author:
   name: lllllllama
