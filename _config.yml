@@ -48,6 +48,8 @@ nav:
     url: /pages/tags/
   - title: RSS
     url: /feed.xml
+  - title: 管理
+    url: /admin/
 
 # 社交链接（在页脚显示）
 social:
