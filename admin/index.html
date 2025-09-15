@@ -6,10 +6,14 @@
     <title>内容管理 · Static CMS</title>
     <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
     <!-- Static CMS（加载全量 UMD 构建，自动读取 /admin/config.yml） -->
-    <script src="https://unpkg.com/@staticcms/app@^3.1.0/dist/static-cms-app.js"></script>
+    <script defer src="https://unpkg.com/@staticcms/app@^3.4.8/dist/static-cms-app.js"></script>
     <script>
-      // 全局对象为 CMS（与 Decap/Netlify CMS 兼容）
-      window.CMS && window.CMS.init();
+      // 等待文档可用后再初始化，避免 MutationObserver 传入 null
+      window.addEventListener('DOMContentLoaded', function () {
+        if (window.CMS && typeof window.CMS.init === 'function') {
+          window.CMS.init();
+        }
+      });
     </script>
   </head>
   <body>
