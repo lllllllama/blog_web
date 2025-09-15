@@ -2,10 +2,7 @@ backend:
   name: github
   repo: lllllllama/blog_web
   branch: main
-  # 如需在线登录编辑，请部署 OAuth 代理并取消注释以下三行：
-  # base_url: https://your-oauth-server.example.com
-  # auth_endpoint: oauth/authorize
-  # token_endpoint: oauth/token
+  base_url: https://netlify-cms-github-oauth-provider-g9fh.onrender.com
 
 # 本地开发可启用本地后端，无需登录（仅本地有效）
 local_backend: true
@@ -50,4 +47,3 @@ collections:
         fields:
           - { label: 标题, name: title, widget: string }
           - { label: 正文, name: body, widget: markdown }
-
