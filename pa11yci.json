@@ -1,0 +1,12 @@
+{
+  "defaults": {
+    "timeout": 120000,
+    "standard": "WCAG2AA",
+    "chromeLaunchConfig": { "args": ["--no-sandbox", "--disable-dev-shm-usage"] }
+  },
+  "urls": [
+    "http://localhost:8080/",
+    "http://localhost:8080/pages/archives/",
+    "http://localhost:8080/pages/about/"
+  ]
+}

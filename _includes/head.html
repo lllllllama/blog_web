@@ -3,6 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
 <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="manifest" href="{{ '/assets/manifest.webmanifest' | relative_url }}">
+<meta name="theme-color" content="#0ea5e9">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' 'unsafe-inline' https:; connect-src 'self' https:; font-src 'self' https: data:; frame-ancestors 'self'; upgrade-insecure-requests">
 
 <script>
   (function(){
@@ -35,3 +38,10 @@
 
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 {% seo %}
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('{{ '/sw.js' | relative_url }}').catch(function(){});
+    });
+  }
+</script>

@@ -1,0 +1,11 @@
+{
+  "name": "lama小站",
+  "short_name": "lama",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0e14",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {"src":"/assets/img/favicon.svg","sizes":"any","type":"image/svg+xml"}
+  ]
+}

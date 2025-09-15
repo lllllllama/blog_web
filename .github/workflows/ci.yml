@@ -1,0 +1,66 @@
+name: Site CI
+
+on:
+  push:
+    branches: ["refactor/site-revamp"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          bundle config set path 'vendor/bundle'
+          bundle install --jobs 4 --retry 3 || true
+          gem install html-proofer --no-document
+
+      - name: Build Jekyll
+        run: |
+          bundle exec jekyll build --trace || jekyll build --trace
+
+      - name: HTMLProofer
+        run: |
+          htmlproofer ./_site \
+            --disable-external --assume-extension --check-html --check-img-http \
+            --empty-alt-ignore --allow-hash-href || true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pa11y-ci and http-server
+        run: npm i -g pa11y-ci http-server @lhci/cli
+
+      - name: Serve _site
+        run: |
+          nohup http-server _site -p 8080 > /dev/null 2>&1 &
+
+      - name: a11y (pa11y-ci)
+        run: pa11y-ci
+
+      - name: Lighthouse
+        run: |
+          lhci autorun --collect.staticDistDir=_site || true
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            ./**/lighthouseci/**
+            ./pa11yci*.json
+            ./_site/**
+

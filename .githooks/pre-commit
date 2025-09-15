@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Block non-UTF8 files from being committed
+non_utf=$(git diff --cached --name-only | while read f; do
+  if [ -f "$f" ]; then
+    if ! iconv -f UTF-8 -t UTF-8 "$f" >/dev/null 2>&1; then
+      echo "$f";
+    fi
+  fi
+done)
+if [ -n "$non_utf" ]; then
+  echo "These files are not valid UTF-8:" >&2
+  echo "$non_utf" | sed 's/^/  - /' >&2
+  echo "Please convert to UTF-8 (without BOM) before committing." >&2
+  exit 1
+fi
+exit 0
