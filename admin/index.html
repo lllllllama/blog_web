@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>内容管理 · Static CMS</title>
     <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
-    <!-- Static CMS (Decap/Netlify CMS 社区分支) -->
+    <!-- Static CMS（加载全量 UMD 构建，自动读取 /admin/config.yml） -->
     <script src="https://unpkg.com/@staticcms/app@^3.1.0/dist/static-cms-app.js"></script>
-    <script src="https://unpkg.com/@staticcms/core@^3.1.0/dist/static-cms-core.js"></script>
     <script>
-      // 注册默认样式组件
-      window.StaticCms.init({});
+      // 全局对象为 CMS（与 Decap/Netlify CMS 兼容）
+      window.CMS && window.CMS.init();
     </script>
   </head>
   <body>
-    <!-- Static CMS 会自动接管整页渲染 -->
+    <!-- Static CMS 会自动接管整页渲染；若长时间黑屏，请打开控制台查看报错 -->
   </body>
   </html>
-
