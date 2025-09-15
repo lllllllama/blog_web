@@ -50,6 +50,7 @@ collections:
             media_folder: "assets/files"
             public_folder: "/assets/files"
             # 仅提示：可上传 pdf/zip 等；如需强校验可加 pattern
+          - { label: 内嵌预览, name: embed, widget: boolean, default: true, required: false }
           - { label: 标题, name: title, widget: string, required: false }
 
   - name: pages
