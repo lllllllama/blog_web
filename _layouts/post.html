@@ -25,6 +25,31 @@ layout: default
     </div>
   {% endif %}
 
+  {% if page.gallery %}
+  <section class="post-gallery" style="margin-top:24px">
+    <h3>图片集</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+      {% for item in page.gallery %}
+        <figure style="margin:0">
+          <img src="{{ item.image | relative_url }}" alt="{{ item.caption | default: 'image' }}" loading="lazy" style="width:100%;height:auto;border:1px solid rgba(0,234,255,.2);border-radius:8px" />
+          {% if item.caption %}<figcaption style="opacity:.8;font-size:.9em;margin-top:6px">{{ item.caption }}</figcaption>{% endif %}
+        </figure>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if page.attachments %}
+  <section class="post-attachments" style="margin-top:24px">
+    <h3>附件</h3>
+    <ul>
+      {% for a in page.attachments %}
+        <li><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">{{ a.title | default: a.file | split: '/' | last }}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+
   <footer class="post-footer">
     <p><a href="{{ '/' | relative_url }}">« 返回首页</a></p>
   </footer>

@@ -31,6 +31,26 @@ collections:
       - { label: 封面, name: cover, widget: image, required: false }
       - { label: 摘要, name: description, widget: text, required: false }
       - { label: 正文, name: body, widget: markdown }
+      - label: 图片集
+        name: gallery
+        widget: list
+        required: false
+        summary: "{{fields.image}}"
+        fields:
+          - { label: 图片, name: image, widget: image }
+          - { label: 说明, name: caption, widget: string, required: false }
+      - label: 附件（PDF/其它文件）
+        name: attachments
+        widget: list
+        required: false
+        fields:
+          - label: 文件
+            name: file
+            widget: file
+            media_folder: "assets/files"
+            public_folder: "/assets/files"
+            # 仅提示：可上传 pdf/zip 等；如需强校验可加 pattern
+          - { label: 标题, name: title, widget: string, required: false }
 
   - name: pages
     label: 页面
