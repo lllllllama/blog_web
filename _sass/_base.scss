@@ -56,6 +56,20 @@ pre { background: var(--bg-muted); padding: 12px; border-radius: 8px; overflow: 
 code { background: var(--bg-muted); padding: 2px 6px; border-radius: 4px; }
 
 img { max-width: 100%; height: auto; }
+// 文章内容在小屏适配：避免溢出与布局错乱
+.post-content {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.post-content iframe,
+.post-content video,
+.post-content object,
+.post-content embed {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+.post-content table { display: block; overflow-x: auto; }
 
 // 按钮
 .darkmode-toggle {
@@ -70,4 +84,3 @@ img { max-width: 100%; height: auto; }
 // 表格
 table { border-collapse: collapse; width: 100%; }
 td, th { border: 1px solid var(--border); padding: 8px; }
-
