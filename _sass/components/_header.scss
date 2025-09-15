@@ -1,6 +1,219 @@
-.site-header{border-bottom:1px solid color-mix(in srgb, var(--accent) 25%, var(--border));backdrop-filter:saturate(140%) blur(8px)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:58px}
-.brand{font-weight:800}
-.site-nav a{margin-left:12px;color:#e2e8f0}
-.site-nav a:hover{color:var(--accent)}
-.theme-switcher{display:flex;align-items:center}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0,234,255,.2);
+  background: rgba(10,13,18,.85);
+  backdrop-filter: saturate(140%) blur(12px);
+  transition: all $t-mid $ease-smooth;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0,234,255,.4) 50%, 
+      transparent 100%);
+    opacity: 0;
+    transition: opacity $t-mid $ease-smooth;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+  
+  @media (max-width: 767px) {
+    padding: 0 $space-md;
+    height: 56px;
+  }
+}
+
+.brand {
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  transition: all $t-fast $ease-smooth;
+  
+  &::before {
+    content: '⚡';
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 8px var(--accent));
+  }
+  
+  &:hover {
+    color: var(--accent);
+    text-shadow: 0 0 12px rgba(0,234,255,.5);
+    transform: translateY(-1px);
+  }
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  
+  @media (max-width: 767px) {
+    gap: $space-xs;
+  }
+  
+  a {
+    position: relative;
+    padding: $space-sm $space-md;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: $radius-md;
+    transition: all $t-fast $ease-smooth;
+    
+    @media (max-width: 767px) {
+      padding: $space-xs $space-sm;
+      font-size: 0.875rem;
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 1px;
+      transition: width $t-mid $ease-smooth;
+    }
+    
+    &:hover {
+      color: var(--accent);
+      background: rgba(0,234,255,.08);
+      transform: translateY(-1px);
+      
+      &::before {
+        width: 80%;
+      }
+    }
+    
+    &.active {
+      color: var(--accent-2);
+      background: rgba(0,234,255,.12);
+      
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: $radius-md;
+    background: rgba(255,255,255,.05);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all $t-fast $ease-smooth;
+    
+    &:hover {
+      border-color: rgba(0,234,255,.3);
+      background: rgba(0,234,255,.1);
+      color: var(--accent);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,234,255,.2);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+    
+    svg {
+      width: 18px;
+      height: 18px;
+      transition: transform $t-mid $ease-bounce;
+    }
+    
+    &:hover svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// 移动端导航优化
+@media (max-width: 640px) {
+  .site-nav {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: rgba(10,13,18,.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: $space-md;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all $t-mid $ease-smooth;
+    
+    &.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    a {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: $space-md;
+      margin-bottom: $space-xs;
+    }
+  }
+  
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+@media (min-width: 641px) {
+  .nav-toggle {
+    display: none;
+  }
+}

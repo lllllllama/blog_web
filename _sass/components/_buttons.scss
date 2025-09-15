@@ -1,6 +1,170 @@
-.btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid color-mix(in srgb, var(--accent) 30%, var(--border));border-radius:$radius-sm;color:var(--text);background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.08));box-shadow:0 2px 0 rgba(0,0,0,.2);transition:transform $t-fast $ease-inout, box-shadow $t-fast $ease-inout, border-color $t-fast $ease-inout}
-.btn:hover{transform:translateY(-1px);box-shadow:0 4px 22px rgba(0,0,0,.35), var(--accent-glow);border-color:var(--accent)}
-.btn:active{transform:translateY(0)}
-.icon-btn{padding:6px 8px;border-radius:10px}
-.chip{width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;margin-left:8px;border-radius:50%;border-color:color-mix(in srgb, var(--accent) 45%, var(--border));}
-.chip[aria-pressed="true"], .chip:hover{background:color-mix(in srgb, var(--accent) 20%, transparent);box-shadow:var(--accent-glow)}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+  padding: $space-sm $space-lg;
+  border: 1px solid var(--border);
+  border-radius: $radius-md;
+  background: linear-gradient(145deg, 
+    rgba(255,255,255,.08), 
+    rgba(255,255,255,.02));
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all $t-mid $ease-smooth;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255,255,255,.1), 
+      transparent);
+    transition: left $t-slow $ease-smooth;
+  }
+  
+  &:hover {
+    border-color: rgba(0,234,255,.4);
+    background: linear-gradient(145deg, 
+      rgba(0,234,255,.15), 
+      rgba(0,234,255,.08));
+    color: var(--accent-2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,234,255,.25);
+    
+    &::before {
+      left: 100%;
+    }
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0,234,255,.2);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0,234,255,.2);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    
+    &:hover {
+      border-color: var(--border);
+      background: linear-gradient(145deg, 
+        rgba(255,255,255,.08), 
+        rgba(255,255,255,.02));
+      color: var(--text);
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.btn.primary {
+  background: linear-gradient(145deg, 
+    var(--accent), 
+    var(--accent-dark));
+  border-color: var(--accent);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0,234,255,.3);
+  
+  &::before {
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255,255,255,.2), 
+      transparent);
+  }
+  
+  &:hover {
+    background: linear-gradient(145deg, 
+      var(--accent-2), 
+      var(--accent));
+    border-color: var(--accent-2);
+    box-shadow: var(--accent-glow-strong);
+    transform: translateY(-3px);
+  }
+  
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.btn.secondary {
+  background: transparent;
+  border-color: rgba(0,234,255,.3);
+  color: var(--accent);
+  
+  &:hover {
+    background: rgba(0,234,255,.1);
+    border-color: rgba(0,234,255,.5);
+  }
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-dim);
+  
+  &:hover {
+    background: rgba(255,255,255,.05);
+    border-color: var(--border);
+    color: var(--text);
+  }
+}
+
+// 尺寸变体
+.btn.sm {
+  padding: $space-xs $space-md;
+  font-size: 0.75rem;
+}
+
+.btn.lg {
+  padding: $space-md $space-xl;
+  font-size: 1rem;
+}
+
+// 图标按钮
+.btn.icon-only {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  
+  &.sm {
+    width: 32px;
+    height: 32px;
+  }
+  
+  &.lg {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// 响应式
+@media (max-width: 767px) {
+  .btn {
+    padding: $space-sm $space-md;
+    font-size: 0.8rem;
+  }
+  
+  .btn.lg {
+    padding: $space-md $space-lg;
+    font-size: 0.875rem;
+  }
+}

@@ -3,29 +3,50 @@
 
 // Motion & Easing
 $ease-inout: cubic-bezier(0.22, 1, 0.36, 1);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 $t-fast: 140ms;  // hover/focus 微交互
 $t-mid: 300ms;   // 入场淡入
 $t-slow: 520ms;  // 大块区域或延迟
 
+// Spacing Scale
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+$space-3xl: 64px;
+
 // Radius & Shadow
-$radius-sm: 10px;
-$radius-md: 14px;
-$radius-lg: 18px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 20px;
 
 :root {
-  --bg:#0b0e14;        // 背景（深色）
-  --bg-soft:#0f1420;   // 次级背景
-  --surface:#111827;   // 卡片底
-  --text:#d7dce2;      // 正文
-  --text-dim:#8a93a2;  // 次要
-  --border:rgba(255,255,255,.08);
-  --ring:rgba(0,234,255,.7);
-  --shadow:0 0 0 1px rgba(255,255,255,.05), 0 6px 30px rgba(0,0,0,.35);
+  --bg: #0a0d12;        // 背景（更深）
+  --bg-soft: #0f1419;   // 次级背景
+  --bg-card: #111827;   // 卡片背景
+  --surface: #1a202c;   // 表面
+  --text: #e2e8f0;      // 正文（更亮）
+  --text-dim: #94a3b8;  // 次要文字（更清晰）
+  --text-muted: #64748b; // 静音文字
+  --border: rgba(255,255,255,.1);
+  --border-soft: rgba(255,255,255,.06);
+  --ring: rgba(0,234,255,.8);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  --shadow-xl: 0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04);
+  --shadow-glow: 0 0 0 1px rgba(255,255,255,.05), 0 8px 32px rgba(0,0,0,.4);
 
   /* 霓虹主题（accent） */
-  --accent:#00eaff;
-  --accent-2:#4af3ff;
-  --accent-glow:0 0 12px rgba(0,234,255,.6), 0 0 24px rgba(0,234,255,.35);
+  --accent: #00eaff;
+  --accent-2: #4af3ff;
+  --accent-dark: #0099cc;
+  --accent-glow: 0 0 16px rgba(0,234,255,.7), 0 0 32px rgba(0,234,255,.4);
+  --accent-glow-strong: 0 0 20px rgba(0,234,255,.8), 0 0 40px rgba(0,234,255,.5);
 }
 
 /* 主题变体 */

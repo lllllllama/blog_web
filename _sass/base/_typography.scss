@@ -1,11 +1,300 @@
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"PingFang SC","Microsoft YaHei",sans-serif;letter-spacing:0.1px}
-h1,h2,h3,h4{font-weight:800;letter-spacing:0.2px;color:#e6ebf2}
-h1{font-size:clamp(28px,4vw,38px)}
-h2{font-size:clamp(22px,3vw,28px);margin:24px 0 10px}
-h3{font-size:clamp(18px,2.2vw,22px);margin:18px 0 8px}
-p{color:var(--text-dim);margin:0 0 1em}
-code{background:rgba(255,255,255,.04);padding:2px 6px;border-radius:8px}
-pre{background:#0f1420;border:1px solid var(--border);border-radius:14px;padding:14px;overflow:auto;box-shadow:inset 0 0 0 1px rgba(255,255,255,.03)}
-blockquote{border-left:3px solid var(--accent);padding-left:12px;color:#aeb7c2}
-.subtitle{color:#c9d1d9}
-.desc{color:var(--text-dim)}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Helvetica Neue", Arial, "Noto Sans", sans-serif, 
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 
+               "Noto Color Emoji", "PingFang SC", "Hiragino Sans GB", 
+               "Microsoft YaHei", "微软雅黑", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: $space-lg;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  margin: $space-2xl 0 $space-lg;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    border-radius: 2px;
+  }
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  margin: $space-xl 0 $space-md;
+  color: var(--accent-2);
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  margin: $space-lg 0 $space-sm;
+}
+
+h5 {
+  font-size: 1.125rem;
+  margin: $space-md 0 $space-sm;
+}
+
+h6 {
+  font-size: 1rem;
+  margin: $space-md 0 $space-xs;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+p {
+  color: var(--text-dim);
+  margin: 0 0 $space-md;
+  line-height: 1.7;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all $t-fast $ease-smooth;
+  
+  &:hover {
+    color: var(--accent-2);
+    text-decoration: underline;
+    text-decoration-color: rgba(0,234,255,.5);
+    text-underline-offset: 3px;
+  }
+}
+
+strong, b {
+  font-weight: 700;
+  color: var(--text);
+}
+
+em, i {
+  font-style: italic;
+  color: var(--accent-2);
+}
+
+code {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", 
+               "SF Mono", Monaco, "Inconsolata", "Roboto Mono", 
+               "Source Code Pro", monospace;
+  font-size: 0.875em;
+  background: rgba(0,234,255,.1);
+  border: 1px solid rgba(0,234,255,.2);
+  color: var(--accent-2);
+  padding: 2px 6px;
+  border-radius: $radius-sm;
+  font-weight: 500;
+}
+
+pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  overflow-x: auto;
+  margin: $space-lg 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0,234,255,.3) 50%, 
+      transparent 100%);
+  }
+  
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+blockquote {
+  border-left: 4px solid var(--accent);
+  padding: $space-md 0 $space-md $space-lg;
+  margin: $space-lg 0;
+  background: rgba(0,234,255,.05);
+  border-radius: 0 $radius-md $radius-md 0;
+  position: relative;
+  
+  &::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: $space-md;
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.3;
+    font-family: Georgia, serif;
+  }
+  
+  p {
+    color: var(--text);
+    margin-bottom: 0;
+    font-style: italic;
+  }
+  
+  cite {
+    display: block;
+    margin-top: $space-sm;
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    
+    &::before {
+      content: '— ';
+    }
+  }
+}
+
+ul, ol {
+  margin: $space-md 0;
+  padding-left: $space-xl;
+  
+  li {
+    margin-bottom: $space-xs;
+    color: var(--text-dim);
+    line-height: 1.6;
+    
+    &::marker {
+      color: var(--accent);
+    }
+  }
+  
+  ul, ol {
+    margin: $space-xs 0;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding-left: $space-lg;
+  
+  li {
+    position: relative;
+    
+    &::before {
+      content: '▶';
+      position: absolute;
+      left: -$space-lg;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+  }
+}
+
+ol {
+  counter-reset: item;
+  
+  li {
+    counter-increment: item;
+    
+    &::marker {
+      content: counter(item) '. ';
+      font-weight: 700;
+    }
+  }
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--border) 20%, 
+    var(--accent) 50%, 
+    var(--border) 80%, 
+    transparent 100%);
+  margin: $space-2xl 0;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// 响应式字体
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+  
+  h2::after {
+    width: 40px;
+    height: 2px;
+  }
+  
+  blockquote {
+    padding: $space-sm 0 $space-sm $space-md;
+    
+    &::before {
+      font-size: 2rem;
+      left: $space-sm;
+    }
+  }
+  
+  ul, ol {
+    padding-left: $space-lg;
+  }
+  
+  ul li::before {
+    left: -$space-md;
+  }
+}
