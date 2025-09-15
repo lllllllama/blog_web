@@ -1,3 +1,6 @@
+publish_mode: editorial_workflow
+open_authoring: true
+
 backend:
   name: github
   repo: lllllllama/blog_web

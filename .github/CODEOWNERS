@@ -1,0 +1,5 @@
+# Require review from the repository owner for content changes
+# Adjust the username below to your GitHub handle if different.
+_posts/** @lllllllama
+pages/** @lllllllama
+admin/** @lllllllama

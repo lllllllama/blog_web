@@ -1,9 +1,8 @@
-title: 赛博日志 · Cyber Journal
-subtitle: 霓虹在夜里呼吸，文字在黑暗中发光。
-description: 一款面向 GitHub Pages 的赛博朋克风 Jekyll 博客脚手架：深色为底、霓虹点缀、轻量动效与可演进架构。
-# 生产地址：用户页使用 https://<username>.github.io，项目页使用 https://<username>.github.io/<repo>
-url: "https://llllllama.me" # 部署后请改为你的域名或用户页地址
-baseurl: "" # 用户页留空；项目页填写 "/<repo>"
+title: lama小站
+subtitle: 记录与分享
+description: lama的小站 · 文章、笔记与资料分享
+url: "https://lllllllama.me"
+baseurl: ""
 
 author:
   name: lllllllama
@@ -11,32 +10,24 @@ author:
   url: https://github.com/yourname
 
 lang: zh-CN
-timezone: Asia/Shanghai # 可改为你的时区
-
-# 永久链接样式
+timezone: Asia/Shanghai
 permalink: /:categories/:year/:month/:day/:title/
 
-# 分页（使用 jekyll-paginate 插件）
 paginate: 5
 paginate_path: "/page:num/"
 
-# 主题/布局：本项目自带 layouts/_includes/_sass，不依赖远程主题
-
-# 插件：以下均为 GitHub Pages 官方支持（A 模式可用）
 plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-paginate
 
-# Markdown & 高亮
 markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# 导航菜单（可在此修改）
 nav:
   - title: 首页
     url: /
@@ -51,25 +42,16 @@ nav:
   - title: 管理
     url: /admin/
 
-# 社交链接（在页脚显示）
 social:
   github: lllllllama
   twitter: yourhandle
   weibo: yourweibo
   rss: /feed.xml
 
-# 外观
 appearance:
-  default_theme: cyber-cyan # 可选：cyber-cyan | cyber-magenta | cyber-lime | cyber-violet
+  default_theme: cyber-cyan
   enable_theme_switcher: true
   reduce_motion_respect: true
-
-# 自定义域名（如使用，请将 CNAME 文件内容设置为你的域名）
-# CNAME: example.com
-
-# 如果使用 TEMPLATE_REPO_URL 拉取模板：
-# - 本地脚本会将模板仓库中的文件拷贝到当前目录（不覆盖现有同名文件）。
-# - 你仍可在此文件中覆盖模板的配置。
 
 exclude:
   - vendor
@@ -79,14 +61,13 @@ exclude:
   - Gemfile.lock
   - .github
 
-# 功能开关
 features:
-  search: true          # 站内搜索（基于 search.json + 前端 lunr 风格实现，无后端）
-  toc: true             # 文章目录（前端生成）
+  search: true
+  toc: true
   comments:
     giscus:
       enabled: false
-      repo: ""          # owner/repo
+      repo: ""
       repo_id: ""
       category: "General"
       category_id: ""
@@ -97,6 +78,5 @@ features:
       theme: dark
       lang: zh-CN
 
-# 搜索索引页（无需插件，使用模板输出 JSON）
 search_index:
   path: /search.json
