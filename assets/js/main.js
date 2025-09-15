@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const searchLayer = document.querySelector('[data-component="search"]');
   if (searchLayer) {
     const { setupSearch } = await import('./components/search.js');
-    setupSearch(searchLayer, { endpoint: '{{ site.search_index.path | default: "/search.json" }}' });
+    setupSearch(searchLayer, { endpoint: '/search.json' });
     document.querySelectorAll('[data-action="open-search"]').forEach(btn => btn.addEventListener('click', () => searchLayer.dispatchEvent(new CustomEvent('open'))));
   }
 
