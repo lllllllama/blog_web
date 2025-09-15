@@ -1,4 +1,4 @@
-// Main entry (ESM): wires theme switcher, search, toc, and micro interactions
+﻿// Main entry (ESM): wires theme switcher, search, toc, and micro interactions
 
 const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -72,11 +72,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btn = document.createElement('button');
     btn.className = 'copy-btn';
     btn.type = 'button';
-    btn.textContent = '复制';
+    btn.textContent = '澶嶅埗';
     btn.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(code.textContent || ''); btn.textContent = '已复制'; setTimeout(() => btn.textContent = '复制', 1500); } catch {}
+      try { await navigator.clipboard.writeText(code.textContent || ''); btn.textContent = '宸插鍒?; setTimeout(() => btn.textContent = '澶嶅埗', 1500); } catch {}
     });
     wrap.appendChild(btn);
   });
 });
+
 
