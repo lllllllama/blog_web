@@ -24,7 +24,7 @@ collections:
     format: frontmatter
     fields:
       - { label: 标题, name: title, widget: string }
-      - { label: 日期, name: date, widget: datetime, format: "YYYY-MM-DD HH:mm:ss", time_format: "HH:mm" }
+      - { label: 日期, name: date, widget: datetime, format: "yyyy-MM-dd HH:mm:ss", time_format: "HH:mm" }
       - { label: 分类, name: categories, widget: list, default: ["blog"] }
       - { label: 标签, name: tags, widget: list, required: false }
       - { label: 置顶, name: pin, widget: boolean, default: false, required: false }
