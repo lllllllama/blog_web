@@ -7,8 +7,8 @@
   border: 1px solid var(--border);
   border-radius: $radius-md;
   background: linear-gradient(145deg, 
-    rgba(255,255,255,.08), 
-    rgba(255,255,255,.02));
+    rgba(26, 26, 26, .8), 
+    rgba(13, 13, 13, .9));
   color: var(--text);
   text-decoration: none;
   font-weight: 600;
@@ -28,19 +28,19 @@
     height: 100%;
     background: linear-gradient(90deg, 
       transparent, 
-      rgba(255,255,255,.1), 
+      rgba(59, 130, 246, .2), 
       transparent);
     transition: left $t-slow $ease-smooth;
   }
   
   &:hover {
-    border-color: rgba(0,234,255,.4);
+    border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
     background: linear-gradient(145deg, 
-      rgba(0,234,255,.15), 
-      rgba(0,234,255,.08));
-    color: var(--accent-2);
+      rgba(59, 130, 246, .15), 
+      rgba(59, 130, 246, .08)); // 使用蓝色强调色
+    color: var(--accent); // 使用蓝色强调色
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,234,255,.25);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, .25); // 使用蓝色强调色
     
     &::before {
       left: 100%;
@@ -49,13 +49,13 @@
   
   &:active {
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(0,234,255,.2);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, .2); // 使用蓝色强调色
   }
   
   &:focus {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent); // 使用蓝色强调色
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px rgba(0,234,255,.2);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, .2); // 使用蓝色强调色
   }
   
   &:disabled {
@@ -66,8 +66,8 @@
     &:hover {
       border-color: var(--border);
       background: linear-gradient(145deg, 
-        rgba(255,255,255,.08), 
-        rgba(255,255,255,.02));
+        rgba(26, 26, 26, .8), 
+        rgba(13, 13, 13, .9));
       color: var(--text);
       transform: none;
       box-shadow: none;
@@ -78,25 +78,25 @@
 .btn.primary {
   background: linear-gradient(145deg, 
     var(--accent), 
-    var(--accent-dark));
-  border-color: var(--accent);
-  color: #000;
+    var(--accent-dark)); // 使用蓝色强调色
+  border-color: var(--accent); // 使用蓝色强调色
+  color: #fff; // 白色文字
   font-weight: 700;
-  box-shadow: 0 4px 15px rgba(0,234,255,.3);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, .3); // 使用蓝色强调色
   
   &::before {
     background: linear-gradient(90deg, 
       transparent, 
-      rgba(255,255,255,.2), 
+      rgba(255,255,255,.3), 
       transparent);
   }
   
   &:hover {
     background: linear-gradient(145deg, 
       var(--accent-2), 
-      var(--accent));
-    border-color: var(--accent-2);
-    box-shadow: var(--accent-glow-strong);
+      var(--accent)); // 使用紫色强调色
+    border-color: var(--accent-2); // 使用紫色强调色
+    box-shadow: 0 0 20px rgba(59, 130, 246, .5), 0 0 30px rgba(59, 130, 246, .3); // 发光效果
     transform: translateY(-3px);
   }
   
@@ -107,12 +107,13 @@
 
 .btn.secondary {
   background: transparent;
-  border-color: rgba(0,234,255,.3);
-  color: var(--accent);
+  border-color: rgba(59, 130, 246, .3); // 使用蓝色强调色
+  color: var(--accent); // 使用蓝色强调色
   
   &:hover {
-    background: rgba(0,234,255,.1);
-    border-color: rgba(0,234,255,.5);
+    background: rgba(59, 130, 246, .1); // 使用蓝色强调色
+    border-color: rgba(59, 130, 246, .5); // 使用蓝色强调色
+    box-shadow: 0 0 15px rgba(59, 130, 246, .2); // 发光效果
   }
 }
 
@@ -125,6 +126,7 @@
     background: rgba(255,255,255,.05);
     border-color: var(--border);
     color: var(--text);
+    box-shadow: 0 0 10px rgba(59, 130, 246, .1); // 轻微发光效果
   }
 }
 

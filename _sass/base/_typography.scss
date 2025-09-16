@@ -4,8 +4,8 @@ body {
                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 
                "Noto Color Emoji", "PingFang SC", "Hiragino Sans GB", 
                "Microsoft YaHei", "微软雅黑", sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 18px; // 增大字号以提升可读性
+  line-height: 1.7; // 增加行距
   letter-spacing: 0.01em;
   color: var(--text);
   background: var(--bg);
@@ -23,45 +23,48 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2.5rem, 5vw, 3.5rem); // 增大H1字号
   margin-bottom: $space-lg;
+  color: #F5F5F5; // 大白字
 }
 
 h2 {
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem); // 增大H2字号
   margin: $space-2xl 0 $space-lg;
   position: relative;
+  color: var(--text); // 保持默认文字颜色
   
+  // 带强调色下划线
   &::after {
     content: '';
     position: absolute;
     bottom: -8px;
     left: 0;
-    width: 60px;
-    height: 3px;
+    width: 80px;
+    height: 4px;
     background: linear-gradient(90deg, var(--accent), var(--accent-2));
     border-radius: 2px;
   }
 }
 
 h3 {
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-size: clamp(1.375rem, 3vw, 2rem); // 增大H3字号
   margin: $space-xl 0 $space-md;
-  color: var(--accent-2);
+  color: #AAAAAA; // 浅灰字
 }
 
 h4 {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
   margin: $space-lg 0 $space-sm;
 }
 
 h5 {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   margin: $space-md 0 $space-sm;
 }
 
 h6 {
-  font-size: 1rem;
+  font-size: 1.125rem;
   margin: $space-md 0 $space-xs;
   color: var(--text-dim);
   text-transform: uppercase;
@@ -71,7 +74,7 @@ h6 {
 p {
   color: var(--text-dim);
   margin: 0 0 $space-md;
-  line-height: 1.7;
+  line-height: 1.8; // 增加行距
 }
 
 a {
@@ -82,7 +85,7 @@ a {
   &:hover {
     color: var(--accent-2);
     text-decoration: underline;
-    text-decoration-color: rgba(0,234,255,.5);
+    text-decoration-color: rgba(59, 130, 246, .5); // 使用蓝色强调色
     text-underline-offset: 3px;
   }
 }
@@ -102,9 +105,9 @@ code {
                "SF Mono", Monaco, "Inconsolata", "Roboto Mono", 
                "Source Code Pro", monospace;
   font-size: 0.875em;
-  background: rgba(0,234,255,.1);
-  border: 1px solid rgba(0,234,255,.2);
-  color: var(--accent-2);
+  background: rgba(59, 130, 246, .1); // 使用蓝色强调色
+  border: 1px solid rgba(59, 130, 246, .2); // 使用蓝色强调色
+  color: var(--accent); // 使用蓝色强调色
   padding: 2px 6px;
   border-radius: $radius-sm;
   font-weight: 500;
@@ -129,7 +132,7 @@ pre {
     height: 1px;
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(0,234,255,.3) 50%, 
+      rgba(59, 130, 246, .3) 50%, // 使用蓝色强调色
       transparent 100%);
   }
   
@@ -139,15 +142,16 @@ pre {
     padding: 0;
     color: var(--text);
     font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.6; // 增加行距
   }
 }
 
 blockquote {
-  border-left: 4px solid var(--accent);
-  padding: $space-md 0 $space-md $space-lg;
+  // 深灰背景 + 左侧亮色竖线
+  background: #1A1A1A; // 深灰背景
+  border-left: 4px solid var(--accent); // 左侧亮色竖线
+  padding: $space-lg;
   margin: $space-lg 0;
-  background: rgba(0,234,255,.05);
   border-radius: 0 $radius-md $radius-md 0;
   position: relative;
   
@@ -187,7 +191,7 @@ ul, ol {
   li {
     margin-bottom: $space-xs;
     color: var(--text-dim);
-    line-height: 1.6;
+    line-height: 1.7;
     
     &::marker {
       color: var(--accent);
@@ -225,6 +229,7 @@ ol {
     &::marker {
       content: counter(item) '. ';
       font-weight: 700;
+      color: var(--accent); // 使用强调色
     }
   }
 }
@@ -243,14 +248,14 @@ hr {
 
 .subtitle {
   color: var(--text-dim);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.5;
 }
 
 .desc {
   color: var(--text-muted);
-  font-size: 1rem;
+  font-size: 1.125rem;
   line-height: 1.6;
 }
 
@@ -273,16 +278,28 @@ hr {
 // 响应式字体
 @media (max-width: 767px) {
   body {
-    font-size: 15px;
+    font-size: 16px; // 移动端适当减小字号
   }
   
-  h2::after {
-    width: 40px;
-    height: 2px;
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    
+    &::after {
+      width: 60px;
+      height: 3px;
+    }
+  }
+  
+  h3 {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
   }
   
   blockquote {
-    padding: $space-sm 0 $space-sm $space-md;
+    padding: $space-md;
     
     &::before {
       font-size: 2rem;

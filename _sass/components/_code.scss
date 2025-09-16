@@ -1,17 +1,52 @@
 /* Rouge 暗色霓虹配色 + 复制按钮 */
-.highlight { background:#0f1420; border:1px solid var(--border); border-radius:14px; box-shadow:inset 0 0 0 1px rgba(255,255,255,.03); overflow:auto; }
-.highlight pre { margin:0; padding:14px; background:transparent; }
-.highlight .lineno { color:#3b4450; margin-right:12px; }
-.highlight .hll { background:rgba(0,234,255,.08) }
-.highlight .c { color:#586172 } /* Comment */
-.highlight .k { color:#8a7dff } /* Keyword */
-.highlight .s { color:#ff5c99 } /* String */
-.highlight .na,.highlight .nf { color:#00eaff } /* Name/Function */
-.highlight .nt { color:#b6ff00 } /* Tag */
-.highlight .mi,.highlight .m { color:#ffd166 } /* Number */
-.highlight .o,.highlight .p { color:#cbd5e1 }
+.highlight { 
+  background: #1A1A1A; /* 暗灰背景 */
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+  overflow: auto;
+  position: relative;
+  
+  /* 添加左侧亮色竖线 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  }
+}
+.highlight pre { margin:0; padding:14px 14px 14px 24px; background:transparent; }
+.highlight .lineno { color:#AAAAAA; margin-right:12px; } /* 次级文字 */
+.highlight .hll { background:rgba(59, 130, 246, .1) } /* 使用蓝色强调色 */
+.highlight .c { color:#AAAAAA } /* Comment - 次级文字 */
+.highlight .k { color:#A855F7 } /* Keyword - 紫色强调色 */
+.highlight .s { color:#F97316 } /* String - 橙色强调色 */
+.highlight .na,.highlight .nf { color:#3B82F6 } /* Name/Function - 蓝色强调色 */
+.highlight .nt { color:#A855F7 } /* Tag - 紫色强调色 */
+.highlight .mi,.highlight .m { color:#F97316 } /* Number - 橙色强调色 */
+.highlight .o,.highlight .p { color:#F5F5F5 } /* 其他符号 - 正文文字 */
 
 .code-block { position:relative }
-.copy-btn { position:absolute; top:8px; right:8px; padding:6px 8px; border-radius:10px; border:1px solid color-mix(in srgb, var(--accent) 40%, var(--border)); background:rgba(0,0,0,.25); color:var(--text); cursor:pointer; transition:transform $t-fast $ease-inout, box-shadow $t-fast $ease-inout; }
-.copy-btn:hover { transform:translateY(-1px); box-shadow:var(--accent-glow) }
+.copy-btn { 
+  position:absolute; 
+  top:8px; 
+  right:8px; 
+  padding:6px 8px; 
+  border-radius:10px; 
+  border:1px solid color-mix(in srgb, var(--accent) 40%, var(--border)); 
+  background:rgba(26, 26, 26, .8); /* 暗色背景 */
+  color:var(--text); 
+  cursor:pointer; 
+  transition:all $t-fast $ease-inout;
+  
+  &:hover {
+    transform:translateY(-1px); 
+    box-shadow:0 0 15px rgba(59, 130, 246, .4); /* 蓝色发光效果 */
+    background: rgba(59, 130, 246, .1); /* 蓝色背景 */
+    border-color: rgba(59, 130, 246, .4);
+  }
+}
 

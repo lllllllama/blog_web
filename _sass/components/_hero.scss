@@ -2,8 +2,8 @@
   position: relative;
   overflow: hidden;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(0,234,255,.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255,61,129,.08) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, .1) 0%, transparent 50%), /* 使用蓝色强调色 */
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, .08) 0%, transparent 50%), /* 使用紫色强调色 */
     url('../img/grid.svg');
   background-repeat: repeat;
   background-size: auto, auto, 60px 60px;
@@ -20,10 +20,10 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg, 
-      rgba(0,234,255,.02) 0%, 
+      rgba(59, 130, 246, .05) 0%,  /* 使用蓝色强调色 */
       transparent 30%, 
       transparent 70%, 
-      rgba(255,61,129,.02) 100%);
+      rgba(168, 85, 247, .05) 100%); /* 使用紫色强调色 */
     pointer-events: none;
   }
   

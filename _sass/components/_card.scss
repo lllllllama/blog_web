@@ -4,10 +4,9 @@
   border: 1px solid var(--border);
   border-radius: $radius-lg;
   background: linear-gradient(145deg, 
-    rgba(255,255,255,.03) 0%, 
-    rgba(255,255,255,.01) 50%, 
-    rgba(0,0,0,.05) 100%);
-  backdrop-filter: blur(8px);
+    rgba(26, 26, 26, 0.8) 0%, 
+    rgba(13, 13, 13, 0.9) 100%); // 暗底卡片
+  backdrop-filter: blur(12px);
   overflow: hidden;
   box-shadow: var(--shadow-glow);
   transition: all $t-mid $ease-smooth;
@@ -21,28 +20,28 @@
     height: 1px;
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(255,255,255,.1) 50%, 
-      transparent 100%);
+      rgba(59, 130, 246, .3) 50%, 
+      transparent 100%); // 使用蓝色强调色
     opacity: 0;
     transition: opacity $t-mid $ease-smooth;
   }
   
   &:hover {
-    transform: translateY(-6px) scale(1.02);
-    border-color: rgba(0,234,255,.3);
-    box-shadow: var(--shadow-xl), var(--accent-glow-strong);
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
+    box-shadow: var(--shadow-xl), 0 0 20px rgba(59, 130, 246, .3); // 柔和发光效果
     
     &::before {
       opacity: 1;
     }
     
     .card-cover img {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
     
     .card-title a {
-      color: var(--accent-2);
-      text-shadow: 0 0 8px rgba(0,234,255,.4);
+      color: var(--accent);
+      text-shadow: 0 0 8px rgba(59, 130, 246, .4); // 使用蓝色强调色
     }
   }
 }
@@ -58,6 +57,7 @@
     height: 200px;
     object-fit: cover;
     transition: transform $t-slow $ease-smooth;
+    opacity: 0.9;
   }
   
   &::after {
@@ -67,7 +67,7 @@
     left: 0;
     right: 0;
     height: 60px;
-    background: linear-gradient(transparent, rgba(17,24,39,.8));
+    background: linear-gradient(transparent, rgba(26, 26, 26, .9)); // 使用暗色背景
     pointer-events: none;
   }
 }
@@ -79,7 +79,7 @@
 
 .card-title {
   margin: 0 0 $space-sm;
-  font-size: 1.25rem;
+  font-size: 1.375rem; // 增大标题字号
   font-weight: 700;
   line-height: 1.3;
   
@@ -110,8 +110,9 @@
 
 .excerpt {
   color: var(--text-dim);
-  line-height: 1.6;
+  line-height: 1.7; // 增加行距
   margin-bottom: $space-md;
+  font-size: 1rem; // 增大摘要字号
 }
 
 .tags {
@@ -125,34 +126,33 @@
   display: inline-flex;
   align-items: center;
   padding: $space-xs $space-sm;
-  background: rgba(0,234,255,.1);
-  border: 1px solid rgba(0,234,255,.2);
+  background: rgba(59, 130, 246, .1); // 使用蓝色强调色
+  border: 1px solid rgba(59, 130, 246, .2); // 使用蓝色强调色
   border-radius: $radius-sm;
-  color: var(--accent-2);
+  color: var(--accent); // 使用蓝色强调色
   font-size: 0.75rem;
   font-weight: 500;
   text-decoration: none;
   transition: all $t-fast $ease-smooth;
   
   &:hover {
-    background: rgba(0,234,255,.2);
-    border-color: rgba(0,234,255,.4);
+    background: rgba(59, 130, 246, .2); // 使用蓝色强调色
+    border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
     transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0,234,255,.3);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, .3); // 使用蓝色强调色
   }
 }
 
 .card.pinned {
-  border-color: rgba(0,234,255,.5);
+  border-color: rgba(59, 130, 246, .6); // 使用蓝色强调色
   background: linear-gradient(145deg, 
-    rgba(0,234,255,.05) 0%, 
-    rgba(255,255,255,.02) 50%, 
-    rgba(0,0,0,.05) 100%);
+    rgba(59, 130, 246, .05) 0%, 
+    rgba(26, 26, 26, .9) 100%);
   
   &::before {
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(0,234,255,.3) 50%, 
+      rgba(59, 130, 246, .4) 50%, 
       transparent 100%);
     opacity: 1;
   }
@@ -161,5 +161,20 @@
     content: '📌 ';
     color: var(--accent);
     margin-right: $space-xs;
+  }
+}
+
+// 响应式优化
+@media (max-width: 767px) {
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .excerpt {
+    font-size: 0.9375rem;
+  }
+  
+  .card-cover img {
+    height: 160px;
   }
 }

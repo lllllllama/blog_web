@@ -20,6 +20,27 @@
   }
 }
 
+/* 添加赛博感网格背景 */
+.cyber-grid {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(rgba(59, 130, 246, .05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59, 130, 246, .05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
 .post-list {
   display: grid;
   gap: $space-xl;
@@ -89,20 +110,20 @@
     display: inline-flex;
     align-items: center;
     padding: $space-xs $space-sm;
-    background: rgba(0,234,255,.08);
-    border: 1px solid rgba(0,234,255,.15);
+    background: rgba(59, 130, 246, .1); // 使用蓝色强调色
+    border: 1px solid rgba(59, 130, 246, .2); // 使用蓝色强调色
     border-radius: $radius-sm;
-    color: var(--accent-2);
+    color: var(--accent); // 使用蓝色强调色
     font-size: 0.8rem;
     font-weight: 500;
     text-decoration: none;
     transition: all $t-fast $ease-smooth;
     
     &:hover {
-      background: rgba(0,234,255,.15);
-      border-color: rgba(0,234,255,.3);
+      background: rgba(59, 130, 246, .2); // 使用蓝色强调色
+      border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
       transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0,234,255,.2);
+      box-shadow: 0 2px 8px rgba(59, 130, 246, .3); // 使用蓝色强调色
     }
     
     span {

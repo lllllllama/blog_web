@@ -25,35 +25,56 @@ $radius-lg: 16px;
 $radius-xl: 20px;
 
 :root {
-  --bg: #0a0d12;        // 背景（更深）
-  --bg-soft: #0f1419;   // 次级背景
-  --bg-card: #111827;   // 卡片背景
-  --surface: #1a202c;   // 表面
-  --text: #e2e8f0;      // 正文（更亮）
-  --text-dim: #94a3b8;  // 次要文字（更清晰）
-  --text-muted: #64748b; // 静音文字
+  --bg: #0D0D0D;        // 暗色背景 (#0D0D0D ~ #1A1A1A)
+  --bg-soft: #121212;   // 次级背景
+  --bg-card: #1A1A1A;   // 卡片背景
+  --surface: #1A1A1A;   // 表面
+  --text: #F5F5F5;      // 正文文字 (#EAEAEA / #F5F5F5)
+  --text-dim: #AAAAAA;  // 次级文字
+  --text-muted: #888888; // 静音文字
   --border: rgba(255,255,255,.1);
   --border-soft: rgba(255,255,255,.06);
-  --ring: rgba(0,234,255,.8);
+  --ring: rgba(59, 130, 246, .8); // 蓝色强调色 #3B82F6
   --shadow-sm: 0 1px 2px rgba(0,0,0,.1);
   --shadow-md: 0 4px 6px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06);
   --shadow-lg: 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
   --shadow-xl: 0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04);
   --shadow-glow: 0 0 0 1px rgba(255,255,255,.05), 0 8px 32px rgba(0,0,0,.4);
 
-  /* 霓虹主题（accent） */
-  --accent: #00eaff;
-  --accent-2: #4af3ff;
-  --accent-dark: #0099cc;
-  --accent-glow: 0 0 16px rgba(0,234,255,.7), 0 0 32px rgba(0,234,255,.4);
-  --accent-glow-strong: 0 0 20px rgba(0,234,255,.8), 0 0 40px rgba(0,234,255,.5);
+  /* 霓虹主题（accent）- 使用指定的强调色 */
+  --accent: #3B82F6;    // 蓝色强调色
+  --accent-2: #A855F7;  // 紫色强调色
+  --accent-3: #F97316;  // 橙色强调色
+  --accent-dark: #1E40AF; // 深蓝
+  --accent-glow: 0 0 16px rgba(59, 130, 246, .7), 0 0 32px rgba(59, 130, 246, .4);
+  --accent-glow-strong: 0 0 20px rgba(59, 130, 246, .8), 0 0 40px rgba(59, 130, 246, .5);
 }
 
-/* 主题变体 */
-html[data-theme='cyber-cyan'] { --accent:#00eaff; --accent-2:#4af3ff; --accent-glow:0 0 12px rgba(0,234,255,.6),0 0 24px rgba(0,234,255,.35); }
-html[data-theme='cyber-magenta'] { --accent:#ff3d81; --accent-2:#ff5c99; --accent-glow:0 0 12px rgba(255,61,129,.6),0 0 24px rgba(255,61,129,.35); }
-html[data-theme='cyber-lime'] { --accent:#b6ff00; --accent-2:#c8ff4a; --accent-glow:0 0 12px rgba(182,255,0,.6),0 0 24px rgba(182,255,0,.35); }
-html[data-theme='cyber-violet'] { --accent:#8a7dff; --accent-2:#a294ff; --accent-glow:0 0 12px rgba(138,125,255,.6),0 0 24px rgba(138,125,255,.35); }
+/* 主题变体 - 保持原有主题但调整强调色 */
+html[data-theme='cyber-cyan'] { 
+  --accent: #3B82F6; 
+  --accent-2: #A855F7; 
+  --accent-3: #F97316; 
+  --accent-glow: 0 0 12px rgba(59, 130, 246, .6), 0 0 24px rgba(59, 130, 246, .35); 
+}
+html[data-theme='cyber-magenta'] { 
+  --accent: #A855F7; 
+  --accent-2: #3B82F6; 
+  --accent-3: #F97316; 
+  --accent-glow: 0 0 12px rgba(168, 85, 247, .6), 0 0 24px rgba(168, 85, 247, .35); 
+}
+html[data-theme='cyber-lime'] { 
+  --accent: #F97316; 
+  --accent-2: #3B82F6; 
+  --accent-3: #A855F7; 
+  --accent-glow: 0 0 12px rgba(249, 115, 22, .6), 0 0 24px rgba(249, 115, 22, .35); 
+}
+html[data-theme='cyber-violet'] { 
+  --accent: #A855F7; 
+  --accent-2: #3B82F6; 
+  --accent-3: #F97316; 
+  --accent-glow: 0 0 12px rgba(168, 85, 247, .6), 0 0 24px rgba(168, 85, 247, .35); 
+}
 
 @media (prefers-reduced-motion: reduce) {
   :root { --accent-glow:none; }

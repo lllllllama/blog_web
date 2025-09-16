@@ -2,8 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(0,234,255,.2);
-  background: rgba(10,13,18,.85);
+  border-bottom: 1px solid rgba(59, 130, 246, .3); /* 使用蓝色强调色 */
+  background: rgba(13, 13, 13, .9); /* 使用暗色背景 */
   backdrop-filter: saturate(140%) blur(12px);
   transition: all $t-mid $ease-smooth;
   
@@ -16,7 +16,7 @@
     height: 1px;
     background: linear-gradient(90deg, 
       transparent 0%, 
-      rgba(0,234,255,.4) 50%, 
+      rgba(59, 130, 246, .6) 50%, /* 使用蓝色强调色 */
       transparent 100%);
     opacity: 0;
     transition: opacity $t-mid $ease-smooth;

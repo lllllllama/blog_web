@@ -1,11 +1,88 @@
 /* Minimal reset + 可访问性基线 */
-*,*::before,*::after{box-sizing:border-box}
-html{line-height:1.5;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text)}
-img,svg,video{max-width:100%;display:block}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-button{font:inherit;color:inherit;background:none;border:1px solid var(--border);border-radius:10px}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-::selection{background:color-mix(in srgb, var(--accent) 35%, transparent)}
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+*,*::before,*::after{
+  box-sizing:border-box;
+}
+
+html{
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  position: relative;
+  overflow-x: hidden;
+}
+
+img,svg,video{
+  max-width:100%;
+  display:block;
+}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+  transition: all $t-fast $ease-smooth;
+}
+
+a:hover{
+  text-decoration:underline;
+  text-shadow: 0 0 8px rgba(59, 130, 246, .4); /* 使用蓝色强调色 */
+}
+
+button{
+  font:inherit;
+  color:inherit;
+  background:none;
+  border:1px solid var(--border);
+  border-radius:10px;
+  cursor: pointer;
+  transition: all $t-fast $ease-smooth;
+}
+
+button:hover{
+  border-color: rgba(59, 130, 246, .4); /* 使用蓝色强调色 */
+  box-shadow: 0 0 10px rgba(59, 130, 246, .2); /* 使用蓝色强调色 */
+}
+
+button:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+  box-shadow: 0 0 15px rgba(59, 130, 246, .4); /* 使用蓝色强调色 */
+}
+
+::selection{
+  background:color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* 添加赛博感网格背景 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, .03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+  
+  /* 在减少动画模式下隐藏网格背景 */
+  body::before {
+    display: none;
+  }
+}
