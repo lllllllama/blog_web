@@ -19,15 +19,11 @@ jobs:
           ruby-version: '3.3'
           bundler-cache: true
 
-      - name: Install dependencies
-        run: |
-          bundle config set path 'vendor/bundle'
-          bundle install --jobs 4 --retry 3 || true
-          gem install html-proofer --no-document
-
-      - name: Build Jekyll
-        run: |
-          bundle exec jekyll build --trace || jekyll build --trace
+      - uses: actions/configure-pages@v5
+      - uses: actions/jekyll-build-pages@v1
+        with:
+          source: .
+          destination: ./_site
 
       - name: HTMLProofer
         run: |
