@@ -4,13 +4,15 @@
     {% include head.html %}
   </head>
   <body>
-    <a class="skip-link" href="#content">跳到主要内容</a>
-    {% include header.html %}
-    <main id="content" class="container">
-      {{ content }}
-    </main>
-    {% include footer.html %}
+    <div class="site-shell">
+      <a class="skip-link" href="#content">跳转到主要内容</a>
+      {% include header.html %}
+      <main id="content" class="site-main">
+        {{ content }}
+      </main>
+      {% include footer.html %}
+    </div>
     {% include search.html %}
     <script type="module" src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
   </body>
-  </html>
+</html>

@@ -1,0 +1,29 @@
+[
+  {
+    "title": "你好，世界：第一篇博文",
+    "url": "/随笔/2024/01/01/你好，世界：第一篇博文/",
+    "date": "2024-01-01T10:00:00+08:00",
+    "tags": ["开始", "指南"],
+    "categories": ["随笔"],
+    "summary": "这是你的第一篇中文示例博文，包含标签、分类与置顶与目录示例。",
+    "content": "欢迎来到你的新博客！这是一篇示例文章，帮助你验证本地预览与 GitHub Pages 发布是否工作正常。你可以在 _config.yml 中调整 title、description 与导航等配置；通过 scripts\\new-post.ps1 快速创建新文章。"
+  },
+  {
+    "title": "第二篇：标签/分类/摘要/代码高亮演示",
+    "url": "/技术/jekyll/2024/02/01/第二篇：标签/分类/摘要/代码高亮演示/",
+    "date": "2024-02-01T09:30:00+08:00",
+    "tags": ["Jekyll", "GitHub Pages", "SEO"],
+    "categories": ["技术", "Jekyll"],
+    "summary": "本文演示更多的 front-matter 字段用法与列表摘要效果，同时展示 Rouge 代码高亮的样式效果。",
+    "content": "这是一篇更完整的演示文章，包含以下内容：分类与标签（用于归档与检索）。摘要（excerpt）与首页卡片展示。Rouge 代码高亮（Ruby、JavaScript 等）。"
+  },
+  {
+    "title": "AutoDL 大文件上传最快方法",
+    "url": "/教程/2025/09/12/AutoDL 大文件上传最快方法/",
+    "date": "2025-09-12T10:00:00+08:00",
+    "tags": ["AutoDL", "上传", "MobaXterm", "Google Drive", "网盘"],
+    "categories": ["教程"],
+    "summary": "快速在 AutoDL 实例上传大文件的多种方法对比。",
+    "content": "AutoDl-较大文件上传最快方法 方法一.使用MobaXterm（最快，同时免费）上传速度约10mb/s - 100mb/s 方法二使用公网网盘（官网推荐，不免费，方便管理） 方法三使用Google drive(笔者推荐) 方法四直接在容器内上传（比较慢但方便，适合小文件）"
+  }
+]

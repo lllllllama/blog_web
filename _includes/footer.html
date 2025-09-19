@@ -1,13 +1,14 @@
 <footer class="site-footer">
   <div class="container footer-inner">
-    <p>
-      © {{ site.time | date: '%Y' }} {{ site.author.name | default: site.title }} ·
+    <div class="footer-meta">
+      <p class="footer-title">{{ site.title }}</p>
+      <p>© {{ site.time | date: '%Y' }} {{ site.author.name | default: site.title }} · Crafted with Jekyll & GitHub Pages</p>
+    </div>
+    <div class="footer-links">
       <a href="https://github.com/{{ site.social.github | default: '' }}" rel="noopener" target="_blank">GitHub</a>
-      {% if site.social.twitter %} · <a href="https://twitter.com/{{ site.social.twitter }}" rel="noopener" target="_blank">Twitter</a>{% endif %}
-      {% if site.social.weibo %} · <a href="https://weibo.com/{{ site.social.weibo }}" rel="noopener" target="_blank">Weibo</a>{% endif %}
-      {% if site.social.rss %} · <a href="{{ site.social.rss | relative_url }}">RSS</a>{% endif %}
-    </p>
-    <p class="powered">Powered by Jekyll & GitHub Pages</p>
+      {% if site.social.twitter %}<a href="https://twitter.com/{{ site.social.twitter }}" rel="noopener" target="_blank">Twitter</a>{% endif %}
+      {% if site.social.weibo %}<a href="https://weibo.com/{{ site.social.weibo }}" rel="noopener" target="_blank">Weibo</a>{% endif %}
+      {% if site.social.rss %}<a href="{{ site.social.rss | relative_url }}">RSS</a>{% endif %}
+    </div>
   </div>
 </footer>
-

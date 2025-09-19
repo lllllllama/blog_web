@@ -1,118 +1,123 @@
 .card {
   display: block;
   position: relative;
-  border: 1px solid var(--border);
-  border-radius: $radius-lg;
-  background: linear-gradient(145deg, 
-    rgba(26, 26, 26, 0.8) 0%, 
-    rgba(13, 13, 13, 0.9) 100%); // 暗底卡片
-  backdrop-filter: blur(12px);
-  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--panel-border);
+  background: linear-gradient(160deg, rgba(23, 24, 33, .92), rgba(18, 18, 24, .88));
   box-shadow: var(--shadow-glow);
-  transition: all $t-mid $ease-smooth;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, .3) 50%, 
-      transparent 100%); // 使用蓝色强调色
-    opacity: 0;
-    transition: opacity $t-mid $ease-smooth;
-  }
-  
-  &:hover {
-    transform: translateY(-4px);
-    border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
-    box-shadow: var(--shadow-xl), 0 0 20px rgba(59, 130, 246, .3); // 柔和发光效果
-    
-    &::before {
-      opacity: 1;
-    }
-    
-    .card-cover img {
-      transform: scale(1.03);
-    }
-    
-    .card-title a {
-      color: var(--accent);
-      text-shadow: 0 0 8px rgba(59, 130, 246, .4); // 使用蓝色强调色
-    }
-  }
+  overflow: hidden;
+  transition: transform $t-mid $ease-smooth, border-color $t-fast $ease-smooth, box-shadow $t-mid $ease-smooth;
+  isolation: isolate;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(var(--radius-2xl) - 2px);
+  border: 1px solid rgba(255,255,255,.04);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(135deg, rgba(59,130,246,.14), transparent 55%, rgba(168,85,247,.12));
+  opacity: 0;
+  transition: opacity $t-mid $ease-smooth;
+  z-index: -1;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--panel-border-strong);
+  box-shadow: var(--shadow-xl), 0 0 28px rgba(59,130,246,.35);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card-cover {
   position: relative;
   overflow: hidden;
-  border-radius: $radius-lg $radius-lg 0 0;
-  
-  img {
-    display: block;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    transition: transform $t-slow $ease-smooth;
-    opacity: 0.9;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    background: linear-gradient(transparent, rgba(26, 26, 26, .9)); // 使用暗色背景
-    pointer-events: none;
-  }
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+}
+
+.card-cover img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  filter: saturate(1.05);
+  transition: transform $t-slow $ease-smooth, opacity $t-mid $ease-smooth;
+  opacity: 0.92;
+}
+
+.card:hover .card-cover img {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+.card-cover::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 120px;
+  background: linear-gradient(0deg, rgba(15,15,20,.9), transparent 80%);
+  pointer-events: none;
 }
 
 .card-body {
-  padding: $space-lg;
-  position: relative;
+  padding: clamp($space-lg, 3vw, $space-2xl);
 }
 
 .card-title {
   margin: 0 0 $space-sm;
-  font-size: 1.375rem; // 增大标题字号
+  font-size: clamp(1.35rem, 2vw, 1.55rem);
   font-weight: 700;
-  line-height: 1.3;
-  
-  a {
-    color: var(--text);
-    text-decoration: none;
-    transition: all $t-fast $ease-smooth;
-    
-    &:hover {
-      color: var(--accent);
-    }
-  }
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.card-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color $t-fast $ease-smooth, text-shadow $t-mid $ease-smooth;
+}
+
+.card-title a:hover {
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(59,130,246,.45);
 }
 
 .meta {
-  color: var(--text-dim);
-  font-size: 0.875rem;
-  margin-bottom: $space-md;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: $space-sm;
-  
-  &::before {
-    content: '📅';
-    font-size: 0.75rem;
-  }
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: $space-md;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.meta::before {
+  content: '';
+  width: 20px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  border-radius: 2px;
+  opacity: 0.8;
 }
 
 .excerpt {
   color: var(--text-dim);
-  line-height: 1.7; // 增加行距
-  margin-bottom: $space-md;
-  font-size: 1rem; // 增大摘要字号
+  line-height: 1.75;
+  margin-bottom: $space-lg;
+  font-size: 1rem;
 }
 
 .tags {
@@ -125,56 +130,70 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: $space-xs $space-sm;
-  background: rgba(59, 130, 246, .1); // 使用蓝色强调色
-  border: 1px solid rgba(59, 130, 246, .2); // 使用蓝色强调色
-  border-radius: $radius-sm;
-  color: var(--accent); // 使用蓝色强调色
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
   font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: rgba(59,130,246,.08);
+  border: 1px solid rgba(59,130,246,.25);
+  color: var(--text);
+  text-transform: uppercase;
+  transition: transform $t-fast $ease-smooth, box-shadow $t-fast $ease-smooth, border-color $t-fast $ease-smooth;
+}
+
+.tag::before {
+  content: '#';
+  color: inherit;
   font-weight: 500;
-  text-decoration: none;
-  transition: all $t-fast $ease-smooth;
-  
-  &:hover {
-    background: rgba(59, 130, 246, .2); // 使用蓝色强调色
-    border-color: rgba(59, 130, 246, .4); // 使用蓝色强调色
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(59, 130, 246, .3); // 使用蓝色强调色
-  }
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  border-color: rgba(59,130,246,.45);
+  box-shadow: 0 0 16px rgba(59,130,246,.25);
+}
+
+.tag:nth-child(3n + 1) {
+  background: rgba(59,130,246,.12);
+  border-color: rgba(59,130,246,.35);
+  color: var(--tag-accent-1);
+}
+
+.tag:nth-child(3n + 2) {
+  background: rgba(168,85,247,.12);
+  border-color: rgba(168,85,247,.35);
+  color: var(--tag-accent-2);
+}
+
+.tag:nth-child(3n + 3) {
+  background: rgba(249,115,22,.12);
+  border-color: rgba(249,115,22,.35);
+  color: var(--tag-accent-3);
 }
 
 .card.pinned {
-  border-color: rgba(59, 130, 246, .6); // 使用蓝色强调色
-  background: linear-gradient(145deg, 
-    rgba(59, 130, 246, .05) 0%, 
-    rgba(26, 26, 26, .9) 100%);
-  
-  &::before {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, .4) 50%, 
-      transparent 100%);
-    opacity: 1;
-  }
-  
-  .card-title::before {
-    content: '📌 ';
-    color: var(--accent);
-    margin-right: $space-xs;
-  }
+  border-color: var(--panel-border-strong);
+  box-shadow: 0 0 0 1px rgba(59,130,246,.35), 0 30px 60px rgba(59,130,246,.25);
 }
 
-// 响应式优化
+.card.pinned .card-title::before {
+  content: '★';
+  margin-right: 8px;
+  font-size: 0.9em;
+  color: var(--accent-3);
+  filter: drop-shadow(0 0 8px rgba(249,115,22,.5));
+}
+
 @media (max-width: 767px) {
-  .card-title {
-    font-size: 1.25rem;
+  .card {
+    border-radius: var(--radius-xl);
   }
-  
-  .excerpt {
-    font-size: 0.9375rem;
-  }
-  
   .card-cover img {
-    height: 160px;
+    height: 180px;
+  }
+  .card-body {
+    padding: $space-lg;
   }
 }

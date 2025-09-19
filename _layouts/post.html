@@ -2,69 +2,84 @@
 layout: default
 ---
 
-<article class="post">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-      {% if page.categories %} · 分类：{{ page.categories | join: '/' }}{% endif %}
-      {% if page.tags %} · 标签：{% for t in page.tags %}<span>#{{ t }}</span> {% endfor %}{% endif %}
-    </p>
-  </header>
-
-  {% if site.features.toc and page.toc != false %}
-  <div class="post-grid">
-    <div class="post-content">
-      {{ content }}
-    </div>
-    {% include toc.html %}
-  </div>
-  {% else %}
-    <div class="post-content">
-      {{ content }}
-    </div>
-  {% endif %}
-
-  {% if page.gallery %}
-  <section class="post-gallery" style="margin-top:24px">
-    <h3>图片集</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
-      {% for item in page.gallery %}
-        <figure style="margin:0">
-          <img src="{{ item.image | relative_url }}" alt="{{ item.caption | default: 'image' }}" loading="lazy" style="width:100%;height:auto;border:1px solid rgba(0,234,255,.2);border-radius:8px" />
-          {% if item.caption %}<figcaption style="opacity:.8;font-size:.9em;margin-top:6px">{{ item.caption }}</figcaption>{% endif %}
-        </figure>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-
-  {% if page.attachments %}
-  <section class="post-attachments" style="margin-top:24px">
-    <h3>附件</h3>
-    <ul>
-      {% for a in page.attachments %}
-        {% assign f = a.file | downcase %}
-        {% if f contains '.pdf' and a.embed != false %}
-          </ul>
-          <div class="pdf-embed" style="margin:12px 0">
-            <object data="{{ a.file | relative_url }}" type="application/pdf" style="width:100%;height:80vh;border:1px solid var(--border);border-radius:8px;">
-              <p>无法内嵌预览。你可以 <a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">下载查看 {{ a.title | default: a.file | split: '/' | last }}</a>。</p>
-            </object>
-            <p style="margin:8px 0 0"><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">在新标签打开或下载：{{ a.title | default: a.file | split: '/' | last }}</a></p>
-          </div>
-          <ul>
-        {% else %}
-          <li><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">{{ a.title | default: a.file | split: '/' | last }}</a></li>
+<div class="container">
+  <article class="post surface-panel">
+    <header class="post-header">
+      <h1 class="post-title">{{ page.title }}</h1>
+      <p class="post-meta">
+        <span class="meta-item">
+          <span class="meta-label">发布于</span>
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
+        </span>
+        {% if page.categories %}
+        <span class="meta-item meta-categories">
+          <span class="meta-label">分类</span>
+          {% for c in page.categories %}<span class="badge">{{ c }}</span>{% endfor %}
+        </span>
         {% endif %}
-      {% endfor %}
-    </ul>
-  </section>
-  {% endif %}
+        {% if page.tags %}
+        <span class="meta-item meta-tags">
+          <span class="meta-label">标签</span>
+          {% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}
+        </span>
+        {% endif %}
+      </p>
+    </header>
 
-  <footer class="post-footer">
-    <p><a href="{{ '/' | relative_url }}">« 返回首页</a></p>
-  </footer>
-</article>
+    {% if site.features.toc and page.toc != false %}
+    <div class="post-grid">
+      <div class="post-content">
+        {{ content }}
+      </div>
+      {% include toc.html %}
+    </div>
+    {% else %}
+      <div class="post-content">
+        {{ content }}
+      </div>
+    {% endif %}
+
+    {% if page.gallery %}
+    <section class="post-gallery">
+      <h3>图集</h3>
+      <div class="gallery-grid">
+        {% for item in page.gallery %}
+          <figure>
+            <img src="{{ item.image | relative_url }}" alt="{{ item.caption | default: 'image' }}" loading="lazy" />
+            {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+          </figure>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if page.attachments %}
+    <section class="post-attachments">
+      <h3>附件</h3>
+      <ul>
+        {% for a in page.attachments %}
+          {% assign f = a.file | downcase %}
+          {% if f contains '.pdf' and a.embed != false %}
+            </ul>
+            <div class="pdf-embed">
+              <object data="{{ a.file | relative_url }}" type="application/pdf">
+                <p>无法内嵌预览，请 <a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">单独打开 {{ a.title | default: a.file | split: '/' | last }}</a></p>
+              </object>
+              <p><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">下载 {{ a.title | default: a.file | split: '/' | last }}</a></p>
+            </div>
+            <ul>
+          {% else %}
+            <li><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">{{ a.title | default: a.file | split: '/' | last }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <footer class="post-footer">
+      <a class="btn secondary" href="{{ '/' | relative_url }}">← 返回首页</a>
+    </footer>
+  </article>
+</div>
 
 {% include comments.html %}

@@ -4,93 +4,93 @@ title: 首页
 ---
 
 <section class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <h1 class="glitch-title" data-component="glitch-title">赛博日志</h1>
-      {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
-      {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
-    </div>
+  <div class="container hero-inner">
+    <h1 class="glitch-title" data-component="glitch-title" data-text="{{ site.title | escape }}">{{ site.title }}</h1>
+    {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
+    {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
   </div>
 </section>
 
-<div class="container layout-grid">
-  <section class="post-list">
-    <h2 class="section-title">最新文章</h2>
-    {% if paginator %}
-      {% assign page_posts = paginator.posts %}
-    {% else %}
-      {% assign page_posts = site.posts %}
-    {% endif %}
-
-    {% assign pinned = page_posts | where_exp: 'p','p.pin == true' %}
-    {% assign others = page_posts | where_exp: 'p','p.pin != true' %}
-
-    {% for post in pinned %}
-      <article class="card neon-border pinned" data-component="neon-border">
-        <a class="card-cover" href="{{ post.url | relative_url }}">
-          <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="cover" loading="lazy" decoding="async" width="800" height="420"/>
-        </a>
-        <div class="card-body">
-          <h3 class="card-title"><a href="{{ post.url | relative_url }}">📌 {{ post.title }}</a></h3>
-          <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: "/" }}</p>
-          <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
-          {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">#{{ t }}</span>{% endfor %}</p>{% endif %}
-        </div>
-      </article>
-    {% endfor %}
-
-    {% for post in others %}
-      <article class="card neon-border" data-component="neon-border">
-        <a class="card-cover" href="{{ post.url | relative_url }}">
-          <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="cover" loading="lazy" decoding="async" width="800" height="420"/>
-        </a>
-        <div class="card-body">
-          <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: "/" }}</p>
-          <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
-          {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">#{{ t }}</span>{% endfor %}</p>{% endif %}
-        </div>
-      </article>
-    {% endfor %}
-
-    {% if paginator and paginator.total_pages > 1 %}
-    <nav class="pagination">
-      {% if paginator.previous_page %}
-        <a class="prev btn" href="{{ paginator.previous_page_path | relative_url }}">« 上一页</a>
+<section class="site-section">
+  <div class="container layout-grid">
+    <section class="post-list">
+      <h2 class="section-title">最新文章</h2>
+      {% if paginator %}
+        {% assign page_posts = paginator.posts %}
+      {% else %}
+        {% assign page_posts = site.posts %}
       {% endif %}
-      <span>第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
-      {% if paginator.next_page %}
-        <a class="next btn" href="{{ paginator.next_page_path | relative_url }}">下一页 »</a>
+
+      {% assign pinned = page_posts | where_exp: 'p','p.pin == true' %}
+      {% assign others = page_posts | where_exp: 'p','p.pin != true' %}
+
+      {% for post in pinned %}
+        <article class="card neon-border pinned" data-component="neon-border">
+          <a class="card-cover" href="{{ post.url | relative_url }}">
+            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="cover" loading="lazy" decoding="async" width="800" height="420"/>
+          </a>
+          <div class="card-body">
+            <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+            <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
+            {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+
+      {% for post in others %}
+        <article class="card" data-component="neon-border">
+          <a class="card-cover" href="{{ post.url | relative_url }}">
+            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="cover" loading="lazy" decoding="async" width="800" height="420"/>
+          </a>
+          <div class="card-body">
+            <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+            <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
+            {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
+          </div>
+        </article>
+      {% endfor %}
+
+      {% if paginator and paginator.total_pages > 1 %}
+      <nav class="pagination">
+        {% if paginator.previous_page %}
+          <a class="prev btn" href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+        {% endif %}
+        <span>第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+        {% if paginator.next_page %}
+          <a class="next btn" href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+        {% endif %}
+      </nav>
       {% endif %}
-    </nav>
-    {% endif %}
-  </section>
-
-  <aside class="sidebar">
-    {% if site.features.search %}
-    <section class="widget">
-      <h3 class="widget-title">搜索</h3>
-      <button class="btn" data-action="open-search">打开搜索 ( / )</button>
-    </section>
-    {% endif %}
-
-    <section class="widget">
-      <h3 class="widget-title">标签云</h3>
-      <div class="tag-cloud">
-        {% assign tags = site.tags | sort %}
-        {% for tag in tags %}
-          <a class="tag" href="{{ '/pages/tags/#' | append: tag[0] | relative_url }}">#{{ tag[0] }}<span>{{ tag[1].size }}</span></a>
-        {% endfor %}
-      </div>
     </section>
 
-    <section class="widget">
-      <h3 class="widget-title">社交</h3>
-      <p>
-        <a href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a>
-        {% if site.social.twitter %} · <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener">Twitter</a>{% endif %}
-        {% if site.social.weibo %} · <a href="https://weibo.com/{{ site.social.weibo }}" target="_blank" rel="noopener">Weibo</a>{% endif %}
-      </p>
-    </section>
-  </aside>
-</div>
+    <aside class="sidebar">
+      {% if site.features.search %}
+      <section class="widget">
+        <h3 class="widget-title">搜索</h3>
+        <button class="btn secondary" data-action="open-search">打开搜索 ( / )</button>
+      </section>
+      {% endif %}
+
+      <section class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="tag-cloud">
+          {% assign tags = site.tags | sort %}
+          {% for tag in tags %}
+            <a class="tag" href="{{ '/pages/tags/#' | append: tag[0] | relative_url }}">{{ tag[0] }}<span>{{ tag[1].size }}</span></a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="widget">
+        <h3 class="widget-title">社交链接</h3>
+        <div class="footer-links">
+          <a href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a>
+          {% if site.social.twitter %}<a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener">Twitter</a>{% endif %}
+          {% if site.social.weibo %}<a href="https://weibo.com/{{ site.social.weibo }}" target="_blank" rel="noopener">Weibo</a>{% endif %}
+        </div>
+      </section>
+    </aside>
+  </div>
+</section>
