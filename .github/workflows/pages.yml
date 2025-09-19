@@ -10,9 +10,8 @@ permissions:
   pages: write
   id-token: write
 
-# 通过环境变量切换模式：A 或 B（默认 A）
-env:
-  BUILD_MODE: A
+# 构建模式通过 BUILD_MODE 切换：A = 官方构建，B = 自定义 Bundler
+  BUILD_MODE: B
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -102,5 +101,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-# 切换说明：
-# - 默认 A 模式（使用官方 GitHub Pages 构建）。若需 B 模式，自行切换 BUILD_MODE 为 B 并确保 Gemfile 适配。
+# 鍒囨崲璇存槑锛?# - 榛樿 A 妯″紡锛堜娇鐢ㄥ畼鏂?GitHub Pages 鏋勫缓锛夈€傝嫢闇€ B 妯″紡锛岃嚜琛屽垏鎹?BUILD_MODE 涓?B 骞剁‘淇?Gemfile 閫傞厤銆?
+

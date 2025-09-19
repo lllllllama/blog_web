@@ -1,6 +1,8 @@
----
+﻿---
 layout: default
 ---
+
+{% assign features = site.config.features %}
 
 <div class="container">
   <article class="post surface-panel">
@@ -8,25 +10,25 @@ layout: default
       <h1 class="post-title">{{ page.title }}</h1>
       <p class="post-meta">
         <span class="meta-item">
-          <span class="meta-label">发布于</span>
+          <span class="meta-label">鍙戝竷浜?/span>
           <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
         </span>
         {% if page.categories %}
         <span class="meta-item meta-categories">
-          <span class="meta-label">分类</span>
+          <span class="meta-label">鍒嗙被</span>
           {% for c in page.categories %}<span class="badge">{{ c }}</span>{% endfor %}
         </span>
         {% endif %}
         {% if page.tags %}
         <span class="meta-item meta-tags">
-          <span class="meta-label">标签</span>
+          <span class="meta-label">鏍囩</span>
           {% for t in page.tags %}<span class="tag">{{ t }}</span>{% endfor %}
         </span>
         {% endif %}
       </p>
     </header>
 
-    {% if site.features.toc and page.toc != false %}
+    {% if features and features.toc and page.toc != false %}
     <div class="post-grid">
       <div class="post-content">
         {{ content }}
@@ -41,7 +43,7 @@ layout: default
 
     {% if page.gallery %}
     <section class="post-gallery">
-      <h3>图集</h3>
+      <h3>鍥鹃泦</h3>
       <div class="gallery-grid">
         {% for item in page.gallery %}
           <figure>
@@ -55,7 +57,7 @@ layout: default
 
     {% if page.attachments %}
     <section class="post-attachments">
-      <h3>附件</h3>
+      <h3>闄勪欢</h3>
       <ul>
         {% for a in page.attachments %}
           {% assign f = a.file | downcase %}
@@ -63,9 +65,9 @@ layout: default
             </ul>
             <div class="pdf-embed">
               <object data="{{ a.file | relative_url }}" type="application/pdf">
-                <p>无法内嵌预览，请 <a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">单独打开 {{ a.title | default: a.file | split: '/' | last }}</a></p>
+                <p>鏃犳硶鍐呭祵棰勮锛岃 <a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">鍗曠嫭鎵撳紑 {{ a.title | default: a.file | split: '/' | last }}</a></p>
               </object>
-              <p><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">下载 {{ a.title | default: a.file | split: '/' | last }}</a></p>
+              <p><a href="{{ a.file | relative_url }}" target="_blank" rel="noopener">涓嬭浇 {{ a.title | default: a.file | split: '/' | last }}</a></p>
             </div>
             <ul>
           {% else %}
@@ -77,9 +79,13 @@ layout: default
     {% endif %}
 
     <footer class="post-footer">
-      <a class="btn secondary" href="{{ '/' | relative_url }}">← 返回首页</a>
+      <a class="btn secondary" href="{{ '/' | relative_url }}">鈫?杩斿洖棣栭〉</a>
     </footer>
   </article>
 </div>
 
 {% include comments.html %}
+
+
+
+

@@ -1,11 +1,14 @@
-{% if site.features.search %}
+﻿{% assign features = site.config.features %}`r`n{% if features and features.search %}
 <div class="search-layer" hidden data-component="search">
   <div class="search-panel">
     <div class="search-head">
-      <input type="search" placeholder="搜索文章… (Esc 关闭)" aria-label="搜索文章" autocomplete="off" inputmode="search">
-      <button class="btn icon-btn" data-action="close-search" aria-label="关闭">✕</button>
+      <input type="search" placeholder="鎼滅储鏂囩珷鈥?(Esc 鍏抽棴)" aria-label="鎼滅储鏂囩珷" autocomplete="off" inputmode="search">
+      <button class="btn icon-btn" data-action="close-search" aria-label="鍏抽棴">鉁?/button>
     </div>
-    <div class="search-results" role="listbox" aria-label="搜索结果"></div>
+    <div class="search-results" role="listbox" aria-label="鎼滅储缁撴灉"></div>
   </div>
 </div>
 {% endif %}
+
+
+

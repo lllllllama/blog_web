@@ -1,7 +1,10 @@
 ---
 layout: default
-title: 首页
+title: 棣栭〉
+paginate: 5
 ---
+
+{% assign features = site.config.features %}
 
 <section class="hero">
   <div class="container hero-inner">
@@ -14,7 +17,7 @@ title: 首页
 <section class="site-section">
   <div class="container layout-grid">
     <section class="post-list">
-      <h2 class="section-title">最新文章</h2>
+      <h2 class="section-title">鏈€鏂版枃绔?/h2>
       {% if paginator %}
         {% assign page_posts = paginator.posts %}
       {% else %}
@@ -31,7 +34,7 @@ title: 首页
           </a>
           <div class="card-body">
             <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} 路 {{ post.categories | join: " / " }}</p>
             <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
             {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
           </div>
@@ -45,7 +48,7 @@ title: 首页
           </a>
           <div class="card-body">
             <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} 路 {{ post.categories | join: " / " }}</p>
             <p class="excerpt">{{ post.excerpt | strip_html | strip_newlines | truncate: 140 }}</p>
             {% if post.tags %}<p class="tags">{% for t in post.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>{% endif %}
           </div>
@@ -55,26 +58,26 @@ title: 首页
       {% if paginator and paginator.total_pages > 1 %}
       <nav class="pagination">
         {% if paginator.previous_page %}
-          <a class="prev btn" href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+          <a class="prev btn" href="{{ paginator.previous_page_path | relative_url }}">鈫?涓婁竴椤?/a>
         {% endif %}
-        <span>第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
+        <span>绗?{{ paginator.page }} / {{ paginator.total_pages }} 椤?/span>
         {% if paginator.next_page %}
-          <a class="next btn" href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+          <a class="next btn" href="{{ paginator.next_page_path | relative_url }}">涓嬩竴椤?鈫?/a>
         {% endif %}
       </nav>
       {% endif %}
     </section>
 
     <aside class="sidebar">
-      {% if site.features.search %}
+      {% if features and features.search %}
       <section class="widget">
-        <h3 class="widget-title">搜索</h3>
-        <button class="btn secondary" data-action="open-search">打开搜索 ( / )</button>
+        <h3 class="widget-title">鎼滅储</h3>
+        <button class="btn secondary" data-action="open-search">鎵撳紑鎼滅储 ( / )</button>
       </section>
       {% endif %}
 
       <section class="widget">
-        <h3 class="widget-title">标签云</h3>
+        <h3 class="widget-title">鏍囩浜?/h3>
         <div class="tag-cloud">
           {% assign tags = site.tags | sort %}
           {% for tag in tags %}
@@ -84,7 +87,7 @@ title: 首页
       </section>
 
       <section class="widget">
-        <h3 class="widget-title">社交链接</h3>
+        <h3 class="widget-title">绀句氦閾炬帴</h3>
         <div class="footer-links">
           <a href="https://github.com/{{ site.social.github }}" target="_blank" rel="noopener">GitHub</a>
           {% if site.social.twitter %}<a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener">Twitter</a>{% endif %}
@@ -94,3 +97,6 @@ title: 首页
     </aside>
   </div>
 </section>
+
+
+

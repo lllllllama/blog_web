@@ -1,10 +1,10 @@
-<header class="site-header" role="banner">
+﻿{% assign features = site.config.features %}`r`n<header class="site-header" role="banner">
   <div class="container header-inner">
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
       <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="logo" width="32" height="32" loading="eager" decoding="sync"/>
       <span>{{ site.title }}</span>
     </a>
-    <nav class="site-nav" aria-label="涓诲鑸?>
+    <nav class="site-nav" aria-label="娑撹顕遍懜?>
       {% for item in site.nav %}
         <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
       {% endfor %}
@@ -13,9 +13,12 @@
       {% if site.appearance.enable_theme_switcher %}
         {% include theme-toggle.html %}
       {% endif %}
-      {% if site.features.search %}
-        <button class="btn icon-only" data-action="open-search" aria-label="鎼滅储" title="鎼滅储 (/)" type="button"><span aria-hidden="true">鈱?/span></button>
+      {% if features and features.search %}
+        <button class="btn icon-only" data-action="open-search" aria-label="閹兼粎鍌? title="閹兼粎鍌?(/)" type="button"><span aria-hidden="true">閳?/span></button>
       {% endif %}
     </div>
   </div>
 </header>
+
+
+
