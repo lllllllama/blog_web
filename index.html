@@ -1,10 +1,11 @@
-﻿---
+---
 layout: default
-title: 棣栭〉
+title: 首页
 paginate: 5
 ---
 
-{% assign features = site.config.features | default: {} %}
+{% assign features = site.features | default: site.config.features | default: nil %}
+{% assign search_enabled = features and features.search %}
 {% if paginator %}
   {% assign posts_collection = paginator.posts %}
 {% else %}
@@ -14,17 +15,18 @@ paginate: 5
 {% assign latest_posts = posts_collection | where_exp: 'p','p.pin != true' %}
 {% assign total_posts = site.posts | size %}
 {% assign latest_post = site.posts | first %}
+{% assign sorted_tags = site.tags | sort %}
 
 <section class="hero">
   <div class="container hero-inner">
-    <p class="hero-pill">鎸佺画鏇存柊 路 鍏?{{ total_posts }} 绡囨枃绔?/p>
+    <p class="hero-pill">持续更新 · 共 {{ total_posts }} 篇文章</p>
     <h1 class="hero-title" data-component="glitch-title" data-text="{{ site.title | escape }}">{{ site.title }}</h1>
     {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
     {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
     {% if latest_post %}
     <div class="hero-meta">
-      <span class="hero-meta-label">鏈€鏂版洿鏂?/span>
-      <a href="{{ latest_post.url | relative_url }}" class="hero-meta-link">{{ latest_post.title }} 鈫?/a>
+      <span class="hero-meta-label">最新更新</span>
+      <a href="{{ latest_post.url | relative_url }}" class="hero-meta-link">{{ latest_post.title }} →</a>
     </div>
     {% endif %}
   </div>
@@ -35,17 +37,17 @@ paginate: 5
     <section class="post-list">
       {% if featured_posts.size > 0 %}
       <div class="section-head">
-        <h2 class="section-title">绮鹃€夋帹鑽?/h2>
-        <p class="section-desc">杩欎簺鏂囩珷琚疆椤跺睍绀猴紝鍊煎緱浣犱紭鍏堥槄璇汇€?/p>
+        <h2 class="section-title">精选推荐</h2>
+        <p class="section-desc">被置顶的文章值得你优先阅读，包含项目总结、实践指南与思考。</p>
       </div>
       <div class="featured-grid">
         {% for post in featured_posts %}
         <article class="card pinned" data-component="neon-border">
           <a class="card-cover" href="{{ post.url | relative_url }}">
-            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="鏂囩珷灏侀潰" loading="lazy" decoding="async" width="800" height="420"/>
+            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="文章封面" loading="lazy" decoding="async" width="800" height="420"/>
           </a>
           <div class="card-body">
-            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} 路 {{ post.categories | join: " / " }}</p>
+            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
             <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
             <p class="excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
             {% if post.tags %}
@@ -62,8 +64,8 @@ paginate: 5
       {% endif %}
 
       <div class="section-head">
-        <h2 class="section-title">鏈€鏂版枃绔?/h2>
-        <p class="section-desc">鏈€杩戝彂甯冪殑鍐呭涓庣伒鎰燂紝娆㈣繋璁㈤槄涓庡洖璁裤€?/p>
+        <h2 class="section-title">最新文章</h2>
+        <p class="section-desc">最近发布的内容与灵感，欢迎订阅和回访。</p>
       </div>
 
       {% if latest_posts.size > 0 %}
@@ -73,7 +75,7 @@ paginate: 5
           <div class="post-stream-meta">
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
             {% if post.categories and post.categories.size > 0 %}
-              <span class="meta-dot" aria-hidden="true">鈥?/span>
+              <span class="meta-dot" aria-hidden="true">•</span>
               <span class="post-stream-category">{{ post.categories | join: " / " }}</span>
             {% endif %}
           </div>
@@ -84,28 +86,28 @@ paginate: 5
           <div class="post-stream-footer">
             {% if post.tags %}
             <div class="post-stream-tags">
-              {% for t in post.tags limit:4 %}
+              {% for t in post.tags limit: 4 %}
                 <span class="tag-chip">#{{ t }}</span>
               {% endfor %}
             </div>
             {% endif %}
-            <a class="post-stream-link" href="{{ post.url | relative_url }}">闃呰鍏ㄦ枃 鈫?/a>
+            <a class="post-stream-link" href="{{ post.url | relative_url }}">阅读全文 →</a>
           </div>
         </article>
         {% endfor %}
       </div>
       {% else %}
-        <p class="empty-hint">鏆傛棤鏂囩珷锛屾暚璇锋湡寰呮柊鍐呭銆?/p>
+        <p class="empty-hint">暂无文章，敬请期待新内容。</p>
       {% endif %}
 
       {% if paginator and paginator.total_pages > 1 %}
-      <nav class="pagination" aria-label="鏂囩珷鍒嗛〉">
+      <nav class="pagination" aria-label="文章分页">
         {% if paginator.previous_page %}
-          <a class="btn" href="{{ paginator.previous_page_path | relative_url }}">涓婁竴椤?/a>
+          <a class="btn" href="{{ paginator.previous_page_path | relative_url }}">上一页</a>
         {% endif %}
-        <span class="pagination-info">绗?{{ paginator.page }} / {{ paginator.total_pages }} 椤?/span>
+        <span class="pagination-info">第 {{ paginator.page }} / {{ paginator.total_pages }} 页</span>
         {% if paginator.next_page %}
-          <a class="btn" href="{{ paginator.next_page_path | relative_url }}">涓嬩竴椤?/a>
+          <a class="btn" href="{{ paginator.next_page_path | relative_url }}">下一页</a>
         {% endif %}
       </nav>
       {% endif %}
@@ -113,26 +115,25 @@ paginate: 5
 
     <aside class="sidebar">
       <section class="widget overview">
-        <h3 class="widget-title">绔欑偣姒傝</h3>
+        <h3 class="widget-title">站点概览</h3>
         <ul class="overview-list">
-          <li><span>鏂囩珷</span><strong>{{ site.posts | size }}</strong></li>
-          <li><span>鏍囩</span><strong>{{ site.tags | size }}</strong></li>
-          <li><span>鏈€杩戞洿鏂?/span><strong>{{ latest_post.date | date: "%Y-%m-%d" }}</strong></li>
+          <li><span>文章</span><strong>{{ site.posts | size }}</strong></li>
+          <li><span>标签</span><strong>{{ site.tags | size }}</strong></li>
+          <li><span>最近更新</span><strong>{{ latest_post.date | date: "%Y-%m-%d" }}</strong></li>
         </ul>
       </section>
 
-      {% if features and features.search %}
+      {% if search_enabled %}
       <section class="widget">
-        <h3 class="widget-title">绔欏唴鎼滅储</h3>
-        <button class="btn full" data-action="open-search">鎵撳紑鎼滅储锛?锛?/button>
+        <h3 class="widget-title">站内搜索</h3>
+        <button class="btn full" data-action="open-search">打开搜索（/）</button>
       </section>
       {% endif %}
 
       <section class="widget">
-        <h3 class="widget-title">鐑棬鏍囩</h3>
+        <h3 class="widget-title">标签速览</h3>
         <div class="tag-rank">
-          {% assign sorted_tags = site.tags | sort: 'last' | reverse %}
-          {% for tag in sorted_tags limit:6 %}
+          {% for tag in sorted_tags limit: 8 %}
             {% assign tag_name = tag[0] %}
             {% assign tag_count = tag[1].size %}
             <a class="tag-rank-item" href="{{ '/pages/tags/#' | append: tag_name | relative_url }}">
@@ -141,18 +142,17 @@ paginate: 5
             </a>
           {% endfor %}
         </div>
-        <a class="widget-link" href="{{ '/pages/tags/' | relative_url }}">娴忚鍏ㄩ儴鏍囩 鈫?/a>
+        <a class="widget-link" href="{{ '/pages/tags/' | relative_url }}">浏览全部标签 →</a>
       </section>
 
       <section class="widget">
-        <h3 class="widget-title">蹇€熷叆鍙?/h3>
+        <h3 class="widget-title">快速入口</h3>
         <div class="widget-links">
-          <a href="{{ '/pages/about/' | relative_url }}">鍏充簬鏈珯</a>
-          <a href="{{ '/pages/archives/' | relative_url }}">褰掓。骞磋〃</a>
-          <a href="{{ site.social.rss | relative_url | default: '/feed.xml' }}">RSS 璁㈤槄</a>
+          <a href="{{ '/pages/about/' | relative_url }}">关于本站</a>
+          <a href="{{ '/pages/archives/' | relative_url }}">归档年表</a>
+          <a href="{{ site.social.rss | relative_url | default: '/feed.xml' }}">RSS 订阅</a>
         </div>
       </section>
     </aside>
   </div>
 </section>
-
