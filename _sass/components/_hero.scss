@@ -1,9 +1,9 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, .1) 0%, transparent 50%), /* 使用蓝色强调色 */
-    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, .08) 0%, transparent 50%), /* 使用紫色强调色 */
+  background:
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, .12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, .1) 0%, transparent 50%),
     url('../img/grid.svg');
   background-repeat: repeat;
   background-size: auto, auto, 60px 60px;
@@ -11,203 +11,122 @@
   min-height: 60vh;
   display: flex;
   align-items: center;
-  
+
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, 
-      rgba(59, 130, 246, .05) 0%,  /* 使用蓝色强调色 */
-      transparent 30%, 
-      transparent 70%, 
-      rgba(168, 85, 247, .05) 100%); /* 使用紫色强调色 */
+    inset: 0;
+    background: linear-gradient(135deg,
+      rgba(59, 130, 246, .08) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(168, 85, 247, .08) 100%);
     pointer-events: none;
   }
-  
+
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100px;
+    height: 120px;
     background: linear-gradient(transparent, var(--bg));
     pointer-events: none;
   }
 }
 
 .hero-inner {
-  padding: $space-3xl 0;
+  padding: clamp(72px, 10vw, 120px) 0;
   text-align: center;
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: $space-sm;
+  justify-items: center;
 }
 
-.glitch-title {
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
+.hero-pill {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(10,10,16,.7);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
   line-height: 1.1;
   position: relative;
   display: inline-block;
   color: var(--text);
   font-weight: 900;
   letter-spacing: -0.02em;
-  margin-bottom: $space-md;
+  margin: 0;
   text-shadow: 0 0 20px rgba(255,255,255,.1);
-  
-  &::before,
-  &::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  &::before {
-    color: var(--accent);
-    z-index: -1;
-  }
-  
-  &::after {
-    color: #ff3d81;
-    z-index: -2;
-  }
 }
 
 .subtitle {
   font-size: 1.25rem;
   color: var(--text-dim);
-  margin-bottom: $space-sm;
+  margin: 0;
   font-weight: 500;
-  opacity: 0;
-  animation: fadeInUp 1s $ease-smooth 0.3s forwards;
 }
 
 .desc {
   font-size: 1rem;
   color: var(--text-muted);
-  max-width: 600px;
+  max-width: 640px;
   margin: 0 auto;
   line-height: 1.6;
-  opacity: 0;
-  animation: fadeInUp 1s $ease-smooth 0.6s forwards;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .glitch-title {
-    animation: 
-      glow 4s ease-in-out infinite alternate,
-      glitchShake 0.3s ease-in-out infinite;
-    
-    &::before {
-      animation: glitch1 2s ease-in-out infinite alternate-reverse;
-    }
-    
-    &::after {
-      animation: glitch2 3s ease-in-out infinite alternate;
-    }
-  }
-  
-  @keyframes glow {
-    from {
-      filter: drop-shadow(0 0 0 rgba(0,234,255,0));
-      text-shadow: 0 0 20px rgba(255,255,255,.1);
-    }
-    to {
-      filter: drop-shadow(0 0 20px rgba(0,234,255,.4));
-      text-shadow: 0 0 30px rgba(0,234,255,.3);
-    }
-  }
-  
-  @keyframes glitchShake {
-    0%, 90%, 100% {
-      transform: translate(0);
-    }
-    10% {
-      transform: translate(-1px, -1px);
-    }
-    20% {
-      transform: translate(1px, 1px);
-    }
-    30% {
-      transform: translate(-1px, 1px);
-    }
-    40% {
-      transform: translate(1px, -1px);
-    }
-  }
-  
-  @keyframes glitch1 {
-    0%, 100% {
-      transform: translate(0);
-      opacity: 0;
-    }
-    20% {
-      transform: translate(-2px, 2px);
-      opacity: 0.1;
-    }
-    40% {
-      transform: translate(-2px, -2px);
-      opacity: 0.1;
-    }
-    60% {
-      transform: translate(2px, 2px);
-      opacity: 0.1;
-    }
-    80% {
-      transform: translate(2px, -2px);
-      opacity: 0.1;
-    }
-  }
-  
-  @keyframes glitch2 {
-    0%, 100% {
-      transform: translate(0);
-      opacity: 0;
-    }
-    25% {
-      transform: translate(1px, -1px);
-      opacity: 0.08;
-    }
-    50% {
-      transform: translate(-1px, 1px);
-      opacity: 0.08;
-    }
-    75% {
-      transform: translate(1px, 1px);
-      opacity: 0.08;
-    }
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+.hero-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+  margin-top: $space-md;
+  padding: 6px 14px;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(10,10,16,.65);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.hero-meta-label {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.hero-meta-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hero-meta-link:hover {
+  text-shadow: 0 0 12px rgba(59,130,246,.4);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .glitch-title {
+  .hero-title {
     animation: none;
-    
-    &::before,
-    &::after {
-      display: none;
-    }
   }
-  
-  .subtitle,
-  .desc {
-    opacity: 1;
-    animation: none;
+}
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+  }
+  .hero-inner {
+    gap: $space-sm;
   }
 }

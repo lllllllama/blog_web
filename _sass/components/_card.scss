@@ -99,7 +99,7 @@
   gap: $space-sm;
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: $space-md;
+  margin-bottom: $space-sm;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -116,15 +116,15 @@
 .excerpt {
   color: var(--text-dim);
   line-height: 1.75;
-  margin-bottom: $space-lg;
+  margin: 0;
   font-size: 1rem;
 }
 
-.tags {
-  display: flex;
+.tag-row {
+  display: inline-flex;
   flex-wrap: wrap;
   gap: $space-xs;
-  margin: 0;
+  margin-top: $space-sm;
 }
 
 .tag {
@@ -188,7 +188,7 @@
 }
 
 .card.pinned .card-title::before {
-  content: '★';
+  content: '\\2605';
   margin-right: 8px;
   font-size: 0.9em;
   color: var(--accent-3);

@@ -13,6 +13,7 @@
   align-items: center;
   justify-content: space-between;
   height: 68px;
+  gap: $space-lg;
 }
 
 .brand {
@@ -47,10 +48,6 @@
   transition: transform $t-mid $ease-smooth;
 }
 
-.brand-name {
-  font-weight: 800;
-}
-
 .brand:hover {
   color: var(--accent);
   transform: translateY(-2px);
@@ -66,12 +63,18 @@
 }
 
 .site-nav {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+}
+
+.nav-primary {
   display: inline-flex;
   align-items: center;
   gap: $space-sm;
 }
 
-.site-nav a {
+.nav-primary a {
   position: relative;
   padding: $space-sm $space-md;
   color: var(--text-muted);
@@ -80,7 +83,7 @@
   transition: all $t-fast $ease-smooth;
 }
 
-.site-nav a::before {
+.nav-primary a::before {
   content: '';
   position: absolute;
   inset: auto 16px -6px;
@@ -92,20 +95,63 @@
   transition: opacity $t-fast $ease-smooth, transform $t-fast $ease-smooth;
 }
 
-.site-nav a:hover {
+.nav-primary a:hover {
   color: var(--accent);
   background: rgba(59,130,246,.12);
   transform: translateY(-1px);
 }
 
-.site-nav a:hover::before,
-.site-nav a.active::before {
+.nav-primary a:hover::before,
+.nav-primary a.active::before {
   opacity: 1;
   transform: scaleX(1);
 }
 
-.site-nav a.active {
+.nav-primary a.active {
   color: var(--accent-2);
+}
+
+.nav-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+}
+
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(18,18,24,.8);
+  color: var(--text-muted);
+  transition: all $t-fast $ease-smooth;
+}
+
+.nav-icon svg {
+  width: 18px;
+  height: 18px;
+  transition: transform $t-fast $ease-smooth;
+}
+
+.nav-icon:hover {
+  color: var(--accent);
+  border-color: rgba(59,130,246,.45);
+  box-shadow: 0 6px 18px rgba(59,130,246,.25);
+  transform: translateY(-1px);
+}
+
+.nav-icon:hover svg {
+  transform: scale(1.05);
+}
+
+.nav-pill {
+  padding: 0 $space-sm;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
 }
 
 .header-actions {
@@ -136,7 +182,7 @@
 
 .icon-button:hover {
   color: var(--accent);
-  border-color: rgba(59,130,246,.45);
+  border-color: rgba(59,130,246,.55);
   box-shadow: 0 6px 18px rgba(59,130,246,.25);
   transform: translateY(-1px);
 }
@@ -186,6 +232,7 @@
   .header-inner {
     height: 60px;
   }
+
   .site-nav {
     display: none;
   }

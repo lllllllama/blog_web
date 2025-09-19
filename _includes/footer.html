@@ -1,14 +1,13 @@
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div class="footer-meta">
+    <div class="footer-brand">
       <p class="footer-title">{{ site.title }}</p>
-      <p>© {{ site.time | date: '%Y' }} {{ site.author.name | default: site.title }} · Crafted with Jekyll & GitHub Pages</p>
+      <p class="footer-note">{{ site.subtitle | default: site.description }}</p>
+      <p class="footer-meta">© {{ site.time | date: '%Y' }} {{ site.author.name | default: site.title }}</p>
     </div>
-    <div class="footer-links">
-      <a href="https://github.com/{{ site.social.github | default: '' }}" rel="noopener" target="_blank">GitHub</a>
-      {% if site.social.twitter %}<a href="https://twitter.com/{{ site.social.twitter }}" rel="noopener" target="_blank">Twitter</a>{% endif %}
-      {% if site.social.weibo %}<a href="https://weibo.com/{{ site.social.weibo }}" rel="noopener" target="_blank">Weibo</a>{% endif %}
-      {% if site.social.rss %}<a href="{{ site.social.rss | relative_url }}">RSS</a>{% endif %}
+    <div class="footer-actions">
+      <a href="https://github.com/{{ site.social.github | default: '' }}" target="_blank" rel="noopener">GitHub</a>
+      <a href="{{ site.social.rss | relative_url | default: '/feed.xml' }}">RSS</a>
     </div>
   </div>
 </footer>

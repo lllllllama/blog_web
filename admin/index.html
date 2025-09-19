@@ -8,54 +8,9 @@
     <link rel="stylesheet" href="https://unpkg.com/@staticcms/app@^3.4.8/dist/main.css" />
     <style>
       html, body { height: 100%; margin: 0; background: #0b0e14; }
-
-      .admin-brand {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 9999;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 16px;
-        border: 1px solid rgba(255,255,255,.14);
-        background: rgba(10,13,18,.85);
-        box-shadow: 0 10px 30px rgba(0,234,255,.25);
-        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-      }
-
-      .admin-brand img {
-        width: 26px;
-        height: 26px;
-        filter: drop-shadow(0 0 12px rgba(0,234,255,.45));
-        transition: transform .3s ease;
-      }
-
-      .admin-brand:hover {
-        border-color: rgba(0,234,255,.45);
-        box-shadow: 0 14px 36px rgba(0,234,255,.32);
-        transform: translateY(-2px);
-      }
-
-      .admin-brand:hover img {
-        transform: rotate(-6deg) scale(1.06);
-      }
-
-      @media (max-width: 768px) {
-        .admin-brand {
-          top: 16px;
-          left: 16px;
-          width: 44px;
-          height: 44px;
-        }
-      }
     </style>
-    <!-- Static CMS（加载全量 UMD 构建，自动读取 /admin/config.yml） -->
     <script defer src="https://unpkg.com/@staticcms/app@^3.4.8/dist/static-cms-app.js"></script>
     <script>
-      // 等待文档可用后再初始化，避免 MutationObserver 传入 null
       window.addEventListener('DOMContentLoaded', function () {
         if (window.CMS && typeof window.CMS.init === 'function') {
           window.CMS.init();
@@ -64,10 +19,6 @@
     </script>
   </head>
   <body>
-    <a href="/" class="admin-brand" aria-label="返回首页">
-      <img src="../assets/img/logo.svg" alt="" />
-    </a>
-
     <!-- Static CMS 会自动接管整页渲染；若长时间黑屏，请打开控制台查看报错 -->
   </body>
 </html>
