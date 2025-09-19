@@ -128,49 +128,58 @@
 }
 
 .tag {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  background: rgba(59,130,246,.08);
-  border: 1px solid rgba(59,130,246,.25);
-  color: var(--text);
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: transform $t-fast $ease-smooth, box-shadow $t-fast $ease-smooth, border-color $t-fast $ease-smooth;
+  color: var(--text);
+  background: rgba(20,21,30,.72);
+  border: 1px solid rgba(255,255,255,.12);
+  overflow: hidden;
+  transition: transform $t-fast $ease-smooth, box-shadow $t-fast $ease-smooth, border-color $t-fast $ease-smooth, color $t-fast $ease-smooth;
 }
 
 .tag::before {
   content: '#';
-  color: inherit;
-  font-weight: 500;
+  color: var(--accent);
+  font-weight: 600;
+  opacity: .8;
+}
+
+.tag::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(59,130,246,.28), transparent 60%);
+  opacity: 0;
+  transition: opacity $t-fast $ease-smooth;
+  pointer-events: none;
 }
 
 .tag:hover {
   transform: translateY(-2px);
-  border-color: rgba(59,130,246,.45);
-  box-shadow: 0 0 16px rgba(59,130,246,.25);
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 6px 18px rgba(59,130,246,.25);
+  color: var(--accent);
 }
 
-.tag:nth-child(3n + 1) {
-  background: rgba(59,130,246,.12);
-  border-color: rgba(59,130,246,.35);
-  color: var(--tag-accent-1);
+.tag:hover::after {
+  opacity: 1;
 }
 
-.tag:nth-child(3n + 2) {
-  background: rgba(168,85,247,.12);
-  border-color: rgba(168,85,247,.35);
-  color: var(--tag-accent-2);
+.tag:nth-child(3n + 2)::after {
+  background: linear-gradient(120deg, rgba(168,85,247,.3), transparent 60%);
 }
 
-.tag:nth-child(3n + 3) {
-  background: rgba(249,115,22,.12);
-  border-color: rgba(249,115,22,.35);
-  color: var(--tag-accent-3);
+.tag:nth-child(3n + 3)::after {
+  background: linear-gradient(120deg, rgba(249,115,22,.3), transparent 60%);
 }
 
 .card.pinned {

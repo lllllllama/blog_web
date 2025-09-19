@@ -19,19 +19,36 @@
   display: inline-flex;
   align-items: center;
   gap: $space-sm;
-  font-weight: 800;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.15rem;
   letter-spacing: 0.04em;
   color: var(--text);
   text-decoration: none;
   transition: color $t-fast $ease-smooth, transform $t-fast $ease-smooth;
 }
 
-.brand img {
-  width: 32px;
-  height: 32px;
-  filter: drop-shadow(0 0 16px rgba(59,130,246,.35));
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(18,18,24,.85);
+  box-shadow: 0 8px 20px rgba(0,0,0,.45);
+  transition: transform $t-fast $ease-smooth, border-color $t-fast $ease-smooth, box-shadow $t-fast $ease-smooth;
+}
+
+.brand-logo img {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 10px rgba(59,130,246,.4));
   transition: transform $t-mid $ease-smooth;
+}
+
+.brand-name {
+  font-weight: 800;
 }
 
 .brand:hover {
@@ -39,8 +56,13 @@
   transform: translateY(-2px);
 }
 
-.brand:hover img {
-  transform: rotate(-8deg) scale(1.05);
+.brand:hover .brand-logo {
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 10px 26px rgba(59,130,246,.35);
+}
+
+.brand:hover .brand-logo img {
+  transform: rotate(-6deg) scale(1.06);
 }
 
 .site-nav {
@@ -92,8 +114,40 @@
   gap: $space-sm;
 }
 
-.header-actions .btn {
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
   border-radius: $radius-md;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(18,18,24,.8);
+  color: var(--text-muted);
+  transition: all $t-fast $ease-smooth;
+  cursor: pointer;
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  transition: transform $t-fast $ease-smooth;
+}
+
+.icon-button:hover {
+  color: var(--accent);
+  border-color: rgba(59,130,246,.45);
+  box-shadow: 0 6px 18px rgba(59,130,246,.25);
+  transform: translateY(-1px);
+}
+
+.icon-button:hover svg {
+  transform: scale(1.08);
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .theme-switcher {

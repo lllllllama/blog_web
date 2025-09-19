@@ -1,10 +1,13 @@
-﻿{% assign features = site.config.features %}`r`n<header class="site-header" role="banner">
+{% assign features = site.config.features | default: {} %}
+<header class="site-header" role="banner">
   <div class="container header-inner">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
-      <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="logo" width="32" height="32" loading="eager" decoding="sync"/>
-      <span>{{ site.title }}</span>
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}" title="返回首页">
+      <span class="brand-logo" aria-hidden="true">
+        <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="" width="28" height="28" loading="eager" decoding="sync" />
+      </span>
+      <span class="brand-name">{{ site.title }}</span>
     </a>
-    <nav class="site-nav" aria-label="娑撹顕遍懜?>
+    <nav class="site-nav" aria-label="主导航">
       {% for item in site.nav %}
         <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
       {% endfor %}
@@ -14,11 +17,13 @@
         {% include theme-toggle.html %}
       {% endif %}
       {% if features and features.search %}
-        <button class="btn icon-only" data-action="open-search" aria-label="閹兼粎鍌? title="閹兼粎鍌?(/)" type="button"><span aria-hidden="true">閳?/span></button>
+        <button class="icon-button search-trigger" data-action="open-search" type="button" aria-label="搜索" title="搜索（/）">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M12.9 14.32a6.5 6.5 0 1 1 1.414-1.414l3.387 3.387a1 1 0 0 1-1.414 1.414l-3.387-3.387ZM13 8.5a4.5 4.5 0 1 0-9 0a4.5 4.5 0 0 0 9 0Z" />
+          </svg>
+          <span class="sr-only">打开搜索</span>
+        </button>
       {% endif %}
     </div>
   </div>
 </header>
-
-
-
