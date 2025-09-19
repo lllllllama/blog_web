@@ -18,8 +18,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  resolve-mode:
+    runs-on: ubuntu-latest
+    outputs:
+      mode: ${{ steps.detect.outputs.mode }}
+    steps:
+      - name: Detect build mode
+        id: detect
+        run: |
+          echo "mode=$BUILD_MODE" >> "$GITHUB_OUTPUT"
+
   build-a:
-    if: ${{ env.BUILD_MODE == 'A' }}
+    needs: resolve-mode
+    if: ${{ needs.resolve-mode.outputs.mode == 'A' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,19 +51,20 @@ jobs:
           path: ./_site
 
   deploy-a:
-    if: ${{ env.BUILD_MODE == 'A' }}
+    needs: build-a
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build-a
+    if: ${{ needs.build-a.result == 'success' }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
   build-b:
-    if: ${{ env.BUILD_MODE == 'B' }}
+    needs: resolve-mode
+    if: ${{ needs.resolve-mode.outputs.mode == 'B' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -79,16 +91,16 @@ jobs:
           path: ./_site
 
   deploy-b:
-    if: ${{ env.BUILD_MODE == 'B' }}
+    needs: build-b
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build-b
+    if: ${{ needs.build-b.result == 'success' }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-# 鍒囨崲妯″紡璇存槑锛?# - 榛樿 A 妯″紡锛堝畼鏂规瀯寤猴級锛氫娇鐢?`actions/jekyll-build-pages` 鎸?GitHub Pages 鐧藉悕鍗曟彃浠舵瀯寤恒€?# - 鍒囧埌 B 妯″紡锛堣嚜琛屾瀯寤猴級锛氬皢涓婃柟 env.BUILD_MODE 鏀逛负 B锛屼笖鎸?README 璋冩暣 Gemfile锛堢Щ闄?github-pages锛屾敼鐢?jekyll + 棰濆鎻掍欢锛夈€?
-
+# 切换说明：
+# - 默认 A 模式（使用官方 GitHub Pages 构建）。若需 B 模式，自行切换 BUILD_MODE 为 B 并确保 Gemfile 适配。
