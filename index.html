@@ -4,8 +4,8 @@ title: 首页
 paginate: 5
 ---
 
-{% assign features = site.features | default: site.config.features | default: nil %}
-{% assign search_enabled = features and features.search %}
+{% assign features = site.features | default: site.config.features | default: {} %}
+{% assign search_enabled = features.search %}
 {% if paginator %}
   {% assign posts_collection = paginator.posts %}
 {% else %}
@@ -15,20 +15,30 @@ paginate: 5
 {% assign latest_posts = posts_collection | where_exp: 'p','p.pin != true' %}
 {% assign total_posts = site.posts | size %}
 {% assign latest_post = site.posts | first %}
-{% assign sorted_tags = site.tags | sort %}
+
+{% assign tag_groups_definition = '技术实践:Jekyll|指南|AutoDL|开发,工具资源:GitHub Pages|上传|MobaXterm|Google Drive,随笔想法:随笔|笔记|记录|思考' | split: ',' %}
+{% assign used_tags = '' | split: '' %}
 
 <section class="hero">
-  <div class="container hero-inner">
-    <p class="hero-pill">持续更新 · 共 {{ total_posts }} 篇文章</p>
-    <h1 class="hero-title" data-component="glitch-title" data-text="{{ site.title | escape }}">{{ site.title }}</h1>
-    {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
-    {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
-    {% if latest_post %}
-    <div class="hero-meta">
-      <span class="hero-meta-label">最新更新</span>
-      <a href="{{ latest_post.url | relative_url }}" class="hero-meta-link">{{ latest_post.title }} →</a>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="hero-title" data-component="glitch-title" data-text="{{ site.title | escape }}">{{ site.title }}</h1>
+      {% if site.subtitle %}<p class="subtitle">{{ site.subtitle }}</p>{% endif %}
+      {% if site.description %}<p class="desc">{{ site.description }}</p>{% endif %}
+      <div class="hero-actions">
+        <a class="btn" href="{{ site.social.rss | relative_url | default: '/feed.xml' }}">订阅更新</a>
+        <a class="btn secondary" href="{{ '/pages/archives/' | relative_url }}">查看归档</a>
+      </div>
+      {% if latest_post %}
+      <div class="hero-meta">
+        <span class="hero-meta-label">最新更新</span>
+        <a href="{{ latest_post.url | relative_url }}" class="hero-meta-link">{{ latest_post.title }} →</a>
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
+    <figure class="hero-cover">
+      <img src="{{ latest_post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="最新文章封面" loading="lazy" decoding="async">
+    </figure>
   </div>
 </section>
 
@@ -38,7 +48,7 @@ paginate: 5
       {% if featured_posts.size > 0 %}
       <div class="section-head">
         <h2 class="section-title">精选推荐</h2>
-        <p class="section-desc">被置顶的文章值得你优先阅读，包含项目总结、实践指南与思考。</p>
+        <p class="section-desc">精选文章提供稳定的知识密度，适合作为入门或复习的参考资料。</p>
       </div>
       <div class="featured-grid">
         {% for post in featured_posts %}
@@ -65,33 +75,38 @@ paginate: 5
 
       <div class="section-head">
         <h2 class="section-title">最新文章</h2>
-        <p class="section-desc">最近发布的内容与灵感，欢迎订阅和回访。</p>
+        <p class="section-desc">包含最近发布的思考、实践记录与笔记，按时间顺序排列，方便快速追踪。</p>
       </div>
 
       {% if latest_posts.size > 0 %}
       <div class="post-stream">
         {% for post in latest_posts %}
         <article class="post-stream-item">
-          <div class="post-stream-meta">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
-            {% if post.categories and post.categories.size > 0 %}
-              <span class="meta-dot" aria-hidden="true">•</span>
-              <span class="post-stream-category">{{ post.categories | join: " / " }}</span>
-            {% endif %}
-          </div>
-          <h3 class="post-stream-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h3>
-          <p class="post-stream-excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
-          <div class="post-stream-footer">
-            {% if post.tags %}
-            <div class="post-stream-tags">
-              {% for t in post.tags limit: 4 %}
-                <span class="tag-chip">#{{ t }}</span>
-              {% endfor %}
+          <a class="post-stream-thumb" href="{{ post.url | relative_url }}">
+            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="{{ post.title }}" loading="lazy" decoding="async">
+          </a>
+          <div class="post-stream-body">
+            <div class="post-stream-meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+              {% if post.categories and post.categories.size > 0 %}
+                <span class="meta-dot" aria-hidden="true">•</span>
+                <span class="post-stream-category">{{ post.categories | join: " / " }}</span>
+              {% endif %}
             </div>
-            {% endif %}
-            <a class="post-stream-link" href="{{ post.url | relative_url }}">阅读全文 →</a>
+            <h3 class="post-stream-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h3>
+            <p class="post-stream-excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
+            <div class="post-stream-footer">
+              {% if post.tags %}
+              <div class="post-stream-tags">
+                {% for t in post.tags limit: 4 %}
+                  <span class="tag-chip">#{{ t }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+              <a class="post-stream-link" href="{{ post.url | relative_url }}">阅读全文 →</a>
+            </div>
           </div>
         </article>
         {% endfor %}
@@ -117,9 +132,9 @@ paginate: 5
       <section class="widget overview">
         <h3 class="widget-title">站点概览</h3>
         <ul class="overview-list">
-          <li><span>文章</span><strong>{{ site.posts | size }}</strong></li>
+          <li><span>文章</span><strong>{{ total_posts }}</strong></li>
           <li><span>标签</span><strong>{{ site.tags | size }}</strong></li>
-          <li><span>最近更新</span><strong>{{ latest_post.date | date: "%Y-%m-%d" }}</strong></li>
+          {% if latest_post %}<li><span>最近更新</span><strong>{{ latest_post.date | date: "%Y-%m-%d" }}</strong></li>{% endif %}
         </ul>
       </section>
 
@@ -132,15 +147,55 @@ paginate: 5
 
       <section class="widget">
         <h3 class="widget-title">标签速览</h3>
-        <div class="tag-rank">
-          {% for tag in sorted_tags limit: 8 %}
-            {% assign tag_name = tag[0] %}
-            {% assign tag_count = tag[1].size %}
-            <a class="tag-rank-item" href="{{ '/pages/tags/#' | append: tag_name | relative_url }}">
-              <span class="tag-rank-name">#{{ tag_name }}</span>
-              <span class="tag-rank-count">{{ tag_count }}</span>
-            </a>
+        <div class="tag-groups">
+          {% for entry in tag_groups_definition %}
+            {% assign parts = entry | split: ':' %}
+            {% assign group_name = parts[0] %}
+            {% assign defined_tags = parts[1] | split: '|' %}
+            {% assign present_tags = '' | split: '' %}
+            {% for t in defined_tags %}
+              {% if site.tags[t] %}
+                {% assign present_tags = present_tags | push: t %}
+                {% assign used_tags = used_tags | push: t %}
+              {% endif %}
+            {% endfor %}
+            {% if present_tags and present_tags.size > 0 %}
+            <div class="tag-group">
+              <h4 class="tag-group-title">{{ group_name }}</h4>
+              <div class="tag-group-body">
+                {% for tag_name in present_tags %}
+                  {% assign tag_count = site.tags[tag_name].size %}
+                  <a class="tag-rank-item" href="{{ '/pages/tags/#' | append: tag_name | relative_url }}">
+                    <span class="tag-rank-name">#{{ tag_name }}</span>
+                    <span class="tag-rank-count">{{ tag_count }}</span>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
           {% endfor %}
+
+          {% assign other_tags = '' | split: '' %}
+          {% for tag in site.tags %}
+            {% assign tag_name = tag[0] %}
+            {% unless used_tags contains tag_name %}
+              {% assign other_tags = other_tags | push: tag_name %}
+            {% endunless %}
+          {% endfor %}
+          {% if other_tags and other_tags.size > 0 %}
+          <div class="tag-group">
+            <h4 class="tag-group-title">其他主题</h4>
+            <div class="tag-group-body">
+              {% for tag_name in other_tags limit:6 %}
+                {% assign tag_count = site.tags[tag_name].size %}
+                <a class="tag-rank-item" href="{{ '/pages/tags/#' | append: tag_name | relative_url }}">
+                  <span class="tag-rank-name">#{{ tag_name }}</span>
+                  <span class="tag-rank-count">{{ tag_count }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
         </div>
         <a class="widget-link" href="{{ '/pages/tags/' | relative_url }}">浏览全部标签 →</a>
       </section>

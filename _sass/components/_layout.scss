@@ -22,8 +22,8 @@
 
 .section-head {
   display: grid;
-  gap: $space-sm;
-  margin-bottom: $space-xl;
+  gap: $space-xs;
+  margin-bottom: clamp($space-lg, 4vw, $space-xl);
 }
 
 .section-title {
@@ -44,7 +44,6 @@
 .featured-grid {
   display: grid;
   gap: clamp($space-xl, 4vw, $space-2xl);
-  margin-bottom: clamp($space-2xl, 5vw, $space-3xl);
 }
 
 @media (min-width: 768px) {
@@ -64,8 +63,12 @@
 }
 
 .post-stream-item {
+  display: grid;
+  gap: clamp($space-sm, 3vw, $space-lg);
+  grid-template-columns: 120px minmax(0, 1fr);
+  align-items: center;
   position: relative;
-  padding: clamp($space-lg, 3vw, $space-2xl);
+  padding: clamp($space-md, 3vw, $space-xl);
   border-radius: var(--radius-2xl);
   background: linear-gradient(160deg, rgba(20,21,28,.88), rgba(12,13,20,.9));
   border: 1px solid rgba(255,255,255,.08);
@@ -89,6 +92,27 @@
   box-shadow: var(--shadow-xl);
 }
 
+.post-stream-thumb {
+  display: block;
+  position: relative;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 20px 40px rgba(0,0,0,.35);
+}
+
+.post-stream-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-stream-body {
+  display: grid;
+  gap: $space-sm;
+}
+
 .post-stream-meta {
   display: inline-flex;
   align-items: center;
@@ -97,7 +121,6 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: $space-sm;
 }
 
 .meta-dot {
@@ -105,7 +128,7 @@
 }
 
 .post-stream-title {
-  margin: 0 0 $space-sm;
+  margin: 0;
   font-size: clamp(1.35rem, 2.3vw, 1.6rem);
   line-height: 1.35;
 }
@@ -122,7 +145,7 @@
 }
 
 .post-stream-excerpt {
-  margin: 0 0 $space-md;
+  margin: 0;
   color: var(--text-dim);
   line-height: 1.75;
   font-size: 1rem;
@@ -257,7 +280,20 @@
   font-size: 1.05rem;
 }
 
-.tag-rank {
+.tag-groups {
+  display: grid;
+  gap: $space-md;
+}
+
+.tag-group-title {
+  margin: 0 0 $space-xs;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.tag-group-body {
   display: grid;
   gap: $space-xs;
 }
@@ -330,106 +366,13 @@
   text-align: center;
 }
 
-.post,
-.page {
-  @extend .surface-panel;
-  padding: clamp($space-2xl, 5vw, 72px);
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-lg);
-}
-
-.post-header,
-.page-header {
-  display: grid;
-  gap: $space-sm;
-  margin-bottom: clamp($space-xl, 4vw, $space-2xl);
-}
-
-.post-title,
-.page-title {
-  margin: 0;
-  color: var(--text);
-  font-size: clamp(2.1rem, 6vw, 3rem);
-  letter-spacing: -0.015em;
-}
-
-.post-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-sm $space-md;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.post-meta .meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: $space-xs;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-  padding: 6px 12px;
-}
-
-.post-meta .meta-label {
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-}
-
-.post-meta .meta-item.meta-tags,
-.post-meta .meta-item.meta-categories {
-  background: transparent;
-  border: none;
-  padding: 0;
-  gap: $space-xs;
-}
-
-.post-meta .meta-item.meta-tags .tag,
-.post-meta .meta-item.meta-categories .tag {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-}
-
-.post-content {
-  color: var(--text-dim);
-  font-size: 1.05rem;
-  line-height: 1.85;
-  max-width: 72ch;
-}
-
-.post-content > *:first-child {
-  margin-top: 0;
-}
-
-.post-content img {
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255,255,255,.05);
-  box-shadow: 0 16px 45px rgba(0,0,0,.45);
-  margin: $space-xl 0;
-}
-
-.post-footer {
-  margin-top: $space-2xl;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.page-content {
-  color: var(--text-dim);
-  line-height: 1.85;
-}
-
-@media (max-width: 960px) {
-  .post,
-  .page {
-    border-radius: var(--radius-xl);
-    padding: clamp($space-xl, 8vw, $space-2xl);
+@media (max-width: 1024px) {
+  .post-stream-item {
+    grid-template-columns: 1fr;
   }
-  .post-meta {
-    gap: $space-xs $space-sm;
+  .post-stream-thumb {
+    width: 100%;
+    max-height: 240px;
   }
 }
 
@@ -441,10 +384,5 @@
     flex-direction: column;
     align-items: flex-start;
     gap: $space-xs;
-  }
-  .post-footer {
-    flex-direction: column;
-    gap: $space-sm;
-    align-items: flex-start;
   }
 }

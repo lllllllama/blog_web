@@ -1,14 +1,20 @@
-{% assign features = site.config.features | default: {} %}
+{% assign features = site.features | default: site.config.features | default: {} %}
 {% assign nav_items = site.nav | default: [] %}
 <header class="site-header" role="banner">
   <div class="container header-inner">
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }}" title="返回首页">
       <span class="brand-logo" aria-hidden="true">
-        <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="" width="26" height="26" loading="eager" decoding="sync" />
+        <img src="{{ '/assets/img/logo.svg' | relative_url }}" alt="" width="30" height="30" loading="eager" decoding="sync" />
       </span>
       <span class="brand-name">{{ site.title }}</span>
     </a>
-    <nav class="site-nav" aria-label="主导航">
+
+    <button class="nav-toggle" type="button" data-action="toggle-nav" aria-label="展开导航" aria-expanded="false">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      <span class="sr-only">展开或收起导航</span>
+    </button>
+
+    <nav class="site-nav" aria-label="主导航" data-component="primary-nav">
       <div class="nav-primary">
         {% for item in nav_items limit:4 %}
           <a href="{{ item.url | relative_url }}">{{ item.title }}</a>
@@ -37,6 +43,7 @@
       </div>
       {% endif %}
     </nav>
+
     <div class="header-actions">
       {% if site.appearance.enable_theme_switcher %}
         {% include theme-toggle.html %}

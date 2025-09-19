@@ -1,31 +1,48 @@
-﻿﻿// Main entry (ESM): wires theme switcher, search, toc, and micro interactions
+// Main entry (ESM): wires theme switcher, search, toc, and micro interactions
 
 const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Theme switcher
 (function initTheme() {
-  const key = 'cyber-theme';
+  const key = "cyber-theme";
   const root = document.documentElement;
-  const current = root.getAttribute('data-theme') || 'cyber-cyan';
+  const current = root.getAttribute("data-theme") || "cyber-cyan";
   try {
     const saved = localStorage.getItem(key);
-    root.setAttribute('data-theme', saved || current);
+    root.setAttribute("data-theme", saved || current);
   } catch {}
-  const group = document.querySelector('.theme-switcher');
+  const group = document.querySelector(".theme-switcher");
   if (!group) return;
-  const chips = group.querySelectorAll('.chip');
+  const chips = group.querySelectorAll(".chip");
   function setTheme(t) {
-    root.setAttribute('data-theme', t);
+    root.setAttribute("data-theme", t);
     try { localStorage.setItem(key, t); } catch {}
-    chips.forEach(c => c.setAttribute('aria-pressed', c.dataset.theme === t ? 'true':'false'));
+    chips.forEach(c => c.setAttribute("aria-pressed", c.dataset.theme === t ? "true" : "false"));
   }
-  chips.forEach(chip => chip.addEventListener('click', () => setTheme(chip.dataset.theme)));
-  const t = root.getAttribute('data-theme');
-  chips.forEach(c => c.setAttribute('aria-pressed', c.dataset.theme === t ? 'true':'false'));
+  chips.forEach(chip => chip.addEventListener("click", () => setTheme(chip.dataset.theme)));
+  const t = root.getAttribute("data-theme");
+  chips.forEach(c => c.setAttribute("aria-pressed", c.dataset.theme === t ? "true" : "false"));
 })();
 
-// Lazy load components when needed
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  const header = document.querySelector(".site-header");
+  const navToggle = document.querySelector('[data-action="toggle-nav"]');
+  const primaryNav = document.querySelector('.site-nav');
+  if (header && navToggle && primaryNav) {
+    const closeNav = () => {
+      header.classList.remove('is-nav-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    };
+    navToggle.addEventListener('click', () => {
+      const isOpen = header.classList.toggle('is-nav-open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    primaryNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+    document.addEventListener('keyup', evt => {
+      if (evt.key === 'Escape') closeNav();
+    });
+  }
+
   // Glitch title (hero)
   const glitchEl = document.querySelector('[data-component="glitch-title"]');
   if (glitchEl && !prefersReduced) {
@@ -74,10 +91,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     btn.type = 'button';
     btn.textContent = '复制';
     btn.addEventListener('click', async () => {
-      try { await navigator.clipboard.writeText(code.textContent || ''); btn.textContent = '已复制'; setTimeout(() => btn.textContent = '复制', 1500); } catch {}
+      try {
+        await navigator.clipboard.writeText(code.textContent || '');
+        btn.textContent = '已复制';
+        setTimeout(() => btn.textContent = '复制', 1500);
+      } catch {}
     });
     wrap.appendChild(btn);
   });
 });
-
-
