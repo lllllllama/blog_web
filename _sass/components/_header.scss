@@ -2,10 +2,17 @@
   position: sticky;
   top: 0;
   z-index: 140;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  background: rgba(12, 12, 18, .82);
+  border-bottom: 1px solid transparent;
+  background: rgba(12, 12, 18, .72);
   backdrop-filter: blur(22px) saturate(140%);
-  box-shadow: 0 18px 40px rgba(0,0,0,.55);
+  box-shadow: none;
+  transition: background-color $t-mid $ease-smooth, box-shadow $t-mid $ease-smooth, border-color $t-fast $ease-smooth;
+}
+
+.site-header.scrolled {
+  border-color: rgba(255,255,255,.12);
+  background: rgba(12, 12, 18, .9);
+  box-shadow: var(--shadow-lg);
 }
 
 .header-inner {
@@ -148,13 +155,17 @@
 }
 
 .nav-primary a:hover::before,
-.nav-primary a.active::before {
+.nav-primary a.active::before,
+.nav-primary a[aria-current='page']::before {
   opacity: 1;
   transform: scaleX(1);
 }
 
-.nav-primary a.active {
+.nav-primary a.active,
+.nav-primary a[aria-current='page'] {
   color: var(--accent-2);
+  background: rgba(59,130,246,.18);
+  box-shadow: 0 12px 28px rgba(59,130,246,.18);
 }
 
 .nav-secondary {
@@ -188,6 +199,12 @@
   border-color: rgba(59,130,246,.45);
   box-shadow: 0 6px 18px rgba(59,130,246,.25);
   transform: translateY(-1px);
+}
+
+.nav-icon[aria-current='page'] {
+  color: var(--accent);
+  border-color: rgba(59,130,246,.55);
+  box-shadow: 0 8px 22px rgba(59,130,246,.28);
 }
 
 .nav-icon:hover svg {

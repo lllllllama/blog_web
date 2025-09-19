@@ -78,11 +78,32 @@ layout: default
     </section>
     {% endif %}
 
+    <section id="related" class="panel related-posts">
+      <h3>相关推荐</h3>
+      <div class="cards-grid" id="related-cards"></div>
+    </section>
+
     <footer class="post-footer">
       <a class="btn secondary" href="{{ '/' | relative_url }}">鈫?杩斿洖棣栭〉</a>
     </footer>
   </article>
 </div>
+
+<script id="related-posts-data" type="application/json">
+[{% assign candidates = site.posts | where_exp: 'p', 'p.url != page.url' %}{% assign limited = candidates | slice: 0, 40 %}{% for post in limited %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "cover": {{ post.cover | default: '/assets/img/cover.svg' | relative_url | jsonify }},
+    "summary": {{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 160 | jsonify }},
+    "date": {{ post.date | date: '%Y-%m-%d' | jsonify }},
+    "date_iso": {{ post.date | date_to_xmlschema | jsonify }},
+    "categories": {{ post.categories | jsonify }},
+    "tags": {{ post.tags | jsonify }},
+    "words": {{ post.content | number_of_words }}
+  }{% unless forloop.last %},{% endunless %}{% endfor %}
+]
+</script>
 
 {% include comments.html %}
 

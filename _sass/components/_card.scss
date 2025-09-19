@@ -1,6 +1,9 @@
 .card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   position: relative;
+  min-height: 100%;
+  height: 100%;
   border-radius: var(--radius-2xl);
   border: 1px solid var(--panel-border);
   background: linear-gradient(160deg, rgba(23, 24, 33, .92), rgba(18, 18, 24, .88));
@@ -43,13 +46,16 @@
 
 .card-cover {
   position: relative;
+  display: block;
+  flex-shrink: 0;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
 .card-cover img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
   filter: saturate(1.05);
   transition: transform $t-slow $ease-smooth, opacity $t-mid $ease-smooth;
@@ -71,6 +77,11 @@
 }
 
 .card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp($space-sm, 2vw, $space-md);
   padding: clamp($space-lg, 3vw, $space-2xl);
 }
 
@@ -94,23 +105,37 @@
 }
 
 .meta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: $space-sm;
+  gap: $space-xs;
   font-size: 0.85rem;
   color: var(--text-muted);
   margin-bottom: $space-sm;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  text-transform: none;
+  letter-spacing: 0.02em;
 }
 
 .meta::before {
-  content: '';
-  width: 20px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  border-radius: 2px;
-  opacity: 0.8;
+  content: none;
+}
+
+
+.meta time {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.meta .category {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.meta .readtime {
+  color: var(--text-dim);
+}
+
+.meta-dot {
+  color: var(--text-dim);
 }
 
 .excerpt {
@@ -118,13 +143,15 @@
   line-height: 1.75;
   margin: 0;
   font-size: 1rem;
+  flex-grow: 1;
 }
 
 .tag-row {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: $space-xs;
-  margin-top: $space-sm;
+  margin-top: auto;
+  padding-top: $space-xs;
 }
 
 .tag {

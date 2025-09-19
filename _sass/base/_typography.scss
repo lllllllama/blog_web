@@ -4,89 +4,91 @@ body {
                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 
                "Noto Color Emoji", "PingFang SC", "Hiragino Sans GB", 
                "Microsoft YaHei", "微软雅黑", sans-serif;
-  font-size: 18px; // 增大字号以提升可读性
-  line-height: 1.7; // 增加行距
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.8;
   letter-spacing: 0.01em;
   color: var(--text);
+  color: color-mix(in srgb, var(--text) 90%, #ffffff 10%);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
+.prose {
+  max-width: 72ch;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--text);
-  line-height: 1.2;
+  line-height: 1.25;
   margin: 0;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem); // 增大H1字号
-  margin-bottom: $space-lg;
-  color: #F5F5F5; // 大白字
+  font-size: clamp(2rem, 4.2vw, 2.8rem);
+  margin: 0 0 $space-lg;
 }
 
 h2 {
-  font-size: clamp(1.75rem, 4vw, 2.5rem); // 增大H2字号
-  margin: $space-2xl 0 $space-lg;
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  margin: $space-xl 0 $space-md;
   position: relative;
-  color: var(--text); // 保持默认文字颜色
-  
-  // 带强调色下划线
+
   &::after {
     content: '';
     position: absolute;
     bottom: -8px;
     left: 0;
-    width: 80px;
-    height: 4px;
+    width: 64px;
+    height: 3px;
     background: linear-gradient(90deg, var(--accent), var(--accent-2));
     border-radius: 2px;
   }
 }
 
 h3 {
-  font-size: clamp(1.375rem, 3vw, 2rem); // 增大H3字号
-  margin: $space-xl 0 $space-md;
-  color: #AAAAAA; // 浅灰字
+  font-size: clamp(1.3rem, 2.8vw, 1.6rem);
+  margin: $space-lg 0 $space-sm;
+  color: color-mix(in srgb, var(--text) 85%, transparent);
 }
 
 h4 {
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  margin: $space-lg 0 $space-sm;
-}
-
-h5 {
-  font-size: 1.25rem;
+  font-size: clamp(1.2rem, 2.3vw, 1.45rem);
   margin: $space-md 0 $space-sm;
 }
 
-h6 {
+h5 {
   font-size: 1.125rem;
   margin: $space-md 0 $space-xs;
-  color: var(--text-dim);
+}
+
+h6 {
+  font-size: 1rem;
+  margin: $space-sm 0 $space-xs;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 p {
-  color: var(--text-dim);
+  color: color-mix(in srgb, var(--text) 88%, transparent);
   margin: 0 0 $space-md;
-  line-height: 1.8; // 增加行距
+  line-height: 1.8;
 }
 
 a {
-  color: var(--accent);
+  color: color-mix(in srgb, var(--accent) 80%, #dbeafe 20%);
   text-decoration: none;
-  transition: all $t-fast $ease-smooth;
-  
+  transition: color $t-fast $ease-smooth, text-shadow $t-fast $ease-smooth;
+
   &:hover {
     color: var(--accent-2);
     text-decoration: underline;
-    text-decoration-color: rgba(59, 130, 246, .5); // 使用蓝色强调色
-    text-underline-offset: 3px;
+    text-decoration-color: rgba(59, 130, 246, .45);
+    text-underline-offset: 4px;
   }
 }
 
@@ -104,25 +106,25 @@ code {
   font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", 
                "SF Mono", Monaco, "Inconsolata", "Roboto Mono", 
                "Source Code Pro", monospace;
-  font-size: 0.875em;
-  background: rgba(59, 130, 246, .1); // 使用蓝色强调色
-  border: 1px solid rgba(59, 130, 246, .2); // 使用蓝色强调色
-  color: var(--accent); // 使用蓝色强调色
-  padding: 2px 6px;
+  font-size: 0.9em;
+  background: rgba(20, 22, 32, .8);
+  border: 1px solid rgba(255,255,255,.1);
+  color: var(--accent);
+  padding: 0.2rem 0.5rem;
   border-radius: $radius-sm;
   font-weight: 500;
 }
 
 pre {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: $radius-lg;
+  background: rgba(16, 18, 30, .9);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: $radius-xl;
   padding: $space-lg;
   overflow-x: auto;
   margin: $space-lg 0;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 24px 50px rgba(0,0,0,.35);
   position: relative;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -130,19 +132,7 @@ pre {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(59, 130, 246, .3) 50%, // 使用蓝色强调色
-      transparent 100%);
-  }
-  
-  code {
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--text);
-    font-size: 0.875rem;
-    line-height: 1.6; // 增加行距
+    background: linear-gradient(90deg, transparent, rgba(59,130,246,.35), transparent);
   }
 }
 
@@ -237,12 +227,7 @@ ol {
 hr {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--border) 20%, 
-    var(--accent) 50%, 
-    var(--border) 80%, 
-    transparent 100%);
+  background: rgba(255,255,255,.08);
   margin: $space-2xl 0;
 }
 

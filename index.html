@@ -50,20 +50,28 @@ paginate: 5
         <h2 class="section-title">精选推荐</h2>
         <p class="section-desc">精选文章提供稳定的知识密度，适合作为入门或复习的参考资料。</p>
       </div>
-      <div class="featured-grid">
+      <div class="cards-grid featured-grid">
         {% for post in featured_posts %}
         <article class="card pinned" data-component="neon-border">
           <a class="card-cover" href="{{ post.url | relative_url }}">
             <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="文章封面" loading="lazy" decoding="async" width="800" height="420"/>
           </a>
           <div class="card-body">
-            <p class="meta">{{ post.date | date: "%Y-%m-%d" }} · {{ post.categories | join: " / " }}</p>
+            <div class="meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+              {% if post.categories and post.categories.size > 0 %}
+                <span class="meta-dot" aria-hidden="true">·</span>
+                <span class="category">{{ post.categories | join: " / " }}</span>
+              {% endif %}
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="readtime" data-words="{{ post.content | number_of_words }}"></span>
+            </div>
             <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
             <p class="excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
             {% if post.tags %}
             <div class="tag-row">
               {% for t in post.tags limit: 4 %}
-                <span class="tag">{{ t }}</span>
+                <span class="tag-chip">#{{ t }}</span>
               {% endfor %}
             </div>
             {% endif %}
@@ -79,34 +87,31 @@ paginate: 5
       </div>
 
       {% if latest_posts.size > 0 %}
-      <div class="post-stream">
+      <div class="cards-grid latest-grid">
         {% for post in latest_posts %}
-        <article class="post-stream-item">
-          <a class="post-stream-thumb" href="{{ post.url | relative_url }}">
-            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="{{ post.title }}" loading="lazy" decoding="async">
+        <article class="card" data-component="neon-border">
+          <a class="card-cover" href="{{ post.url | relative_url }}">
+            <img src="{{ post.cover | default: '/assets/img/cover.svg' | relative_url }}" alt="{{ post.title }}" loading="lazy" decoding="async" width="800" height="420"/>
           </a>
-          <div class="post-stream-body">
-            <div class="post-stream-meta">
+          <div class="card-body">
+            <div class="meta">
               <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
               {% if post.categories and post.categories.size > 0 %}
-                <span class="meta-dot" aria-hidden="true">•</span>
-                <span class="post-stream-category">{{ post.categories | join: " / " }}</span>
+                <span class="meta-dot" aria-hidden="true">·</span>
+                <span class="category">{{ post.categories | join: " / " }}</span>
               {% endif %}
+              <span class="meta-dot" aria-hidden="true">·</span>
+              <span class="readtime" data-words="{{ post.content | number_of_words }}"></span>
             </div>
-            <h3 class="post-stream-title">
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-            </h3>
-            <p class="post-stream-excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
-            <div class="post-stream-footer">
-              {% if post.tags %}
-              <div class="post-stream-tags">
-                {% for t in post.tags limit: 4 %}
-                  <span class="tag-chip">#{{ t }}</span>
-                {% endfor %}
-              </div>
-              {% endif %}
-              <a class="post-stream-link" href="{{ post.url | relative_url }}">阅读全文 →</a>
+            <h3 class="card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p class="excerpt">{{ post.summary | default: post.excerpt | strip_html | strip_newlines | truncate: 200 }}</p>
+            {% if post.tags %}
+            <div class="tag-row">
+              {% for t in post.tags limit: 4 %}
+                <span class="tag-chip">#{{ t }}</span>
+              {% endfor %}
             </div>
+            {% endif %}
           </div>
         </article>
         {% endfor %}
@@ -129,7 +134,7 @@ paginate: 5
     </section>
 
     <aside class="sidebar">
-      <section class="widget overview">
+      <section class="widget overview panel">
         <h3 class="widget-title">站点概览</h3>
         <ul class="overview-list">
           <li><span>文章</span><strong>{{ total_posts }}</strong></li>
@@ -139,13 +144,22 @@ paginate: 5
       </section>
 
       {% if search_enabled %}
-      <section class="widget">
+      <section class="widget panel search-widget">
         <h3 class="widget-title">站内搜索</h3>
-        <button class="btn full" data-action="open-search">打开搜索（/）</button>
+        <label class="sr-only" for="sidebar-search">搜索关键词</label>
+        <div class="search-field">
+          <input type="search" id="sidebar-search" name="q" placeholder="输入关键词..." autocomplete="off">
+          <button class="btn secondary" type="button" data-action="open-search">打开全站搜索</button>
+        </div>
       </section>
       {% endif %}
 
-      <section class="widget">
+      <section class="widget panel hot-widget">
+        <h3 class="widget-title">热门文章</h3>
+        <ol class="hot-posts" id="hot-posts"></ol>
+      </section>
+
+      <section class="widget panel">
         <h3 class="widget-title">标签速览</h3>
         <div class="tag-groups">
           {% for entry in tag_groups_definition %}
@@ -200,7 +214,7 @@ paginate: 5
         <a class="widget-link" href="{{ '/pages/tags/' | relative_url }}">浏览全部标签 →</a>
       </section>
 
-      <section class="widget">
+      <section class="widget panel">
         <h3 class="widget-title">快速入口</h3>
         <div class="widget-links">
           <a href="{{ '/pages/about/' | relative_url }}">关于本站</a>
@@ -209,5 +223,6 @@ paginate: 5
         </div>
       </section>
     </aside>
+
   </div>
 </section>
