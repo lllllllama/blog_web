@@ -11,6 +11,7 @@ permissions:
   id-token: write
 
 # 构建模式通过 BUILD_MODE 切换：A = 官方构建，B = 自定义 Bundler
+env:
   BUILD_MODE: B
 concurrency:
   group: "pages"
