@@ -1,4 +1,4 @@
-﻿name: GitHub Pages
+name: GitHub Pages
 
 on:
   push:
@@ -10,9 +10,9 @@ permissions:
   pages: write
   id-token: write
 
-# 閫氳繃鐜鍙橀噺鍒囨崲妯″紡锛欰 鎴?B锛堥粯璁?A锛?env:
+# 通过环境变量切换模式：A 或 B（默认 A）
+env:
   BUILD_MODE: A
-
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -28,7 +28,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 瀹樻柟 Jekyll 鏋勫缓锛堢瓑鍚?Pages 鏋勫缓鐜锛屼娇鐢?github-pages 鍙楁敮鎸侀泦鍚堬級
       - name: Build with Jekyll (official)
         uses: actions/jekyll-build-pages@v1
         with:
