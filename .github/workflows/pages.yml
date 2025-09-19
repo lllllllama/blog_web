@@ -1,4 +1,4 @@
-name: GitHub Pages
+﻿name: GitHub Pages
 
 on:
   push:
@@ -10,8 +10,7 @@ permissions:
   pages: write
   id-token: write
 
-# 通过环境变量切换模式：A 或 B（默认 A）
-env:
+# 閫氳繃鐜鍙橀噺鍒囨崲妯″紡锛欰 鎴?B锛堥粯璁?A锛?env:
   BUILD_MODE: A
 
 concurrency:
@@ -20,7 +19,7 @@ concurrency:
 
 jobs:
   build-a:
-    if: env.BUILD_MODE == 'A'
+    if: ${{ env.BUILD_MODE == 'A' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,7 +28,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 官方 Jekyll 构建（等同 Pages 构建环境，使用 github-pages 受支持集合）
+      # 瀹樻柟 Jekyll 鏋勫缓锛堢瓑鍚?Pages 鏋勫缓鐜锛屼娇鐢?github-pages 鍙楁敮鎸侀泦鍚堬級
       - name: Build with Jekyll (official)
         uses: actions/jekyll-build-pages@v1
         with:
@@ -42,7 +41,7 @@ jobs:
           path: ./_site
 
   deploy-a:
-    if: env.BUILD_MODE == 'A'
+    if: ${{ env.BUILD_MODE == 'A' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -54,7 +53,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
   build-b:
-    if: env.BUILD_MODE == 'B'
+    if: ${{ env.BUILD_MODE == 'B' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -81,7 +80,7 @@ jobs:
           path: ./_site
 
   deploy-b:
-    if: env.BUILD_MODE == 'B'
+    if: ${{ env.BUILD_MODE == 'B' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -92,6 +91,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-# 切换模式说明：
-# - 默认 A 模式（官方构建）：使用 `actions/jekyll-build-pages` 按 GitHub Pages 白名单插件构建。
-# - 切到 B 模式（自行构建）：将上方 env.BUILD_MODE 改为 B，且按 README 调整 Gemfile（移除 github-pages，改用 jekyll + 额外插件）。
+# 鍒囨崲妯″紡璇存槑锛?# - 榛樿 A 妯″紡锛堝畼鏂规瀯寤猴級锛氫娇鐢?`actions/jekyll-build-pages` 鎸?GitHub Pages 鐧藉悕鍗曟彃浠舵瀯寤恒€?# - 鍒囧埌 B 妯″紡锛堣嚜琛屾瀯寤猴級锛氬皢涓婃柟 env.BUILD_MODE 鏀逛负 B锛屼笖鎸?README 璋冩暣 Gemfile锛堢Щ闄?github-pages锛屾敼鐢?jekyll + 棰濆鎻掍欢锛夈€?
+
