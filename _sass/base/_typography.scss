@@ -4,7 +4,7 @@ body {
                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", 
                "Noto Color Emoji", "PingFang SC", "Hiragino Sans GB", 
                "Microsoft YaHei", "微软雅黑", sans-serif;
-  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  font-size: clamp(1rem, calc(0.95rem + 0.25vw), 1.125rem);
   line-height: 1.8;
   letter-spacing: 0.01em;
   color: var(--text);
