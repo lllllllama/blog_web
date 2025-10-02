@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0b1220"/>
+  <circle cx="1000" cy="-50" r="300" fill="url(#g)" opacity="0.35"/>
+  <circle cx="150" cy="600" r="260" fill="url(#g)" opacity="0.25"/>
+  <text x="60" y="340" fill="#e2e8f0" font-size="64" font-family="Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-weight="700">Jekyll · GitHub Pages</text>
+  <text x="60" y="410" fill="#94a3b8" font-size="36" font-family="Segoe UI,Roboto,Helvetica,Arial,sans-serif">简洁 · 响应式 · 深浅色</text>
+  <text x="60" y="470" fill="#94a3b8" font-size="24" font-family="Segoe UI,Roboto,Helvetica,Arial,sans-serif">Asia/Shanghai · zh-CN</text>
+  <rect x="60" y="220" width="70" height="4" fill="#38bdf8"/>
+</svg>
+

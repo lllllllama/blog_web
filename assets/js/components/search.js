@@ -1,5 +1,5 @@
 function createIndex(list){
-  // 简易倒排索引：title + tags + categories + content
+  // 绠€鏄撳€掓帓绱㈠紩锛歵itle + tags + categories + content
   const index = new Map();
   list.forEach((doc, i) => {
     const text = `${doc.title} ${doc.tags?.join(' ')||''} ${doc.categories?.join(' ')||''} ${doc.summary} ${doc.content}`.toLowerCase();
@@ -29,16 +29,16 @@ export function setupSearch(layer, { endpoint='/search.json' }={}){
     results.innerHTML = '';
     ids.slice(0, 30).forEach(id => {
       const d = data[id];
-      const a = document.createElement('a'); a.className='search-item'; a.href=d.url; a.innerHTML = `<strong>${d.title}</strong><br><small>${new Date(d.date).toLocaleDateString()} · ${(d.tags||[]).join(', ')}</small><div>${d.summary||''}</div>`;
+      const a = document.createElement('a'); a.className='search-result'; a.href=d.url; a.innerHTML = `<strong>${d.title}</strong><br><small>${new Date(d.date).toLocaleDateString()} 路 ${(d.tags||[]).join(', ')}</small><div>${d.summary||''}</div>`;
       results.appendChild(a);
     });
   }
 
   function openLayer(){
-    open = true; layer.hidden = false; document.body.style.overflow='hidden'; input.focus(); input.select();
+    open = true; layer.hidden = false; layer.classList.add('open'); document.body.style.overflow='hidden'; input.focus(); input.select();
   }
   function closeLayer(){
-    open = false; layer.hidden = true; document.body.style.overflow=''; active=-1; results.innerHTML=''; input.value='';
+    open = false; layer.classList.remove('open'); layer.hidden = true; document.body.style.overflow=''; active=-1; results.innerHTML=''; input.value='';
   }
 
   layer.addEventListener('open', async ()=>{ await ensure(); openLayer(); });

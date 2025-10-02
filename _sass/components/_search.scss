@@ -263,4 +263,20 @@
 
 .search-box:focus-within {
   animation: searchPulse 2s ease-in-out infinite;
+}// Layout overrides for floating search panel
+.search-overlay {
+  justify-content: flex-end;
+  padding: clamp(72px, 12vh, 120px) clamp(24px, 6vw, 64px) clamp(24px, 8vh, 96px) clamp(24px, 6vw, 64px);
+  z-index: 1200;
+}
+
+@media (max-width: 767px) {
+  .search-overlay {
+    justify-content: center;
+    padding: clamp(48px, 10vh, 80px) 16px 16px 16px;
+  }
+}
+
+.search-box {
+  max-width: 520px;
 }

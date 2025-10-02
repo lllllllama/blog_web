@@ -24,7 +24,7 @@ jobs:
           bundle exec jekyll build
       - name: Run htmlproofer
         run: |
-          htmlproofer ./_site --disable-external --allow-hash-href --check-html --empty-alt-ignore
+          htmlproofer ./_site --disable-external --allow-hash-href --checks html --empty-alt-ignore
       - name: Markdownlint
         run: |
           npm -g i markdownlint-cli@0.37.0

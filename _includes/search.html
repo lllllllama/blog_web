@@ -1,14 +1,16 @@
-{% assign features = site.config.features | default: {} %}
+{% assign features = site.features | default: site.config.features %}
 {% if features and features.search %}
-<div class="search-layer" hidden data-component="search">
-  <div class="search-panel">
-    <div class="search-head">
-      <input type="search" placeholder="搜索文章（Esc 关闭）" aria-label="搜索文章" autocomplete="off" inputmode="search">
-      <button class="icon-button" data-action="close-search" type="button" aria-label="关闭搜索" title="关闭">
+<div class="search-overlay" hidden data-component="search">
+  <div class="search-box" role="dialog" aria-modal="true" aria-label="站内搜索">
+    <div class="search-header">
+      <svg class="search-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path fill="currentColor" d="M12.9 14.32a6.5 6.5 0 1 1 1.414-1.414l3.387 3.387a1 1 0 0 1-1.414 1.414l-3.387-3.387ZM13 8.5a4.5 4.5 0 1 0-9 0a4.5 4.5 0 0 0 9 0Z" />
+      </svg>
+      <input class="search-input" type="search" placeholder="搜索文章（Esc 关闭）" aria-label="搜索文章" autocomplete="off" inputmode="search">
+      <button class="search-close" data-action="close-search" type="button" aria-label="关闭搜索" title="关闭">
         <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
           <path fill="currentColor" d="M14.53 5.47a.75.75 0 0 0-1.06-1.06L10 7.94 6.53 4.41a.75.75 0 1 0-1.06 1.06L8.94 10l-3.47 3.47a.75.75 0 1 0 1.06 1.06L10 12.06l3.47 3.47a.75.75 0 0 0 1.06-1.06L11.06 10l3.47-3.47Z"/>
         </svg>
-        <span class="sr-only">关闭搜索面板</span>
       </button>
     </div>
     <div class="search-results" role="listbox" aria-label="搜索结果"></div>

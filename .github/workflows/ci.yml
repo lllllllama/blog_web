@@ -28,7 +28,7 @@ jobs:
       - name: HTMLProofer
         run: |
           htmlproofer ./_site \
-            --disable-external --assume-extension --check-html --check-img-http \
+            --disable-external --assume-extension --checks html,img_http \
             --empty-alt-ignore --allow-hash-href || true
 
       - name: Setup Node

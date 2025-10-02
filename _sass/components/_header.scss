@@ -244,10 +244,20 @@
   border-radius: 50%;
   border: 1px solid rgba(255,255,255,.12);
   background: rgba(24,24,32,.9);
-  font-size: 1.35rem;
-  line-height: 1;
   padding: 0;
   transition: transform $t-fast $ease-smooth, border-color $t-fast $ease-smooth, box-shadow $t-fast $ease-smooth;
+}
+
+.theme-switcher .chip svg {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 6px rgba(59,130,246,.35));
+  fill: none;
+}
+
+.theme-switcher .chip svg rect {
+  stroke: rgba(15,23,42,.4);
+  stroke-width: 0.5;
 }
 
 .theme-switcher .chip:hover {

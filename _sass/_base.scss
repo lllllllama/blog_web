@@ -1,3 +1,7 @@
+$t-fast: 140ms !default;
+$t-mid: 300ms !default;
+$t-slow: 520ms !default;
+$ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94) !default;
 :root {
   font-size: 16px;
 }

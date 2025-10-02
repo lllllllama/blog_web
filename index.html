@@ -4,8 +4,7 @@ title: 首页
 paginate: 5
 ---
 
-{% assign features = site.features | default: site.config.features | default: {} %}
-{% assign search_enabled = features.search %}
+{% assign features = site.features | default: site.config.features %}
 {% if paginator %}
   {% assign posts_collection = paginator.posts %}
 {% else %}
@@ -142,17 +141,6 @@ paginate: 5
           {% if latest_post %}<li><span>最近更新</span><strong>{{ latest_post.date | date: "%Y-%m-%d" }}</strong></li>{% endif %}
         </ul>
       </section>
-
-      {% if search_enabled %}
-      <section class="widget panel search-widget">
-        <h3 class="widget-title">站内搜索</h3>
-        <label class="sr-only" for="sidebar-search">搜索关键词</label>
-        <div class="search-field">
-          <input type="search" id="sidebar-search" name="q" placeholder="输入关键词..." autocomplete="off">
-          <button class="btn secondary" type="button" data-action="open-search">打开全站搜索</button>
-        </div>
-      </section>
-      {% endif %}
 
       <section class="widget panel hot-widget">
         <h3 class="widget-title">热门文章</h3>
