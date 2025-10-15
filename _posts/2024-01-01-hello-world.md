@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 你好，世界：第一篇博文
+title: 你好，世界：第一篇博客
 date: 2024-01-01 10:00:00 +0800
 categories: [随笔]
 tags: [起步, 指南]
@@ -19,7 +19,7 @@ toc: true
 日常写作时可以直接运行：
 
 ```powershell
-# Windows 本地开发
+# Windows 本地开启
 scripts\serve.ps1
 ```
 

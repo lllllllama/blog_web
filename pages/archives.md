@@ -19,4 +19,3 @@ permalink: /pages/archives/
   {% endfor %}
   </ul>
 {% endfor %}
-

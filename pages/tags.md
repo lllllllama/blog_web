@@ -22,4 +22,3 @@ permalink: /pages/tags/
   {% endfor %}
   </ul>
 </div>
-

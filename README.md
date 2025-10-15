@@ -1,102 +1,104 @@
-﻿# lama小站 · Jekyll + GitHub Pages
+# lama 小站 · Jekyll + GitHub Pages
 
-一个简洁可演进的静态博客。技术栈：Jekyll + Sass + 原生 ES Modules，部署在 GitHub Pages；管理端集成 Static CMS（支持开放投稿、审核发布）。
+一个围绕中文写作优化的静态博客，使用 Jekyll + Sass + 原生 ES Modules 构建，并集成 Static CMS 方便远程投稿。
 
-在线地址：`https://lllllllama.me`
+线上访问地址：`https://lllllllama.me`
 
-——
+---
 
 ## 快速开始（本地预览）
 
-1) 安装 Ruby（含 DevKit/MSYS2）与 Bundler（Windows 可直接用仓库脚本）
-2) 进入仓库目录并运行：
+1. 安装 Ruby、DevKit/MSYS2 及 Bundler（Windows 用户可直接执行仓库脚本）。
+2. 在仓库根目录运行：
 
-```powershell
-scripts\setup.ps1    # 安装依赖（首次）
-scripts\serve.ps1    # 本地预览，默认 http://127.0.0.1:4000
-```
+   ```powershell
+   scripts\setup.ps1    # 首次安装依赖
+   scripts\serve.ps1    # 启动预览服务器，默认 http://127.0.0.1:4000
+   ```
 
-——
+> 若端口占用，可设置环境变量 `JEKYLL_PORT` / `JEKYLL_HOST` 后再启动。
+
+---
 
 ## 目录结构
 
 ```
 .
-├─ _config.yml              # 站点配置
-├─ _layouts/                # 页面布局（default/post/page）
-├─ _includes/               # 片段（head/header/footer/meta/search/toc 等）
-├─ _sass/                   # 设计令牌/基础/组件样式
-├─ assets/                  # 样式、图片、JS
-├─ _posts/                  # 文章
-├─ pages/                   # about、archives 等页面
-├─ admin/                   # Static CMS 后台（/admin/）
-├─ .github/workflows/       # Pages 部署工作流
-└─ index.html               # 首页
+├── _config.yml              # 站点配置
+├── _layouts/                # 页面布局模板（default/post/page 等）
+├── _includes/               # 模板片段（head/header/footer/meta/search/toc 等）
+├── _sass/                   # Sass 样式模块与设计令牌
+├── assets/                  # 样式、脚本、图片与其它静态资源
+├── _posts/                  # 博文内容（Markdown）
+├── pages/                   # 独立页面（about / archives / tags 等）
+├── admin/                   # Static CMS 后台（路径 /admin/）
+├── scripts/                 # PowerShell 工具脚本
+└── .github/workflows/       # GitHub Actions 配置
 ```
 
-——
+---
 
-## 在线后台 · Static CMS（开放投稿）
+## Static CMS 后台 & 开放投稿
 
-- 后台地址：`/admin/`
-- 已启用：
-  - `publish_mode: editorial_workflow`（草稿 → 审核 → 发布）
-  - `open_authoring: true`（开放投稿：任何 GitHub 用户可登录并通过 fork + PR 投稿）
-  - GitHub OAuth 代理：Render 托管，回调为 `/callback`
+- 后台入口：`/admin/`
+- 配置要点：
+  - `publish_mode: editorial_workflow`：投稿先进入审核队列。
+  - `open_authoring: true`：启用开放投稿（fork + PR 流程）。
+  - 通过 Render 部署的 GitHub OAuth 代理，回调为 `/callback`。
 
-开启开放投稿前提（必须）
-- 仓库必须是 Public（公开）。否则未授权用户会看到 “Repo not found”。
-- 分支保护（建议）
-  - Require a pull request before merging
-  - Require review from Code Owners
-  - 可选：Require status checks（Pages 构建）
-- CODEOWNERS：`.github/CODEOWNERS` 指定 `@lllllllama` 审核 `_posts/**`、`pages/**`、`admin/**`
+开放投稿前提：
+- 仓库需设为 Public，否则未授权用户会看到 “Repo not found”。
+- 建议开启分支保护：必须通过 PR、需 Code Owners 审核，部署前自选状态检查。
+- `.github/CODEOWNERS` 可以指定 `_posts/**`、`pages/**`、`admin/**` 对应的审核人。
 
-投稿与审核流程
-1. 访问 `https://<你的域名>/admin/` 用 GitHub 登录
-2. 创建或编辑文章 → “保存” → “提交以审核”
-3. CMS 在投稿者账户 fork 你的公开仓库并发起 PR
-4. 你在 GitHub 审核合并，合并后 Pages 自动发布
+投稿流程：
+1. 投稿者访问 `https://<你的域名>/admin/` 并使用 GitHub 登录。
+2. 新建或编辑文章后点击「保存」→「提交以审核」。
+3. CMS 会在投稿者名下 fork 仓库并发起 PR。
+4. 仓库维护者在 GitHub 审核合并后即可触发 Pages 自动部署。
 
-更多细节见 `docs/OPEN_AUTHORING.md`
+详细说明见 `docs/OPEN_AUTHORING.md`。
 
-——
+---
 
-## 写作与上传
+## 写作与发布
 
-- 文章：`_posts/YYYY-MM-DD-slug.md`
-- Front‑matter 常用字段：
+- 新文章：`_posts/YYYY-MM-DD-slug.md`，必要字段：
   - `layout: post`
-  - `title: 标题`
-  - `date: yyyy-MM-dd HH:mm:ss +0800`
-  - `categories: [分类]`
-  - `tags: [标签]`
-  - `pin: true|false`（首页置顶）
-  - `toc: true|false`（目录）
+  - `title`, `date`, `categories`, `tags`
+  - `pin`（首页置顶）、`toc`（目录）
+  - `summary`（首页卡片摘要，可留空让 Jekyll 自动截断）
+- PowerShell 辅助脚本（Windows）：
+  - `scripts\new-post.ps1` 快速生成文章。
+  - `scripts\first-push.ps1` 设置远端并完成首次推送。
+- 静态资源：
+  - 文章封面默认 `/assets/img/cover.svg`，可自定义。
+  - 图库与附件字段可在 Static CMS 中直接上传。
 
-- 后台上传：
-  - 图片集（gallery）：多图 + 说明，页面自动以网格展示
-  - 附件（attachments）：任意文件/PDF；勾选“内嵌预览”后 PDF 会内嵌显示并保留下载链接
+---
 
-——
+## 部署
 
-## 自定义域名
+1. 仓库 Settings → Pages 中选择 “GitHub Actions” 作为部署源（仓库已包含 `pages.yml`）。
+2. 默认构建模式为 B（Bundler 自定义构建）；可通过 `BUILD_MODE` 切换到官方构建。
+3. 成功部署后可在 Pages 设置中绑定自定义域名（记得配置 DNS 并开启 HTTPS）。
 
-1) Settings → Pages → Custom domain 填入你的域名，并启用 HTTPS
-2) `CNAME` 文件内容写入该域名
-3) DNS：A 记录指向 GitHub Pages IP（四个），`www` 用 CNAME 指向 `<username>.github.io`
+GitHub Actions 流程：
+- `pages.yml`：负责构建与部署。
+- `ci.yml`：在指定分支/PR 上执行 Jekyll 构建、HTMLProofer、pa11y、Lighthouse。
+- `lint.yml`：非阻塞的额外检查（htmlproofer、markdownlint、stylelint）。
 
-——
+---
 
 ## 常见问题
 
-- 后台提示 “Repo not found”：仓库不是 Public，或登录账号无权访问私有仓库
-- 登录 403/CORS：Render 代理 `ORIGINS` 必须包含 `https://<你的域名>` 与 `https://www.<你的域名>`
-- 回调错误：GitHub OAuth App 的 Authorization callback URL 必须是 `https://<render域名>/callback`
-- 后台空白：强制刷新（Ctrl/Cmd+Shift+R）；本仓库已引入官方 CSS 与正确初始化
+- **后台提示 Repo not found**：仓库非公开或登录账户无访问权限。
+- **登录 403/CORS**：更新 OAuth 代理的 `ORIGINS` 环境变量，包含 `https://<域名>` 与 `https://www.<域名>`。
+- **页面空白或样式异常**：强制刷新（Ctrl/Cmd + Shift + R）以清理缓存。
+- **SSL/证书问题（Windows）**：运行 `ridk install` 并更新证书后重试。
 
-——
+---
 
-## 许可证
+## 授权协议
 
-MIT
+MIT License

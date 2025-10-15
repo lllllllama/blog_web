@@ -8,7 +8,7 @@ backend:
   base_url: https://netlify-cms-github-oauth-provider-g9fh.onrender.com
 
 # 本地开发可启用本地后端，无需登录（仅本地有效）
-local_backend: true
+# local_backend: true
 
 site_url: https://lllllllama.me
 logo_url: /assets/img/logo.svg
@@ -27,12 +27,26 @@ collections:
     format: frontmatter
     fields:
       - { label: 标题, name: title, widget: string }
-      - { label: 日期, name: date, widget: datetime, format: "yyyy-MM-dd HH:mm:ss", time_format: "HH:mm" }
-      - { label: 分类, name: categories, widget: list, default: ["blog"] }
-      - { label: 标签, name: tags, widget: list, required: false }
+      - label: 日期
+        name: date
+        widget: datetime
+        format: "yyyy-MM-dd HH:mm:ss"
+        time_format: "HH:mm"
+        required: false
+      - label: 分类
+        name: categories
+        widget: list
+        required: false
+        hint: "可手动添加一个或多个分类"
+      - label: 标签
+        name: tags
+        widget: list
+        required: true
+        min: 1
+        hint: "至少填写一个标签"
       - { label: 置顶, name: pin, widget: boolean, default: false, required: false }
       - { label: 封面, name: cover, widget: image, required: false }
-      - { label: 摘要, name: description, widget: text, required: false }
+      - { label: 摘要, name: summary, widget: text, required: false, hint: "显示于首页卡片等位置，留空将使用自动摘要" }
       - { label: 正文, name: body, widget: markdown }
       - label: 图片集
         name: gallery
@@ -42,7 +56,7 @@ collections:
         fields:
           - { label: 图片, name: image, widget: image }
           - { label: 说明, name: caption, widget: string, required: false }
-      - label: 附件（PDF/其它文件）
+      - label: 附件（PDF/其他文件）
         name: attachments
         widget: list
         required: false
@@ -52,7 +66,6 @@ collections:
             widget: file
             media_folder: "assets/files"
             public_folder: "/assets/files"
-            # 仅提示：可上传 pdf/zip 等；如需强校验可加 pattern
           - { label: 内嵌预览, name: embed, widget: boolean, default: true, required: false }
           - { label: 标题, name: title, widget: string, required: false }
 

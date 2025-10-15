@@ -38,7 +38,7 @@ try {
 
   $tagsYaml = if ($tagsArr.Count -gt 0) { "[" + ($tagsArr -join ", ") + "]" } else { "[未分类]" }
   $catsYaml = if ($catsArr.Count -gt 0) { "[" + ($catsArr -join ", ") + "]" } else { "[随笔]" }
-  $summaryYaml = if ($Summary -and $Summary.Trim() -ne '') { $Summary } else { "这里是文章摘要，可手动编辑或让 Jekyll 自动截断。" }
+  $summaryYaml = if ($Summary -and $Summary.Trim() -ne '') { $Summary } else { "这里是文章摘要，可手动编辑，也可以交给 Jekyll 自动截断生成。" }
 
   $content = @"
 ---
@@ -54,7 +54,6 @@ toc: $Toc
 ---
 
 这里是正文内容。支持 Markdown、代码高亮、图片等。
-
 ```bash
 echo "Hello"
 ```

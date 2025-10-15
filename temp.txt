@@ -1,0 +1,72 @@
+﻿publish_mode: editorial_workflow
+open_authoring: true
+
+backend:
+  name: github
+  repo: lllllllama/blog_web
+  branch: main
+  base_url: https://netlify-cms-github-oauth-provider-g9fh.onrender.com
+
+# 鏈湴寮€鍙戝彲鍚敤鏈湴鍚庣锛屾棤闇€鐧诲綍锛堜粎鏈湴鏈夋晥锛?local_backend: true
+
+site_url: https://lllllllama.me
+logo_url: /assets/img/logo.svg
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+collections:
+  - name: posts
+    label: 鏂囩珷
+    label_singular: 鏂囩珷
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: frontmatter
+    fields:
+      - { label: 鏍囬, name: title, widget: string }
+      - { label: 鏃ユ湡, name: date, widget: datetime, format: "yyyy-MM-dd HH:mm:ss", time_format: "HH:mm" }
+      - { label: 鍒嗙被, name: categories, widget: list, default: ["blog"] }
+      - { label: 鏍囩, name: tags, widget: list, required: false }
+      - { label: 缃《, name: pin, widget: boolean, default: false, required: false }
+      - { label: 灏侀潰, name: cover, widget: image, required: false }
+      - { label: 鎽樿, name: description, widget: text, required: false }
+      - { label: 姝ｆ枃, name: body, widget: markdown }
+      - label: 鍥剧墖闆?        name: gallery
+        widget: list
+        required: false
+        summary: "{{fields.image}}"
+        fields:
+          - { label: 鍥剧墖, name: image, widget: image }
+          - { label: 璇存槑, name: caption, widget: string, required: false }
+      - label: 闄勪欢锛圥DF/鍏跺畠鏂囦欢锛?        name: attachments
+        widget: list
+        required: false
+        fields:
+          - label: 鏂囦欢
+            name: file
+            widget: file
+            media_folder: "assets/files"
+            public_folder: "/assets/files"
+            # 浠呮彁绀猴細鍙笂浼?pdf/zip 绛夛紱濡傞渶寮烘牎楠屽彲鍔?pattern
+          - { label: 鍐呭祵棰勮, name: embed, widget: boolean, default: true, required: false }
+          - { label: 鏍囬, name: title, widget: string, required: false }
+
+  - name: pages
+    label: 椤甸潰
+    files:
+      - label: 鍏充簬
+        name: about
+        file: pages/about.md
+        fields:
+          - { label: 鏍囬, name: title, widget: string }
+          - { label: 姝ｆ枃, name: body, widget: markdown }
+      - label: 褰掓。
+        name: archives
+        file: pages/archives.md
+        fields:
+          - { label: 鏍囬, name: title, widget: string }
+          - { label: 姝ｆ枃, name: body, widget: markdown }
+
+
