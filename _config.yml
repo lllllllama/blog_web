@@ -6,8 +6,8 @@ baseurl: ""
 
 author:
   name: lllllllama
-  email: you@example.com
-  url: https://github.com/yourname
+  email: contact@lllllllama.me
+  url: https://github.com/lllllllama
 
 lang: zh-CN
 timezone: Asia/Shanghai
@@ -44,8 +44,6 @@ nav:
 
 social:
   github: lllllllama
-  twitter: yourhandle
-  weibo: yourweibo
   rss: /feed.xml
 
 appearance:

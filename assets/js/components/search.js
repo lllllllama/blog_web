@@ -1,5 +1,5 @@
 function createIndex(list){
-  // 绠€鏄撳€掓帓绱㈠紩锛歵itle + tags + categories + content
+  // 简易倒排索引：title + tags + categories + content
   const index = new Map();
   list.forEach((doc, i) => {
     const text = `${doc.title} ${doc.tags?.join(' ')||''} ${doc.categories?.join(' ')||''} ${doc.summary} ${doc.content}`.toLowerCase();
