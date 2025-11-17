@@ -2,21 +2,50 @@
 
 一个围绕中文写作优化的静态博客，使用 Jekyll + Sass + 原生 ES Modules 构建，并集成 Static CMS 方便远程投稿。
 
-线上访问地址：`https://lllllllama.me`
+**线上访问:** https://lllllllama.me
+
+[![Deploy](https://github.com/lllllllama/blog_web/actions/workflows/deploy.yml/badge.svg)](https://github.com/lllllllama/blog_web/actions/workflows/deploy.yml)
 
 ---
 
-## 快速开始（本地预览）
+## 🚀 快速开始
 
-1. 安装 Ruby、DevKit/MSYS2 及 Bundler（Windows 用户可直接执行仓库脚本）。
-2. 在仓库根目录运行：
+**3 分钟部署你的博客！**
 
-   ```powershell
-   scripts\setup.ps1    # 首次安装依赖
-   scripts\serve.ps1    # 启动预览服务器，默认 http://127.0.0.1:4000
-   ```
+```bash
+# 1. 初始化环境
+make setup
 
-> 若端口占用，可设置环境变量 `JEKYLL_PORT` / `JEKYLL_HOST` 后再启动。
+# 2. 本地预览
+make serve
+
+# 3. 一键部署
+make deploy
+```
+
+📖 **详细文档:**
+- [快速开始指南](QUICKSTART.md) - 3 分钟快速上手
+- [部署指南](DEPLOY.md) - 完整的部署说明和常见问题
+
+### 跨平台支持
+
+**Linux / macOS:**
+```bash
+./scripts/setup.sh      # 初始化
+./scripts/serve.sh      # 本地预览
+./scripts/deploy.sh     # 部署
+```
+
+**Windows (PowerShell):**
+```powershell
+.\scripts\setup.ps1     # 初始化
+.\scripts\serve.ps1     # 本地预览
+```
+
+**使用 Makefile:**
+```bash
+make help              # 查看所有命令
+```
 
 ---
 
